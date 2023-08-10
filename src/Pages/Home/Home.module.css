@@ -1,0 +1,88 @@
+.container {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem auto 0;
+  width: 100vw;
+}
+
+.regulation {
+  width: 50vw;
+  max-width: 800px;
+  text-align: center;
+  line-height: 1.75rem;
+  color: #505050;
+  margin: 1rem auto;
+}
+
+.table {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 50vw;
+  max-width: 800px;
+  margin: 0 auto;
+  margin: 0 0 5rem 0;
+}
+
+@media (max-width: 767px) {
+  .regulation {
+    width: 90%;
+    height: 0.5rem;
+    font-size: 90%;
+  }
+
+  .table {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    width: 50vw;
+  }
+
+  .regulation {
+    width: 80%;
+    font-size: 85%;
+    margin: 0;
+  }
+
+  .table {
+    width: 65%;
+    height: 65%;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1360px) {
+  .container {
+    width: 70vw;
+  }
+
+  .regulation {
+    width: 80%;
+    font-size: 85%;
+    margin: 0;
+  }
+
+  .table {
+    width: 70%;
+    height: 70%;
+  }
+}
+
+@media (min-width: 1361px) {
+  .regulation {
+    width: 100%;
+    font-size: 100%;
+    margin: 2rem 0;
+  }
+
+  .table {
+    width: 100%;
+    height: 100%;
+  }
+}

@@ -1,0 +1,60 @@
+@import "../../colors.css";
+
+.snackbarContainer {
+  position: fixed;
+  top: 5.75rem;
+  right: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 1;
+  max-width: 17.5rem;
+}
+
+.snackbar {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  padding: 10px 15px;
+  box-shadow: 0 10px 15px -5px var(--shadow-color);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+}
+
+/* Apply fade-out animation only when isVisible is false */
+.snackbar:not(.visible) {
+  animation: fadeOut 0.5s ease-in-out forwards;
+}
+
+.visible {
+  /* Ensure the Snackbar is visible without animation */
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  animation: none !important;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.title {
+  display: flex;
+}
+
+.text {
+  margin: 0.15rem 0 0.75rem 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.description {
+  margin: 0;
+  font-size: 0.9rem;
+}

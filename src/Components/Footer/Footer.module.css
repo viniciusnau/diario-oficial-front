@@ -1,0 +1,82 @@
+@import "../../colors.css";
+
+.footer::-webkit-scrollbar {
+  width: 0.4rem;
+  background-color: transparent;
+}
+
+.footer::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.footer::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 0.2rem;
+}
+
+.footer::-webkit-scrollbar-thumb:hover {
+  background-color: #bbb;
+}
+
+.footer {
+  justify-content: space-between;
+  background-color: #f1f1f1;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  max-height: 5rem;
+  box-shadow: 0 -10px 8px -10px var(--light-shadow-color);
+  overflow-y: hidden;
+}
+
+.container {
+  max-width: 100%;
+  text-align: center;
+  padding: 1rem;
+}
+
+.container p {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+}
+
+.topics {
+  list-style-type: none;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 1rem;
+}
+
+.description {
+  max-width: 30rem;
+}
+
+.copyright {
+  display: flex;
+  align-items: flex-end;
+  font-size: 12px;
+}
+
+.centeredFooter {
+  padding: 1rem;
+}
+
+.redirect {
+  color: var(--first-text-color);
+}
+
+.navLinks button {
+  background: none;
+  border: none;
+  color: #555;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+}
+
+.navLinks button:hover {
+  text-decoration: underline;
+}

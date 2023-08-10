@@ -1,0 +1,181 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.5rem 0 0;
+}
+
+.postContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+}
+
+.calendarContainer {
+  margin: 0 1rem;
+}
+
+.calendar {
+}
+
+.tableContainer {
+  width: 100%;
+}
+
+.tableHeader {
+  font-weight: bold;
+}
+
+.tableCell {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.link {
+  text-decoration: none;
+  max-height: 100%;
+  color: #007bff;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.input,
+.date,
+.time {
+  background-color: var(--second-button-color);
+  display: flex;
+  border: none;
+  width: 7.5rem;
+  height: 3rem;
+  margin: 0 0.5rem;
+  border-radius: 0.5rem;
+  padding: 0 0.75rem;
+  font-size: medium;
+}
+
+.date {
+  width: 7rem;
+  padding: 0 1rem;
+}
+
+.time {
+  /* margin: 0.75rem 1.5rem 0 1.5rem; */
+}
+
+.fileContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.file {
+  display: none;
+}
+
+.fileText {
+  margin-right: 15px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.option {
+  width: 10rem;
+}
+
+.input:hover,
+.date:hover,
+.time:hover {
+  background-color: var(--second-button-color-hover);
+}
+
+.input:disabled,
+.date:disabled,
+.time:disabled {
+  background-color: var(--second-button-color-disabled);
+}
+
+.button {
+  height: 3rem;
+  width: 7.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  margin: 0 1.5rem;
+  background-color: var(--first-button-color);
+  box-shadow: 0 10px 10px -10px var(--shadow-color);
+  font-size: medium;
+}
+
+.fakeInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  min-width: 3rem;
+  border: none;
+  border-radius: 5rem;
+  margin: 0 0.5rem;
+  background-color: var(--first-button-color);
+  box-shadow: 0 10px 10px -10px var(--shadow-color);
+  font-size: medium;
+}
+
+.button:hover,
+.fakeInput:hover {
+  background-color: var(--first-button-color-hover);
+}
+
+.button:disabled,
+.fakeInput:disabled {
+  background-color: var(--first-button-color-disabled);
+}
+
+.table {
+  display: flex;
+  justify-content: center;
+  width: 60vw;
+  margin: 5rem 0 3rem 0;
+}
+
+.lastColumn {
+  display: flex;
+  align-items: center;
+}
+
+.schedule {
+  padding: 0 0.75rem;
+  margin: 0.75rem 0;
+}
+
+@media screen and (max-width: 1175px) {
+  .input,
+  .date,
+  .time,
+  .fakeInput {
+    margin: 0.75rem;
+  }
+  .lastColumn {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .postContainer {
+    flex-direction: column;
+  }
+  .input,
+  .date,
+  .time,
+  .button,
+  .fakeInput {
+    margin: 0.5rem 0;
+  }
+  .lastColumn {
+    flex-direction: column;
+  }
+}

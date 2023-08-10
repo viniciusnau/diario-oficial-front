@@ -1,0 +1,178 @@
+@import "../../colors.css";
+
+.container {
+  width: 40vw;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  max-height: 10rem;
+}
+
+.calendarContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  width: 0;
+}
+
+.calendar {
+  position: absolute;
+  left: -27.5rem;
+  top: -5rem;
+  z-index: 1;
+}
+
+.renderFooter {
+  display: flex;
+  justify-content: center;
+}
+
+.clearButton {
+  border: #0fbcf9;
+  color: #000;
+  border-radius: 0.5rem;
+  width: 5rem;
+  height: 2rem;
+  cursor: pointer;
+  margin: 0 0 1rem 0;
+}
+
+.input,
+.selected {
+  width: 100%;
+  margin: 0 0 0.5rem 0;
+}
+
+.keyword {
+  margin: 0 0 0 -5rem;
+}
+
+.type {
+  display: flex;
+  width: 7rem;
+  margin: 0 0 0 -5rem;
+}
+
+.code {
+  background-color: var(--second-button-color);
+  margin: 0 0.5rem 0.5rem 0;
+  border: none;
+  width: 10rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  padding: 0 0 0 1rem;
+  font-size: medium;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  height: 2.5rem;
+}
+
+.button {
+  height: 2.5rem;
+  width: 90%;
+  border: none;
+  border-radius: 0.5rem;
+  margin: 0.5rem 0;
+  background-color: var(--first-button-color);
+  box-shadow: 0 10px 10px -10px var(--shadow-color);
+  font-size: medium;
+}
+
+.button:hover {
+  background-color: var(--first-button-color-hover);
+}
+
+.button:disabled {
+  background-color: var(--first-button-color-disabled);
+}
+
+/* Media queries for responsive design */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container,
+  .calendar,
+  .date,
+  .input,
+  .selected,
+  .type,
+  .code,
+  .list,
+  .option,
+  .info,
+  .checkbox,
+  .button {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1360px) {
+  .container,
+  .calendar,
+  .date,
+  .input,
+  .selected,
+  .type,
+  .code,
+  .list,
+  .option,
+  .info,
+  .checkbox,
+  .button {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .info {
+    flex-direction: row;
+  }
+  .code,
+  .type {
+    padding: 0;
+    margin: 0;
+    max-width: 6rem;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .container,
+  .calendar,
+  .date,
+  .input,
+  .selected,
+  .type,
+  .code,
+  .list,
+  .option,
+  .info,
+  .checkbox,
+  .button {
+    width: 70%;
+    margin: 0 auto;
+  }
+  .info {
+    flex-direction: row;
+  }
+  .code,
+  .type {
+    padding: 0;
+    margin: 0;
+  }
+  @media screen and (max-width: 768px) {
+    .calendarContainer {
+      max-width: 100%; /* Use the full width on smaller screens */
+    }
+
+    .calendar {
+      left: auto;
+      right: 0; /* Position the calendar on the right side */
+      top: auto;
+      bottom: -10rem; /* Adjust the positioning as needed */
+    }
+    .type {
+      margin: 0;
+    }
+  }
+}
