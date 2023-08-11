@@ -211,17 +211,17 @@ const Status = () => {
           isType
           readOnly
         />
-        <div>
-          <Input
-            className={styles.time}
-            name="time"
-            value={selectedRange.time}
-            onChange={handleTime}
-            placeholder="Horário"
-          />
-        </div>
-
         <div className={styles.lastColumn}>
+          <div>
+            <Input
+              className={styles.time}
+              name="time"
+              value={selectedRange.time}
+              onChange={handleTime}
+              placeholder="Horário"
+            />
+          </div>
+
           <Input
             className={`${styles.input} ${styles.code}`}
             placeholder="Número"
@@ -230,13 +230,13 @@ const Status = () => {
             name="code"
             max={5}
           />
-          <Button
-            className={`${styles.button} ${styles.schedule}`}
-            onClick={handleSubmit}
-          >
-            Agendar
-          </Button>
         </div>
+        <Button
+          className={`${styles.button} ${styles.schedule}`}
+          onClick={handleSubmit}
+        >
+          Agendar
+        </Button>
       </div>
       {transformedData && (
         <div className={styles.table}>
