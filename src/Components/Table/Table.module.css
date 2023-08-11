@@ -107,7 +107,7 @@
 .customPagination li {
   display: flex;
   list-style-type: none;
-  margin: 0 0.5rem;
+  margin: 0;
 }
 
 .button,
@@ -149,6 +149,7 @@
 
 .backButton {
   min-height: 2.5rem;
+  margin: 0 1rem;
 }
 
 .button:hover,

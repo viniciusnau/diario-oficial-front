@@ -67,10 +67,7 @@ const Table: React.FC<TableProps> = ({
     }
     if (type === "next") {
       return (
-        <Button
-          className={`${styles.backButton} ${styles.status}`}
-          title="Avançar"
-        >
+        <Button className={styles.backButton} title="Avançar">
           Avançar
         </Button>
       );
