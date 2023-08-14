@@ -15,6 +15,7 @@ interface iSelectedList {
   className?: any;
   classNameDiv?: any;
   options?: string[];
+  onBlur?: any;
 }
 
 const SelectedList: React.FC<iSelectedList> = ({
