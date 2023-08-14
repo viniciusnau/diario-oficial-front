@@ -43,10 +43,10 @@
 }
 
 .topics {
-  list-style-type: none;
-  text-align: center;
   display: flex;
   justify-content: space-between;
+  list-style-type: none;
+  text-align: center;
   margin: 0 1rem;
 }
 
@@ -80,4 +80,53 @@
 
 .navLinks button:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 750px) {
+  .footer {
+    overflow-y: scroll;
+  }
+  .description,
+  .copyright {
+    font-size: 12px;
+  }
+  .copyright {
+    align-items: flex-start;
+  }
+}
+
+/* Media query for screens larger than 750px (tablets) */
+@media (min-width: 751px) {
+  .description,
+  .copyright {
+    font-size: 12px;
+  }
+  .copyright {
+    padding: 0 0 0 0;
+    align-items: flex-start;
+  }
+}
+
+/* Media query for screens larger than 1023px */
+@media (min-width: 1024px) {
+  .description,
+  .copyright {
+    font-size: 14px;
+  }
+  .copyright {
+    padding: 0 0 0 0;
+    align-items: flex-end;
+  }
+}
+
+/* Media query for screens larger than 1360px */
+@media (min-width: 1361px) {
+  .description,
+  .copyright {
+    font-size: 14px;
+  }
+  .copyright {
+    padding: 0 0 0 0;
+    align-items: flex-end;
+  }
 }
