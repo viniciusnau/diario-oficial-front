@@ -14,13 +14,14 @@ body {
   flex-grow: 1;
   padding: 20px;
 }
+
 @media screen and (min-width: 1800px) {
   .App {
     background: linear-gradient(
-      0deg,
-      rgba(204, 34, 41, 0.1516981792717087) 0%,
-      rgba(255, 255, 255, 1) 17.5%,
-      rgba(159, 197, 77, 0.14609593837535018) 100%
+            0deg,
+            rgba(204, 34, 41, 0.1516981792717087) 0%,
+            rgba(255, 255, 255, 1) 17.5%,
+            rgba(159, 197, 77, 0.14609593837535018) 100%
     );
   }
 }
@@ -28,10 +29,18 @@ body {
 @media screen and (max-width: 1799px) {
   .App {
     background: linear-gradient(
-      270deg,
-      rgba(204, 34, 41, 0.1516981792717087) 0%,
-      rgba(255, 255, 255, 1) 17.5%,
-      rgba(159, 197, 77, 0.14609593837535018) 100%
+            270deg,
+            rgba(204, 34, 41, 0.1516981792717087) 0%,
+            rgba(255, 255, 255, 1) 17.5%,
+            rgba(159, 197, 77, 0.14609593837535018) 100%
     );
   }
+}
+
+.inverted-colors {
+  filter: invert(100%);
+}
+
+.grayscale {
+  filter: grayscale(100%);
 }
