@@ -19,14 +19,14 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch }) => {
   const [selectedRange, setSelectedRange] = useState({
     start_date: "",
     end_date: "",
-    post_type: [],
+    post_type: [] as string[],
     post_code: "",
-    words: [],
+    words: [] as string[],
     exact_words: false,
   });
 
   const [postCode, setPostCode] = useState<string | undefined>(
-    selectedRange.post_code
+      selectedRange.post_code
   );
   const [exactWordsChecked, setExactWordsChecked] = useState<boolean>(false);
 
@@ -57,6 +57,13 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch }) => {
       if (name === "post_code") {
         setPostCode(value);
       }
+
+      if (name === "words" && value.trim() !== "") {
+        setSelectedRange((prev) => ({
+          ...prev,
+          words: [...prev.words, value.trim()],
+        }));
+      }
     }
   };
 
@@ -68,6 +75,10 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch }) => {
   };
 
   const handleSubmit = () => {
+    const lowercaseWords = selectedRange.words.map((word: string) =>
+        word.toLowerCase()
+    );
+
     if (dayRange.from && dayRange.to) {
       const formattedStartDate = formatDate(dayRange.from);
       const formattedEndDate = formatDate(dayRange.to);
@@ -75,21 +86,37 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch }) => {
         ...selectedRange,
         start_date: formattedStartDate,
         end_date: formattedEndDate,
+        words: lowercaseWords,
+      };
+      dispatch<any>(fetchPublic(updatedRange));
+      setBackup(updatedRange);
+      setSearch(true);
+    } else if (dayRange.from && !dayRange.to) {
+      const formattedStartDate = formatDate(dayRange.from);
+      const updatedRange = {
+        ...selectedRange,
+        start_date: formattedStartDate,
+        end_date: formattedStartDate,
+        words: lowercaseWords,
       };
       dispatch<any>(fetchPublic(updatedRange));
       setBackup(updatedRange);
       setSearch(true);
     } else {
-      dispatch<any>(fetchPublic(selectedRange));
-      setBackup(selectedRange);
+      const updatedRange = {
+        ...selectedRange,
+        words: lowercaseWords,
+      };
+      dispatch<any>(fetchPublic(updatedRange));
+      setBackup(updatedRange);
       setSearch(true);
     }
     setSelectedRange({
       start_date: "",
       end_date: "",
-      post_type: [],
+      post_type: [] as string[],
       post_code: "",
-      words: [],
+      words: [] as string[],
       exact_words: false,
     });
     setPostCode("");
@@ -98,81 +125,90 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch }) => {
   };
 
   return (
-    <div
-      className={styles.container}
-      onKeyUp={(e) =>
-        handleKeyPress(e, handleSubmit, "Enter", ["words", "post_type"])
-      }
-    >
-      <div className={styles.calendarContainer}>
-        <Calendar
-          value={dayRange}
-          onChange={setDayRange}
-          shouldHighlightWeekends
-          colorPrimary="#9fc54d"
-          colorPrimaryLight="#d7ecbd"
-          calendarClassName={styles.calendar}
-          locale={ptLocale}
-          renderFooter={() => (
-            <div className={styles.renderFooter}>
-              <button
-                type="button"
-                onClick={() => {
-                  setDayRange({ from: null, to: null });
-                }}
-                className={styles.clearButton}
-              >
-                Limpar
-              </button>
-            </div>
-          )}
-        />
-      </div>
-      <div className={styles.keyword}>
-        <SelectedList
-          placeholder="Palavra-chave"
-          field="words"
-          list={selectedRange}
-          setList={setSelectedRange}
-        />
-      </div>
-      <div className={styles.type}>
-        <SelectedList
-          placeholder="Tipo"
-          field="post_type"
-          list={selectedRange}
-          setList={setSelectedRange}
-          options={optionsType}
-          isType
-          readOnly
-        />
-      </div>
-      <div>
-        <Input
-          className={styles.code}
-          name="post_code"
-          value={postCode}
-          onChange={handleChange}
-          placeholder="Código da edição"
-          max={12}
-        />
-        <div className={styles.info}>
-          <label>Palavras exatas?</label>
-          <div>
-            <Input
-              name="exact_words"
-              checked={exactWordsChecked}
-              onChange={handleChange}
-              type="checkbox"
-            />
-            <label>Sim</label>
-          </div>
+      <div
+          className={styles.container}
+          onKeyUp={(e) =>
+              handleKeyPress(e, handleSubmit, "Enter", ["words", "post_type"])
+          }
+      >
+        <div className={styles.calendarContainer}>
+          <Calendar
+              value={dayRange}
+              onChange={setDayRange}
+              shouldHighlightWeekends
+              colorPrimary="#9fc54d"
+              colorPrimaryLight="#d7ecbd"
+              calendarClassName={styles.calendar}
+              locale={ptLocale}
+              renderFooter={() => (
+                  <div className={styles.renderFooter}>
+                    <button
+                        type="button"
+                        onClick={() => {
+                          setDayRange({ from: null, to: null });
+                        }}
+                        className={styles.clearButton}
+                    >
+                      Limpar
+                    </button>
+                  </div>
+              )}
+          />
         </div>
-        <Button className={styles.button} onClick={handleSubmit}>
-          Pesquisar
-        </Button>
+        <div className={styles.keyword}>
+          <SelectedList
+              placeholder="Palavra-chave"
+              field="words"
+              list={selectedRange}
+              setList={setSelectedRange}
+              onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+                const value = e.target.value.trim();
+                if (value !== "") {
+                  setSelectedRange((prev) => ({
+                    ...prev,
+                    words: [...prev.words, value],
+                  }));
+                }
+              }}
+          />
+        </div>
+        <div className={styles.type}>
+          <SelectedList
+              placeholder="Tipo"
+              field="post_type"
+              list={selectedRange}
+              setList={setSelectedRange}
+              options={optionsType}
+              isType
+              readOnly
+          />
+        </div>
+        <div>
+          <Input
+              className={styles.code}
+              name="post_code"
+              value={postCode}
+              onChange={handleChange}
+              placeholder="Código da edição"
+              max={12}
+          />
+          <div className={styles.info}>
+            <label>Palavras exatas?</label>
+            <div>
+              <Input
+                  name="exact_words"
+                  checked={exactWordsChecked}
+                  onChange={handleChange}
+                  type="checkbox"
+              />
+              <label>Sim</label>
+            </div>
+          </div>
+          <Button className={styles.button} onClick={handleSubmit}>
+            Pesquisar
+          </Button>
+        </div>
       </div>
-    </div>
   );
 };
 
