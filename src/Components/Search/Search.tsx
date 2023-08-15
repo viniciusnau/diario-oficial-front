@@ -26,7 +26,7 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch }) => {
   });
 
   const [postCode, setPostCode] = useState<string | undefined>(
-      selectedRange.post_code
+    selectedRange.post_code
   );
   const [exactWordsChecked, setExactWordsChecked] = useState<boolean>(false);
 
@@ -76,7 +76,7 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch }) => {
 
   const handleSubmit = () => {
     const lowercaseWords = selectedRange.words.map((word: string) =>
-        word.toLowerCase()
+      word.toLowerCase()
     );
 
     if (dayRange.from && dayRange.to) {
@@ -125,14 +125,14 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch }) => {
   };
 
   return (
-      <div
-          className={styles.container}
-          onKeyUp={(e) =>
-              handleKeyPress(e, handleSubmit, "Enter", ["words", "post_type"])
-          }
-      >
-        <div className={styles.calendarContainer}>
-          <Calendar
+    <div
+      className={styles.container}
+      onKeyUp={(e) =>
+        handleKeyPress(e, handleSubmit, "Enter", ["words", "post_type"])
+      }
+    >
+      <div className={styles.calendarContainer}>
+        {/* <Calendar
               value={dayRange}
               onChange={setDayRange}
               shouldHighlightWeekends
@@ -153,62 +153,62 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch }) => {
                     </button>
                   </div>
               )}
-          />
-        </div>
-        <div className={styles.keyword}>
-          <SelectedList
-              placeholder="Palavra-chave"
-              field="words"
-              list={selectedRange}
-              setList={setSelectedRange}
-              onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-                const value = e.target.value.trim();
-                if (value !== "") {
-                  setSelectedRange((prev) => ({
-                    ...prev,
-                    words: [...prev.words, value],
-                  }));
-                }
-              }}
-          />
-        </div>
-        <div className={styles.type}>
-          <SelectedList
-              placeholder="Tipo"
-              field="post_type"
-              list={selectedRange}
-              setList={setSelectedRange}
-              options={optionsType}
-              isType
-              readOnly
-          />
-        </div>
-        <div>
-          <Input
-              className={styles.code}
-              name="post_code"
-              value={postCode}
-              onChange={handleChange}
-              placeholder="Código da edição"
-              max={12}
-          />
-          <div className={styles.info}>
-            <label>Palavras exatas?</label>
-            <div>
-              <Input
-                  name="exact_words"
-                  checked={exactWordsChecked}
-                  onChange={handleChange}
-                  type="checkbox"
-              />
-              <label>Sim</label>
-            </div>
-          </div>
-          <Button className={styles.button} onClick={handleSubmit}>
-            Pesquisar
-          </Button>
-        </div>
+          /> */}
       </div>
+      <div className={styles.keyword}>
+        <SelectedList
+          placeholder="Palavra-chave"
+          field="words"
+          list={selectedRange}
+          setList={setSelectedRange}
+          onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+            const value = e.target.value.trim();
+            if (value !== "") {
+              setSelectedRange((prev) => ({
+                ...prev,
+                words: [...prev.words, value],
+              }));
+            }
+          }}
+        />
+      </div>
+      <div className={styles.type}>
+        <SelectedList
+          placeholder="Tipo"
+          field="post_type"
+          list={selectedRange}
+          setList={setSelectedRange}
+          options={optionsType}
+          isType
+          readOnly
+        />
+      </div>
+      <div>
+        <Input
+          className={styles.code}
+          name="post_code"
+          value={postCode}
+          onChange={handleChange}
+          placeholder="Código da edição"
+          max={12}
+        />
+        <div className={styles.info}>
+          <label>Palavras exatas?</label>
+          <div>
+            <Input
+              name="exact_words"
+              checked={exactWordsChecked}
+              onChange={handleChange}
+              type="checkbox"
+            />
+            <label>Sim</label>
+          </div>
+        </div>
+        <Button className={styles.button} onClick={handleSubmit}>
+          Pesquisar
+        </Button>
+      </div>
+    </div>
   );
 };
 

@@ -3,6 +3,7 @@ import styles from "./Header.module.css";
 import image from "../../Assets/logo_diario_oficial_branco.png";
 import { useNavigate } from "react-router-dom";
 import { isLoggedIn, logout } from "../../Auth/auth";
+import { HiBars3 } from "react-icons/hi2";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ const Header = () => {
                 className={styles.responsiveButton}
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               >
-                Menu
+                <HiBars3 size={24} />
               </button>
               {isResponsive && isDropdownOpen && (
                 <div className={styles.modal}>

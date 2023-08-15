@@ -123,25 +123,13 @@
   color: var(--light-shadow-color);
 }
 
-/* Media query for screens smaller than 750px (smartphones) */
 @media (max-width: 750px) {
   .logo {
-    /* height: 3rem;
-    width: 9.2rem; */
     height: 6rem;
     width: 18.4rem;
   }
 }
 
-/* Media query for screens larger than 750px (tablets) */
-@media (min-width: 751px) {
-  .logo {
-    height: 6rem;
-    width: 18.4rem;
-  }
-}
-
-/* Media query for viewport width of 940px or less */
 @media (max-width: 940px) {
   .buttonContainer {
     display: flex;
@@ -154,38 +142,18 @@
   }
 
   .responsiveButton {
-    height: 2.25rem;
+    height: 4rem;
     width: 4rem;
-    background-color: var(--first-button-color);
-    color: var(--first-text-color);
-    cursor: pointer;
+    background-color: #2f5141;
+    color: white;
     border: none;
-    border-radius: 0.25rem;
-    margin: 0 3rem 0 0;
-  }
-  .responsiveButton:hover {
-    background-color: var(--first-button-color-hover);
+    margin: 0 1rem 0 0;
   }
 }
 
-/* Media query for screens larger than 1023px */
-@media (min-width: 1024px) {
-  .logo {
-    height: 6rem;
-    width: 18.4rem;
-  }
-}
-
-/* Media query for screens larger than 1360px */
 @media (min-width: 1361px) {
   .logo {
     height: 9.1rem;
     width: 28rem;
   }
 }
-/* 1.5 - 4.6
- 9.1 - 28
-6 - 18.4
-3 - 9.2 */
-
-/* 940px apply list button */
