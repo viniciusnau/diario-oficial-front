@@ -13,10 +13,11 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.topics}>
         <p className={styles.description}>
-          <strong>Objetivo:</strong> Atualizar a comunidade de forma prática
-          sobre as notícias que acontecem na DPE-SC
+          <strong>Objetivo:</strong> Garantir que as ações da DPESC sejam
+          acessíveis ao público em geral, além de tornar atos administrativos,
+          leis, regulamentos e decisões judiciais amplamente conhecidos.
           <br />
-          Publicações nos dias úteis: 00h00
+          Publicações: Dias úteis: 00h00
           <br />
         </p>
         <p className={styles.copyright}>

@@ -1,8 +1,8 @@
 @import "../../colors.css";
 
 .container {
-  width: 40vw;
-  margin: 0 auto;
+  width: 80vw;
+  margin: 0 auto 1rem auto;
   display: flex;
   justify-content: space-between;
   max-height: 10rem;
@@ -90,59 +90,13 @@
   background-color: var(--first-button-color-disabled);
 }
 
-/* Media queries for responsive design */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .container,
+@media (max-width: 750px) {
   .calendar,
   .date,
   .input,
   .selected,
   .type,
-  .code,
-  .list,
-  .option,
-  .info,
-  .checkbox,
-  .button {
-    width: 90%;
-    margin: 0 auto;
-  }
-}
-
-@media (min-width: 1024px) and (max-width: 1360px) {
-  .container,
-  .calendar,
-  .date,
-  .input,
-  .selected,
-  .type,
-  .code,
-  .list,
-  .option,
-  .info,
-  .checkbox,
-  .button {
-    width: 80%;
-    margin: 0 auto;
-  }
-  .info {
-    flex-direction: row;
-  }
-  .code,
-  .type {
-    padding: 0;
-    margin: 0;
-    max-width: 6rem;
-  }
-}
-
-@media screen and (max-width: 750px) {
-  .container,
-  .calendar,
-  .date,
-  .input,
-  .selected,
-  .type,
+  .keyword,
   .code,
   .list,
   .option,
@@ -150,7 +104,8 @@
   .checkbox,
   .button {
     width: 70%;
-    margin: 0 auto;
+    margin: 0 0.5rem;
+    padding: 0;
   }
   .info {
     flex-direction: row;
@@ -160,19 +115,37 @@
     padding: 0;
     margin: 0;
   }
-  @media screen and (max-width: 768px) {
-    .calendarContainer {
-      max-width: 100%; /* Use the full width on smaller screens */
-    }
+}
 
-    .calendar {
-      left: auto;
-      right: 0; /* Position the calendar on the right side */
-      top: auto;
-      bottom: -10rem; /* Adjust the positioning as needed */
-    }
-    .type {
-      margin: 0;
-    }
+@media (min-width: 751px) {
+  .calendar,
+  .date,
+  .input,
+  .selected,
+  .type,
+  .keyword,
+  .code,
+  .list,
+  .option,
+  .info,
+  .checkbox,
+  .button {
+    width: 70%;
+    margin: 0;
+    padding: 0;
   }
+  .info {
+    flex-direction: row;
+  }
+  .code,
+  .type {
+    margin: 0;
+  }
+  .code {
+    width: 10rem;
+    padding: 0 0 0 0.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
 }

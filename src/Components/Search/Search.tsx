@@ -3,7 +3,7 @@ import styles from "./Search.module.css";
 import Input from "../Forms/Input";
 import Button from "../Forms/Button";
 import SelectedList from "../SelectedList/SelectedList";
-import { handleKeyPress, optionsType } from "../Helper";
+import { formatDate, handleKeyPress, optionsType } from "../Helper";
 import { useDispatch } from "react-redux";
 import { fetchPublic } from "../../Services/Slices/publicSlice";
 import { Calendar, DayRange } from "@taak/react-modern-calendar-datepicker";
@@ -67,13 +67,6 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch }) => {
     }
   };
 
-  const formatDate = (date: any) => {
-    const year = String(date.year).padStart(2, "0");
-    const month = String(date.month).padStart(2, "0");
-    const day = String(date.day).padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  };
-
   const handleSubmit = () => {
     const lowercaseWords = selectedRange.words.map((word: string) =>
       word.toLowerCase()
@@ -132,28 +125,28 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch }) => {
       }
     >
       <div className={styles.calendarContainer}>
-        {/* <Calendar
-              value={dayRange}
-              onChange={setDayRange}
-              shouldHighlightWeekends
-              colorPrimary="#9fc54d"
-              colorPrimaryLight="#d7ecbd"
-              calendarClassName={styles.calendar}
-              locale={ptLocale}
-              renderFooter={() => (
-                  <div className={styles.renderFooter}>
-                    <button
-                        type="button"
-                        onClick={() => {
-                          setDayRange({ from: null, to: null });
-                        }}
-                        className={styles.clearButton}
-                    >
-                      Limpar
-                    </button>
-                  </div>
-              )}
-          /> */}
+        <Calendar
+          value={dayRange}
+          onChange={setDayRange}
+          shouldHighlightWeekends
+          colorPrimary="#9fc54d"
+          colorPrimaryLight="#d7ecbd"
+          calendarClassName={styles.calendar}
+          locale={ptLocale}
+          renderFooter={() => (
+            <div className={styles.renderFooter}>
+              <button
+                type="button"
+                onClick={() => {
+                  setDayRange({ from: null, to: null });
+                }}
+                className={styles.clearButton}
+              >
+                Limpar
+              </button>
+            </div>
+          )}
+        />
       </div>
       <div className={styles.keyword}>
         <SelectedList

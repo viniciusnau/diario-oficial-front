@@ -52,6 +52,13 @@ export function exhibitionDateFormat(dateString: string) {
   return formattedDate;
 }
 
+export const formatDate = (date: any) => {
+  const year = String(date.year).padStart(2, "0");
+  const month = String(date.month).padStart(2, "0");
+  const day = String(date.day).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
 export function hourFormat(hour: string) {}
 
 export function handleKeyPress(
@@ -83,7 +90,9 @@ export function handleExtract(data: iContent[], setContent: any) {
 
     if (date) {
       const extractedHour = new Date(
-          `${date.split('/')[1]}/${date.split('/')[0]}/${date.split('/')[2]} ${hour}`
+        `${date.split("/")[1]}/${date.split("/")[0]}/${
+          date.split("/")[2]
+        } ${hour}`
       );
       if (extractedHour < new Date()) {
         const extractedInfo = {
@@ -98,7 +107,6 @@ export function handleExtract(data: iContent[], setContent: any) {
     }
   });
 }
-
 
 export function handleExtractUrl(urls: string[], setContent: any) {
   const currentTime = new Date();
@@ -139,7 +147,9 @@ export function handleExtractUrl(urls: string[], setContent: any) {
         presigned_url,
       };
       const extractedHour = new Date(
-          `${date.split('/')[1]}/${date.split('/')[0]}/${date.split('/')[2]} ${hour}`
+        `${date.split("/")[1]}/${date.split("/")[0]}/${
+          date.split("/")[2]
+        } ${hour}`
       );
       if (extractedHour < currentTime) {
         setContent((prev: any) => [...prev, extractedInfo]);
