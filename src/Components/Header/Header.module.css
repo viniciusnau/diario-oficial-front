@@ -29,26 +29,16 @@
 }
 
 .logo {
-  margin: 0.5rem 0 0 1rem;
-}
-
-.image {
   height: 9.1rem;
   width: 28rem;
   cursor: pointer;
+  margin: 0.5rem 0 0 1rem;
 }
 
 .navigation {
   display: flex;
   align-items: center;
-}
-
-.logout {
-  font-size: 0.5rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  position: relative;
-  cursor: pointer;
+  z-index: 1;
 }
 
 .route {
@@ -58,6 +48,7 @@
   color: #e0e0e0;
   position: relative;
   transition: color 0.3s ease;
+  font-weight: bold;
 }
 
 .route::before {
@@ -86,6 +77,7 @@
   font-weight: bold;
   text-transform: uppercase;
   position: relative;
+  font-size: 1.2rem;
 }
 
 .linkText::before {
@@ -100,3 +92,100 @@
   transform: scaleX(0);
   transition: all 0.3s ease;
 }
+
+.modal {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 3rem;
+  width: 15rem;
+  background-color: #fff;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+}
+
+.modal ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.modal ul li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.modal ul li:last-child {
+  border-bottom: none;
+}
+
+.modalItem {
+  width: 100%;
+  color: var(--light-shadow-color);
+}
+
+/* Media query for screens smaller than 750px (smartphones) */
+@media (max-width: 750px) {
+  .logo {
+    /* height: 3rem;
+    width: 9.2rem; */
+    height: 6rem;
+    width: 18.4rem;
+  }
+}
+
+/* Media query for screens larger than 750px (tablets) */
+@media (min-width: 751px) {
+  .logo {
+    height: 6rem;
+    width: 18.4rem;
+  }
+}
+
+/* Media query for viewport width of 940px or less */
+@media (max-width: 940px) {
+  .buttonContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navigation {
+    display: none;
+  }
+
+  .responsiveButton {
+    height: 2.25rem;
+    width: 4rem;
+    background-color: var(--first-button-color);
+    color: var(--first-text-color);
+    cursor: pointer;
+    border: none;
+    border-radius: 0.25rem;
+    margin: 0 3rem 0 0;
+  }
+  .responsiveButton:hover {
+    background-color: var(--first-button-color-hover);
+  }
+}
+
+/* Media query for screens larger than 1023px */
+@media (min-width: 1024px) {
+  .logo {
+    height: 6rem;
+    width: 18.4rem;
+  }
+}
+
+/* Media query for screens larger than 1360px */
+@media (min-width: 1361px) {
+  .logo {
+    height: 9.1rem;
+    width: 28rem;
+  }
+}
+/* 1.5 - 4.6
+ 9.1 - 28
+6 - 18.4
+3 - 9.2 */
+
+/* 940px apply list button */
