@@ -97,7 +97,6 @@
   .selected,
   .type,
   .keyword,
-  .code,
   .list,
   .option,
   .info,
@@ -110,10 +109,14 @@
   .info {
     flex-direction: row;
   }
-  .code,
   .type {
     padding: 0;
     margin: 0;
+  }
+  .code {
+    padding: 0;
+    width: 8rem;
+    font-size: 0.7rem;
   }
 }
 
@@ -124,7 +127,6 @@
   .selected,
   .type,
   .keyword,
-  .code,
   .list,
   .option,
   .info,
@@ -150,13 +152,17 @@
   }
   .code {
     width: 10rem;
-    padding: 0 0 0 0.5rem;
+    font-size: 0.8rem;
   }
 }
 
 @media (min-width: 1024px) {
   .container {
     width: 70vw;
+  }
+  .code {
+    width: 12rem;
+    font-size: 1rem;
   }
 }
 @media (min-width: 1280px) {

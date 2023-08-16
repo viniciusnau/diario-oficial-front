@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Table.module.css";
 import Pagination from "rc-pagination";
 import Button from "../Forms/Button";
@@ -29,9 +29,9 @@ const Table: React.FC<TableProps> = ({
   downloadButton,
   total,
   isEmpty,
-  isStatus,
 }) => {
   const [currentPage] = useState<number>(1);
+  const [isResponsive, setIsResponsive] = useState(false);
   const dispatch = useDispatch();
 
   const handleDownloadFile = (file: string) => {
@@ -56,7 +56,11 @@ const Table: React.FC<TableProps> = ({
 
   const customItemRender = (current: number, type: string) => {
     if (type === "page") {
-      return current === currentPage && <span>{page}</span>;
+      return (
+        current === currentPage && (
+          <span className={styles.currentPage}>{page}</span>
+        )
+      );
     }
     if (type === "prev") {
       return (
@@ -74,6 +78,19 @@ const Table: React.FC<TableProps> = ({
     }
     return null;
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsResponsive(window.innerWidth <= 750);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <div className={styles.content}>
@@ -113,16 +130,16 @@ const Table: React.FC<TableProps> = ({
                           onClick={() =>
                             handleDownloadFile(row[column.property])
                           }
-                          className={`${styles.button} ${styles.download}`}
+                          className={styles.button}
                         >
-                          <MdDownload size={24} />
+                          <MdDownload size={isResponsive ? 18 : 24} />
                         </Button>
                       ) : column.property === "delete" ? (
                         <Button
                           onClick={() =>
                             dispatch<any>(fetchDeleteFile(row.delete))
                           }
-                          className={`${styles.button} ${styles.download}`}
+                          className={styles.button}
                         >
                           <MdDelete size={24} />
                         </Button>

@@ -1,12 +1,10 @@
 @import "../../colors.css";
 
 .content {
-  width: 100%;
   margin: 0;
 }
 
 .container {
-  width: 100%;
   margin: 0 auto;
   border: 4px solid #f0f0f0;
 }
@@ -28,7 +26,6 @@
   display: flex;
   align-items: center;
   font-weight: bold;
-  font-size: 18px;
   margin: 0 0 0.75rem 1rem;
 }
 
@@ -79,12 +76,6 @@
   padding: 0.25rem 0;
 }
 
-.download {
-  width: 2.5rem !important;
-  height: 2.5rem !important;
-  border-radius: 5rem !important;
-}
-
 .tableCell {
   flex: 1;
   padding: 10px;
@@ -110,13 +101,8 @@
   margin: 0;
 }
 
-.button,
 .backButton,
 .downloadButton {
-  min-height: 3.25rem;
-  min-width: 3.25rem;
-  width: auto;
-  padding: 0 1rem;
   border: none;
   border-radius: 0.5rem;
   background-color: var(--first-button-color);
@@ -127,11 +113,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 3.25rem;
-  min-width: 3.25rem;
   border: none;
   border-radius: 5rem;
-  /* margin: 0 1.5rem; */
   background-color: var(--first-button-color);
   box-shadow: 0 10px 10px -10px var(--shadow-color);
 }
@@ -148,7 +131,6 @@
 }
 
 .backButton {
-  min-height: 2.5rem;
   margin: 0 1rem;
 }
 
@@ -169,24 +151,90 @@
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-@media screen and (max-width: 750px) {
-  .container {
-    width: 90vw;
+@media (max-width: 750px) {
+  .content {
+    width: 80vw;
     margin: 0 auto;
   }
 
-  .columnHeader {
-    padding: 5px;
+  .headerTable {
+    font-size: 0.85rem;
   }
 
-  .tableCell {
-    padding: 5px;
+  .columnTitle,
+  .tableCell,
+  .backButton,
+  .currentPage {
+    font-size: 0.7rem;
   }
 
   .button,
-  .backButton,
   .downloadButton {
-    width: 80%;
-    padding: 0.5rem 1rem;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+  }
+
+  .backButton {
+    width: 4rem;
+    height: 2rem;
+    padding: 0;
+  }
+}
+
+@media (min-width: 751px) {
+  .content {
+    width: 80vw;
+  }
+
+  .headerTable,
+  .currentPage {
+    font-size: 1.2rem;
+  }
+
+  .columnTitle,
+  .tableCell,
+  .backButton {
+    font-size: 1rem;
+  }
+
+  .button,
+  .downloadButton {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .backButton {
+    width: 5rem;
+    height: 2.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content {
+    width: 80vw;
+    max-width: 800px;
+  }
+
+  .headerTable {
+    font-size: 1.25rem;
+  }
+
+  .columnTitle,
+  .tableCell,
+  .backButton,
+  .currentPage {
+    font-size: 1rem;
+  }
+
+  .button,
+  .downloadButton {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .backButton {
+    width: 5rem;
+    height: 2.75rem;
   }
 }
