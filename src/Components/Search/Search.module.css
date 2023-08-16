@@ -134,10 +134,17 @@
     margin: 0;
     padding: 0;
   }
+  .lastColumn {
+    display: flex;
+    align-items: center;
+  }
   .info {
     flex-direction: row;
+    margin: 0.5rem 0 0.5rem 1rem;
   }
-  .code,
+  .button {
+    margin: 0 0 0 1rem;
+  }
   .type {
     margin: 0;
   }
@@ -148,4 +155,12 @@
 }
 
 @media (min-width: 1024px) {
+  .container {
+    width: 70vw;
+  }
+}
+@media (min-width: 1280px) {
+  .container {
+    max-width: 55vw;
+  }
 }
