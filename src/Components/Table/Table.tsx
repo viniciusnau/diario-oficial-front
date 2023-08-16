@@ -102,7 +102,7 @@ const Table: React.FC<TableProps> = ({
             onClick={handleDownloadTemplate}
             alt="Baixar template"
           >
-            <MdDownload size={24} />
+            <MdDownload size={isResponsive ? 18 : 24} />
           </Button>
         )}
       </div>
@@ -141,7 +141,7 @@ const Table: React.FC<TableProps> = ({
                           }
                           className={styles.button}
                         >
-                          <MdDelete size={24} />
+                          <MdDelete size={isResponsive ? 18 : 24} />
                         </Button>
                       ) : (
                         <div className={styles.tableCell}>

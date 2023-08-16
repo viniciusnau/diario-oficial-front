@@ -29,10 +29,9 @@
 
 @media (max-width: 750px) {
   .regulation {
-    width: 80%;
-    height: 0.5rem;
-    font-size: 1rem;
-    line-height: 1.2rem;
+    min-width: 75%;
+    font-size: 0.8rem;
+    line-height: 1.25rem;
   }
 
   .table {

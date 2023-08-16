@@ -2,7 +2,7 @@
 
 .container {
   width: 80vw;
-  margin: 0 auto 1rem auto;
+  margin: 1rem auto;
   display: flex;
   justify-content: space-between;
   max-height: 10rem;
@@ -91,6 +91,21 @@
 }
 
 @media (max-width: 750px) {
+  .container {
+    max-height: 50rem;
+  }
+  .align {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .code,
+  .keyword,
+  .type {
+    width: 10rem;
+  }
   .calendar,
   .date,
   .input,
@@ -103,7 +118,7 @@
   .checkbox,
   .button {
     width: 70%;
-    margin: 0 0.5rem;
+    margin: 1rem 0.5rem;
     padding: 0;
   }
   .info {
@@ -167,6 +182,6 @@
 }
 @media (min-width: 1280px) {
   .container {
-    max-width: 55vw;
+    max-width: 40vw;
   }
 }

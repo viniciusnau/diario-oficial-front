@@ -124,59 +124,59 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch }) => {
         handleKeyPress(e, handleSubmit, "Enter", ["words", "post_type"])
       }
     >
-      <div className={styles.calendarContainer}>
-        <Calendar
-          value={dayRange}
-          onChange={setDayRange}
-          shouldHighlightWeekends
-          colorPrimary="#9fc54d"
-          colorPrimaryLight="#d7ecbd"
-          calendarClassName={styles.calendar}
-          locale={ptLocale}
-          renderFooter={() => (
-            <div className={styles.renderFooter}>
-              <button
-                type="button"
-                onClick={() => {
-                  setDayRange({ from: null, to: null });
-                }}
-                className={styles.clearButton}
-              >
-                Limpar
-              </button>
-            </div>
-          )}
-        />
-      </div>
-      <div className={styles.keyword}>
-        <SelectedList
-          placeholder="Palavra-chave"
-          field="words"
-          list={selectedRange}
-          setList={setSelectedRange}
-          onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-            const value = e.target.value.trim();
-            if (value !== "") {
-              setSelectedRange((prev) => ({
-                ...prev,
-                words: [...prev.words, value],
-              }));
-            }
-          }}
-        />
-      </div>
-      <div className={styles.type}>
-        <SelectedList
-          placeholder="Tipo"
-          field="post_type"
-          list={selectedRange}
-          setList={setSelectedRange}
-          options={optionsType}
-          isType
-          readOnly
-        />
-      </div>
-      <div>
+      <div className={styles.align}>
+        <div className={styles.calendarContainer}>
+          <Calendar
+            value={dayRange}
+            onChange={setDayRange}
+            shouldHighlightWeekends
+            colorPrimary="#9fc54d"
+            colorPrimaryLight="#d7ecbd"
+            calendarClassName={styles.calendar}
+            locale={ptLocale}
+            renderFooter={() => (
+              <div className={styles.renderFooter}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setDayRange({ from: null, to: null });
+                  }}
+                  className={styles.clearButton}
+                >
+                  Limpar
+                </button>
+              </div>
+            )}
+          />
+        </div>
+        <div className={styles.keyword}>
+          <SelectedList
+            placeholder="Palavra-chave"
+            field="words"
+            list={selectedRange}
+            setList={setSelectedRange}
+            onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+              const value = e.target.value.trim();
+              if (value !== "") {
+                setSelectedRange((prev) => ({
+                  ...prev,
+                  words: [...prev.words, value],
+                }));
+              }
+            }}
+          />
+        </div>
+        <div className={styles.type}>
+          <SelectedList
+            placeholder="Tipo"
+            field="post_type"
+            list={selectedRange}
+            setList={setSelectedRange}
+            options={optionsType}
+            isType
+            readOnly
+          />
+        </div>
         <Input
           className={styles.code}
           name="post_code"
@@ -196,10 +196,10 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch }) => {
             />
             <label>Sim</label>
           </div>
+          <Button className={styles.button} onClick={handleSubmit}>
+            Pesquisar
+          </Button>
         </div>
-        <Button className={styles.button} onClick={handleSubmit}>
-          Pesquisar
-        </Button>
       </div>
     </div>
   );

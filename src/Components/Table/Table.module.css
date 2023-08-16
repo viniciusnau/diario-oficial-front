@@ -93,6 +93,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0;
 }
 
 .customPagination li {
@@ -164,7 +165,8 @@
   .columnTitle,
   .tableCell,
   .backButton,
-  .currentPage {
+  .currentPage,
+  .empty {
     font-size: 0.7rem;
   }
 
@@ -194,7 +196,8 @@
 
   .columnTitle,
   .tableCell,
-  .backButton {
+  .backButton,
+  .empty {
     font-size: 1rem;
   }
 
@@ -223,7 +226,8 @@
   .columnTitle,
   .tableCell,
   .backButton,
-  .currentPage {
+  .currentPage,
+  .empty {
     font-size: 1rem;
   }
 
