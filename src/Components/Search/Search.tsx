@@ -149,56 +149,66 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch }) => {
             )}
           />
         </div>
-        <div className={styles.keyword}>
-          <SelectedList
-            placeholder="Palavra-chave"
-            field="words"
-            list={selectedRange}
-            setList={setSelectedRange}
-            onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-              const value = e.target.value.trim();
-              if (value !== "") {
-                setSelectedRange((prev) => ({
-                  ...prev,
-                  words: [...prev.words, value],
-                }));
-              }
-            }}
-          />
-        </div>
-        <div className={styles.type}>
-          <SelectedList
-            placeholder="Tipo"
-            field="post_type"
-            list={selectedRange}
-            setList={setSelectedRange}
-            options={optionsType}
-            isType
-            readOnly
-          />
-        </div>
-        <Input
-          className={styles.code}
-          name="post_code"
-          value={postCode}
-          onChange={handleChange}
-          placeholder="Código da edição"
-          max={12}
-        />
-        <div className={styles.info}>
-          <label>Palavras exatas?</label>
-          <div>
-            <Input
-              name="exact_words"
-              checked={exactWordsChecked}
-              onChange={handleChange}
-              type="checkbox"
+        <div className={styles.firstColumn}>
+          <div className={styles.keyword}>
+            <SelectedList
+              placeholder="Palavra-chave"
+              field="words"
+              list={selectedRange}
+              setList={setSelectedRange}
+              onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
+                const value = e.target.value.trim();
+                if (value !== "") {
+                  setSelectedRange((prev) => ({
+                    ...prev,
+                    words: [...prev.words, value],
+                  }));
+                }
+              }}
             />
-            <label>Sim</label>
           </div>
-          <Button className={styles.button} onClick={handleSubmit}>
-            Pesquisar
-          </Button>
+          <div className={styles.type}>
+            <SelectedList
+              placeholder="Tipo"
+              field="post_type"
+              list={selectedRange}
+              setList={setSelectedRange}
+              options={optionsType}
+              isType
+              readOnly
+            />
+          </div>
+        </div>
+        <div className={styles.lastColumn}>
+          <Input
+            className={styles.code}
+            name="post_code"
+            value={postCode}
+            onChange={handleChange}
+            placeholder="Código da edição"
+            max={12}
+          />
+          <div className={styles.info}>
+            <label className={styles.question}>Palavras exatas?</label>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                margin: "0 0 0 .5rem",
+              }}
+            >
+              <Input
+                name="exact_words"
+                checked={exactWordsChecked}
+                onChange={handleChange}
+                type="checkbox"
+              />
+              <label className={styles.yes}>Sim</label>
+            </div>
+            <Button className={styles.button} onClick={handleSubmit}>
+              Pesquisar
+            </Button>
+          </div>
         </div>
       </div>
     </div>

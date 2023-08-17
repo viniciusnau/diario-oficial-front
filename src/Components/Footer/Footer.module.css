@@ -28,6 +28,7 @@
   max-height: 5rem;
   box-shadow: 0 -10px 8px -10px var(--light-shadow-color);
   overflow-y: hidden;
+  z-index: 1;
 }
 
 .container {
