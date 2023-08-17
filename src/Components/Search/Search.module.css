@@ -98,6 +98,7 @@
 
   .calendarContainer {
     width: auto;
+    margin: 0 0 0.5rem;
   }
   .calendar {
     position: relative;
@@ -172,10 +173,10 @@
   .align {
     display: flex;
     flex-direction: column;
-    align-items: center;
   }
   .calendarContainer {
     width: auto;
+    margin: 0 0 0.5rem;
   }
   .calendar {
     position: relative;
@@ -186,6 +187,7 @@
   .lastColumn {
     display: flex;
   }
+
   .lastColumn {
     align-items: center;
   }
@@ -193,7 +195,7 @@
   .type,
   .keyword,
   .code {
-    margin: 0.5rem;
+    margin: 0.5rem 0;
   }
   .info {
     flex-direction: column;
@@ -219,10 +221,14 @@
   .firstColumn {
     display: flex;
     flex-direction: column;
+    margin: 0 0 0 0.5rem;
   }
   .lastColumn {
     display: flex;
     flex-direction: column;
+  }
+  .type {
+    margin-top: 1.5rem;
   }
   .code {
     width: 12rem;
