@@ -19,6 +19,12 @@ export const handleTypeService = {
     description: "Confira se o email está correto e tente novamente.",
     color: "#ff6464",
   },
+  resetSuccess: {
+    title: "Requisição feita com sucesso!",
+    description: "Acesse o email para finalizar a troca de senha.",
+    color: "#9fc54d",
+  },
+
   postError: {
     title: "Erro ao agendar edição!",
     description: "Tente novamente mais tarde.",

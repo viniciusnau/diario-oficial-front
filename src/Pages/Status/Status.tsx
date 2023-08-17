@@ -202,15 +202,17 @@ const Status = () => {
             calendarClassName={styles.calendar}
           />
         </div>
-        <SelectedList
-          placeholder="Tipo"
-          field="type"
-          list={selectedRange}
-          setList={setSelectedRange}
-          options={optionsType}
-          isType
-          readOnly
-        />
+        <div className={styles.type}>
+          <SelectedList
+            placeholder="Tipo"
+            field="type"
+            list={selectedRange}
+            setList={setSelectedRange}
+            options={optionsType}
+            isType
+            readOnly
+          />
+        </div>
         <div className={styles.lastColumn}>
           <div>
             <Input

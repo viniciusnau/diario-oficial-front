@@ -14,7 +14,9 @@ const ResetPassword = () => {
   const [form, setForm] = useState<any>({
     email: "",
   });
-  const { error, loading } = useSelector((state: any) => state.resetPassword);
+  const { data, error, loading } = useSelector(
+    (state: any) => state.resetPassword
+  );
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | any) => {
     const { name, value } = e.target;
     setForm((prev: any) => ({
@@ -44,6 +46,7 @@ const ResetPassword = () => {
   return (
     <div className={styles.container}>
       {error && <Snackbar type="resetError" />}
+      {data.message && <Snackbar type="resetSuccess" />}
       <div
         className={styles.form}
         onKeyUp={(e) => handleKeyPress(e, handleSubmit, "Enter")}
