@@ -7,8 +7,15 @@ import Login from "./Pages/Login/Login";
 import Status from "./Pages/Status/Status";
 import ProtectedRoute from "./Auth/protectedRoute";
 import ResetPassword from "./Pages/ResetPassword/ResetPassword";
+import {useEffect} from "react";
 
 function App() {
+  useEffect(() => {
+    const meta = document.createElement('meta');
+    meta.name = 'Diário Oficial';
+    meta.content = 'Diário Oficial';
+    document.head.appendChild(meta);
+  }, []);
   return (
     <div className="App">
       <BrowserRouter>
