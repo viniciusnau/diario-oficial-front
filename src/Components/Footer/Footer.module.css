@@ -30,18 +30,6 @@
   overflow-y: hidden;
 }
 
-.container {
-  max-width: 100%;
-  text-align: center;
-  padding: 1rem;
-}
-
-.container p {
-  font-size: 14px;
-  color: #555;
-  margin: 0;
-}
-
 .topics {
   display: flex;
   justify-content: space-between;
@@ -95,7 +83,6 @@
   }
 }
 
-/* Media query for screens larger than 750px (tablets) */
 @media (min-width: 751px) {
   .description,
   .copyright {
@@ -110,25 +97,27 @@
   }
 }
 
-/* Media query for screens larger than 1023px */
 @media (min-width: 1024px) {
   .description,
   .copyright {
     font-size: 14px;
   }
   .copyright {
-    padding: 0 0 0 0;
+    padding: 0;
     align-items: flex-end;
   }
 }
 
-/* Media query for screens larger than 1360px */
 @media (min-width: 1361px) {
   .description,
   .copyright {
     font-size: 14px;
   }
   .copyright {
+    padding-bottom: 2rem;
     align-items: flex-end;
+  }
+  .description {
+    margin-top: 0;
   }
 }
