@@ -28,6 +28,7 @@ const Home = () => {
   ];
 
   useEffect(() => {
+    setPage(1);
     setExtracted([]);
     handleExtractUrl(response.data?.results, setExtracted);
   }, [response.data?.results]);

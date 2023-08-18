@@ -122,6 +122,14 @@ const Status = () => {
     formData.append("hour", selectedRange.time);
     formData.append("number", selectedRange.code);
     dispatch<any>(fetchPost(formData));
+    setSelectedRange({
+      file: File,
+      type: [],
+      time: "",
+      code: "",
+    });
+    setSelectedFile(null);
+    setDay(null);
   };
 
   const transformedData = getFiles?.data?.results?.map((item: any) => {
@@ -162,11 +170,6 @@ const Status = () => {
         <Loading size="5rem" type="spin" />
       </div>
     );
-  if (post.error || getFiles.error) {
-    setTimeout(() => {
-      window.location.reload();
-    }, 0.000001);
-  }
 
   return (
     <div className={styles.container}>
