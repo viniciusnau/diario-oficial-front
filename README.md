@@ -27,23 +27,12 @@ Certifique-se de ter o Node.js instalado na sua máquina.
 ## Uso
 
 1. Inicie o servidor de desenvolvimento: `npm start`
-2. Abra o seu navegador e acesse: `http://localhost:3000` ou `http://172.16.214.114:3000`
-
-## CONFIRM SECOND ACCESS ABOVE
+2. Abra o seu navegador e acesse: `http://localhost:3000`
 
 ## Contribuição
 
 Contribuições são bem-vindas! No entanto, apenas administradores têm permissão para fazer postagens neste projeto. Se você deseja reportar problemas ou sugestões, sinta-se à vontade para entrar em contato.
 
-## Contato // I THINK IT IS NOT NECESSARY
-
-Se você tiver alguma dúvida ou sugestão, sinta-se à vontade para entrar em contato:
-
-Nome: Seu Nome
-E-mail: seu@email.com
-
 ---
 
 Agradecemos por escolher o Diário Oficial Eletrônico para se manter informado sobre as novidades locais! Esperamos que esta aplicação seja útil e atenda às suas expectativas. Apreciamos o seu apoio e contribuição.
-
-## I THINK IT IS NOT NECESSARY
