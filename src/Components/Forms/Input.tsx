@@ -21,6 +21,7 @@ interface iInput {
   pattern?: string;
   checked?: boolean;
   onKeyUp?: any;
+  defaultValue?: any;
 }
 
 const Input: React.FC<iInput> = ({

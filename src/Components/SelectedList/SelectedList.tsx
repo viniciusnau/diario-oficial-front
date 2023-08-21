@@ -17,6 +17,8 @@ interface iSelectedList {
   options?: string[];
   onBlur?: any;
   onKeyUp?: any;
+  setClearField?: any;
+  clearField?: any;
 }
 
 const SelectedList: React.FC<iSelectedList> = ({
@@ -31,6 +33,8 @@ const SelectedList: React.FC<iSelectedList> = ({
   classNameDiv,
   options,
   onKeyUp,
+  setClearField,
+  clearField,
   ...props
 }) => {
   const [showOptions, setShowOptions] = useState<boolean>(false);
@@ -80,6 +84,11 @@ const SelectedList: React.FC<iSelectedList> = ({
       setShowOptions(false);
     }, 100);
   };
+
+  if (clearField === true) {
+    value = "";
+    setClearField(false);
+  }
 
   return (
     <div className={styles.listContainer}>

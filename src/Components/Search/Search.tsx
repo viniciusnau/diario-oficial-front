@@ -13,9 +13,10 @@ import { ptLocale } from "../Consts";
 interface iSearch {
   setBackup?: any;
   setSearch?: any;
+  search?: any;
 }
 
-const Search: React.FC<iSearch> = ({ setBackup, setSearch }) => {
+const Search: React.FC<iSearch> = ({ setBackup, setSearch, search }) => {
   const [selectedRange, setSelectedRange] = useState({
     start_date: "",
     end_date: "",
@@ -178,6 +179,8 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch }) => {
                   }));
                 }
               }}
+              setClearField={setSearch}
+              clearField={search}
             />
           </div>
           <div className={styles.type}>

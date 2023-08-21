@@ -9,7 +9,7 @@ import {
   regulation,
 } from "../../Components/Helper";
 import { fetchAllPosts } from "../../Services/Slices/allPostsSlice";
-import { fetchPublic } from "../../Services/Slices/publicSlice";
+// import { fetchPublic } from "../../Services/Slices/publicSlice";
 import Snackbar from "../../Components/Snackbar/Snackbar";
 
 const Home = () => {
@@ -53,7 +53,11 @@ const Home = () => {
         <Snackbar type="error" />
       )}
       <p className={styles.regulation}>{regulation}</p>
-      <Search setBackup={setBackup} setSearch={setIsSearched} />
+      <Search
+        setBackup={setBackup}
+        setSearch={setIsSearched}
+        search={isSearched}
+      />
       <div className={styles.table}>
         <Table
           title={isSearched ? "Edições encontradas" : "Últimas edições"}
