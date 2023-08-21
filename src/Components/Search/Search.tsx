@@ -93,7 +93,7 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch }) => {
         end_date: formattedEndDate,
         words: lowercaseWords,
       };
-      dispatch<any>(fetchPublic(updatedRange));
+      dispatch<any>(fetchPublic(updatedRange, "1"));
       setBackup(updatedRange);
       setSearch(true);
     } else if (dayRange.from && !dayRange.to) {
@@ -104,7 +104,7 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch }) => {
         end_date: formattedStartDate,
         words: lowercaseWords,
       };
-      dispatch<any>(fetchPublic(updatedRange));
+      dispatch<any>(fetchPublic(updatedRange, "1"));
       setBackup(updatedRange);
       setSearch(true);
     } else {
@@ -112,7 +112,7 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch }) => {
         ...selectedRange,
         words: lowercaseWords,
       };
-      dispatch<any>(fetchPublic(updatedRange));
+      dispatch<any>(fetchPublic(updatedRange, "1"));
       setBackup(updatedRange);
       setSearch(true);
     }

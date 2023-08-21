@@ -37,7 +37,6 @@ const Home = () => {
     if (!isSearched) {
       dispatch<any>(fetchAllPosts(page.toString(), false));
     }
-    if (isSearched) dispatch<any>(fetchPublic(backup, page.toString()));
   }, [dispatch, page, isSearched, backup]);
 
   useEffect(() => {
