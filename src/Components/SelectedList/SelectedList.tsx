@@ -16,6 +16,7 @@ interface iSelectedList {
   classNameDiv?: any;
   options?: string[];
   onBlur?: any;
+  onKeyUp?: any;
 }
 
 const SelectedList: React.FC<iSelectedList> = ({
@@ -29,6 +30,7 @@ const SelectedList: React.FC<iSelectedList> = ({
   className,
   classNameDiv,
   options,
+  onKeyUp,
   ...props
 }) => {
   const [showOptions, setShowOptions] = useState<boolean>(false);
@@ -95,6 +97,7 @@ const SelectedList: React.FC<iSelectedList> = ({
         onBlur={isType && handleBlur}
         value={value}
         readOnly={readOnly}
+        onKeyUp={onKeyUp}
         {...props}
       />
 

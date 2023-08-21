@@ -67,6 +67,18 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch }) => {
     }
   };
 
+  const handleKeyUp = (e: React.FocusEvent<HTMLInputElement> | any) => {
+    const value = e.target.value.trim();
+    const key = e.key;
+    if (value !== "" && key === " ") {
+      setSelectedRange((prev) => ({
+        ...prev,
+        words: [...prev.words, value],
+      }));
+      e.currentTarget.value = "";
+    }
+  };
+
   const handleSubmit = () => {
     const lowercaseWords = selectedRange.words.map((word: string) =>
       word.toLowerCase()
@@ -156,6 +168,7 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch }) => {
               field="words"
               list={selectedRange}
               setList={setSelectedRange}
+              onKeyUp={handleKeyUp}
               onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
                 const value = e.target.value.trim();
                 if (value !== "") {
