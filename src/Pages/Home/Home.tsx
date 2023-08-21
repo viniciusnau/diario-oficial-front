@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./Home.module.css";
 import Search from "../../Components/Search/Search";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +9,6 @@ import {
   regulation,
 } from "../../Components/Helper";
 import { fetchAllPosts } from "../../Services/Slices/allPostsSlice";
-// import { fetchPublic } from "../../Services/Slices/publicSlice";
 import Snackbar from "../../Components/Snackbar/Snackbar";
 
 const Home = () => {
@@ -26,18 +25,18 @@ const Home = () => {
     { title: "Publicado", property: "date" },
     { title: "Arquivo", property: "presigned_url" },
   ];
+  const { current } = useRef(isSearched);
+  useEffect(() => {
+    if (!current) {
+      dispatch<any>(fetchAllPosts(page.toString(), false));
+    }
+  }, [dispatch, page, current]);
 
   useEffect(() => {
     setPage(1);
     setExtracted([]);
     handleExtractUrl(response.data?.results, setExtracted);
   }, [response.data?.results]);
-
-  useEffect(() => {
-    if (!isSearched) {
-      dispatch<any>(fetchAllPosts(page.toString(), false));
-    }
-  }, [dispatch, page, isSearched, backup]);
 
   useEffect(() => {
     if (allPostsResponse.data) {

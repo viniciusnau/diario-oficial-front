@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./SelectedList.module.css";
 import Input from "../Forms/Input";
 import { v4 as uuidv4 } from "uuid";
@@ -38,6 +38,7 @@ const SelectedList: React.FC<iSelectedList> = ({
   ...props
 }) => {
   const [showOptions, setShowOptions] = useState<boolean>(false);
+  const inputValue = value !== undefined ? value : "";
 
   const handleAddItem = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const inputValue = e.currentTarget.value.trim();
@@ -85,10 +86,12 @@ const SelectedList: React.FC<iSelectedList> = ({
     }, 100);
   };
 
-  if (clearField === true) {
-    value = "";
-    setClearField(false);
-  }
+  useEffect(() => {
+    if (clearField === true) {
+      value = "";
+      setClearField(false);
+    }
+  }, []);
 
   return (
     <div className={styles.listContainer}>
@@ -104,7 +107,7 @@ const SelectedList: React.FC<iSelectedList> = ({
           })
         }
         onBlur={isType && handleBlur}
-        value={value}
+        defaultValue={inputValue}
         readOnly={readOnly}
         onKeyUp={onKeyUp}
         {...props}

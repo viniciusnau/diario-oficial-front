@@ -177,6 +177,7 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch, search }) => {
                     ...prev,
                     words: [...prev.words, value],
                   }));
+                  e.currentTarget.value = "";
                 }
               }}
               setClearField={setSearch}
