@@ -48,11 +48,11 @@
 
 .text {
   margin: 0.15rem 0 0.75rem 0.5rem;
-  font-size: 1rem;
+  font-size: var(--font-size);
   font-weight: bold;
 }
 
 .description {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: var(--font-size)-0.1rem;
 }

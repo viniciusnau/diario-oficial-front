@@ -1,3 +1,7 @@
+:root {
+  --font-size: 1rem;
+}
+
 body {
   margin: 0;
 }
@@ -14,6 +18,36 @@ body {
   flex-grow: 1;
   padding: 20px;
 }
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: fixed;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  z-index: 1000;
+  gap: 1rem;
+}
+
+.controls button {
+  padding: 0.5rem 1rem;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.invert-colors {
+  filter: invert(70%);
+}
+
+.grayscale {
+  filter: grayscale(100%);
+}
+
 @media screen and (min-width: 1800px) {
   .App {
     background: linear-gradient(

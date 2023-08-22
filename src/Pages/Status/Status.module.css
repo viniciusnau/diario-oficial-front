@@ -60,7 +60,7 @@
   margin: 0 0.5rem;
   border-radius: 0.5rem;
   padding: 0 0.75rem;
-  font-size: medium;
+  font-size: var(--font-size);
 }
 
 .date {
@@ -109,7 +109,7 @@
   margin: 0 1.5rem;
   background-color: var(--first-button-color);
   box-shadow: 0 10px 10px -10px var(--shadow-color);
-  font-size: medium;
+  font-size: var(--font-size);
 }
 
 .fakeInput {
@@ -123,7 +123,7 @@
   margin: 0 0.5rem;
   background-color: var(--first-button-color);
   box-shadow: 0 10px 10px -10px var(--shadow-color);
-  font-size: medium;
+  font-size: var(--font-size);
 }
 
 .button:hover,

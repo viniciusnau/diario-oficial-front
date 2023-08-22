@@ -27,11 +27,10 @@ const Home = () => {
   ];
   const { current } = useRef(isSearched);
   useEffect(() => {
-    if (!current) {
+    if (!current && !response.data.length) {
       dispatch<any>(fetchAllPosts(page.toString(), false));
     }
-  }, [dispatch, page, current]);
-
+  }, [dispatch, page, current, response.data.length]);
   useEffect(() => {
     setPage(1);
     setExtracted([]);

@@ -77,7 +77,7 @@
   font-weight: bold;
   text-transform: uppercase;
   position: relative;
-  font-size: 1.2rem;
+  font-size: var(--font-size) + 0.2rem;
 }
 
 .linkText::before {
@@ -129,13 +129,13 @@
     width: 18.4rem;
   }
   .modalItem {
-    font-size: 0.9rem;
+    font-size: var(--font-size)-0.1rem;
   }
 }
 
 @media (min-width: 751px) {
   .modalItem {
-    font-size: 1.2rem;
+    font-size: var(--font-size) + 0.2rem;
   }
 }
 

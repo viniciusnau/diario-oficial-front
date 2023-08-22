@@ -34,7 +34,7 @@
   justify-content: space-between;
   background-color: #f0f0f0;
   font-weight: bold;
-  font-size: 16px;
+  font-size: var(--font-size);
 }
 
 .columnHeader {
@@ -159,7 +159,7 @@
   }
 
   .headerTable {
-    font-size: 0.85rem;
+    font-size: var(--font-size)-0.15rem;
   }
 
   .columnTitle,
@@ -167,7 +167,7 @@
   .backButton,
   .currentPage,
   .empty {
-    font-size: 0.7rem;
+    font-size: var(--font-size)-0.3rem;
   }
 
   .button,
@@ -191,14 +191,14 @@
 
   .headerTable,
   .currentPage {
-    font-size: 1.2rem;
+    font-size: var(--font-size) + 0.2rem;
   }
 
   .columnTitle,
   .tableCell,
   .backButton,
   .empty {
-    font-size: 1rem;
+    font-size: var(--font-size);
   }
 
   .button,
@@ -220,7 +220,7 @@
   }
 
   .headerTable {
-    font-size: 1.25rem;
+    font-size: var(--font-size) + 0.25rem;
   }
 
   .columnTitle,
@@ -228,7 +228,7 @@
   .backButton,
   .currentPage,
   .empty {
-    font-size: 1rem;
+    font-size: var(--font-size);
   }
 
   .button,

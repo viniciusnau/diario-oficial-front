@@ -42,7 +42,7 @@
   margin: 0.5rem 0;
   border: none;
   border-radius: 0.5rem;
-  font-size: 0.9rem;
+  font-size: var(--font-size)-0.1rem;
   cursor: pointer;
 }
 
@@ -91,7 +91,7 @@
   .input,
   .list,
   .option {
-    font-size: 0.7rem;
+    font-size: var(--font-size)-0.3rem;
   }
   .selected {
     width: 7rem;
@@ -109,7 +109,7 @@
   .input,
   .list,
   .option {
-    font-size: 0.8rem;
+    font-size: var(--font-size)-0.2rem;
   }
   .selected {
     width: 9rem;
@@ -127,7 +127,7 @@
   .input,
   .list,
   .option {
-    font-size: 1rem;
+    font-size: var(--font-size);
   }
   .selected {
     width: 11rem;

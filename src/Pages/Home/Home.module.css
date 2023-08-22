@@ -30,7 +30,7 @@
 @media (max-width: 750px) {
   .regulation {
     min-width: 75%;
-    font-size: 0.8rem;
+    font-size: var(--font-size)-0.2rem;
     line-height: 1.25rem;
   }
 
@@ -43,7 +43,7 @@
 @media (min-width: 751px) {
   .regulation {
     width: 90%;
-    font-size: 1.2rem;
+    font-size: var(--font-size) + 0.2rem;
     line-height: 1.75rem;
   }
 
@@ -55,7 +55,7 @@
 
 @media (min-width: 1024px) {
   .regulation {
-    font-size: 1.1rem;
+    font-size: var(--font-size) + 0.1rem;
   }
 
   .table {
