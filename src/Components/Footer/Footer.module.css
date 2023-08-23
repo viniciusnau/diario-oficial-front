@@ -61,7 +61,7 @@
   background: none;
   border: none;
   color: #555;
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
   font-size: var(--font-size)-0.12rem;
   padding: 0;
 }

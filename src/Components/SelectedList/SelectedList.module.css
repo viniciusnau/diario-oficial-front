@@ -9,6 +9,7 @@
   height: 3rem;
   border-radius: 0.5rem;
   padding: 0 0 0 1rem;
+  cursor: var(--cursor-pointer);
 }
 
 .input:hover {
@@ -43,7 +44,7 @@
   border: none;
   border-radius: 0.5rem;
   font-size: var(--font-size)-0.1rem;
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
 }
 
 .option:hover {
@@ -83,7 +84,7 @@
   border: none;
   background-color: var(--second-button-color);
   align-items: end;
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
 }
 
 @media (max-width: 750px) {

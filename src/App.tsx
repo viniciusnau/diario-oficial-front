@@ -7,12 +7,22 @@ import Login from "./Pages/Login/Login";
 import Status from "./Pages/Status/Status";
 import ProtectedRoute from "./Auth/protectedRoute";
 import ResetPassword from "./Pages/ResetPassword/ResetPassword";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Button from "./Components/Forms/Button";
 
 function App() {
+  const cursorRef = useRef<HTMLDivElement | null>(null);
   const [colorInverted, setColorInverted] = useState(false);
   const [fontSize, setFontSize] = useState(1);
   const [grayscale, setGrayscale] = useState(false);
+  const [customCursor, setCustomCursor] = useState(false);
+  // const [isClicked, setClicked] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (event: any) => {
+    const { clientX, clientY } = event;
+    setMousePosition({ x: clientX, y: clientY });
+  };
 
   const handleColorInversion = () => {
     setColorInverted((prevState) => !prevState);
@@ -36,6 +46,40 @@ function App() {
     setGrayscale((prevState) => !prevState);
   };
 
+  const handleCursorSize = () => {
+    setCustomCursor((prevSize) => !prevSize);
+    if (cursorRef.current) {
+      cursorRef.current.classList.toggle("large-cursor");
+    }
+  };
+
+  useEffect(() => {
+    const cursor = cursorRef.current;
+
+    const onMouseMove = (event: MouseEvent) => {
+      if (cursorRef.current) {
+        cursorRef.current.style.display = "block";
+        cursorRef.current.style.top = mousePosition.y + "px";
+        cursorRef.current.style.left = mousePosition.x + "px";
+        cursorRef.current.style.transformOrigin = "center center";
+      }
+    };
+
+    const onMouseOut = () => {
+      if (cursor) {
+        cursor.style.display = "none";
+      }
+    };
+
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseout", onMouseOut);
+
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseout", onMouseOut);
+    };
+  }, [mousePosition]);
+
   return (
     <div
       className={`App ${colorInverted ? "invert-colors" : ""} ${
@@ -45,9 +89,22 @@ function App() {
         {
           fontSize: `${fontSize}rem`,
           "--font-size": `${fontSize}rem`,
+          cursor: `${customCursor ? "none" : "auto"}`,
+          "--cursor-pointer": `${customCursor ? "none" : "pointer"}`,
+          "--cursor-not-allowed": `${customCursor ? "none" : "not-allowed"}`,
+          "--cursor-default": `${customCursor ? "none" : "default"}`,
         } as any
       }
+      onMouseMove={handleMouseMove}
     >
+      <div
+        ref={cursorRef}
+        className={`${customCursor ? "cursor" : ""}`}
+        style={{
+          top: customCursor ? mousePosition.y + "px" : "auto",
+          left: customCursor ? mousePosition.x + "px" : "auto",
+        }}
+      />
       <BrowserRouter>
         <Header />
         <main>
@@ -62,19 +119,20 @@ function App() {
           </Routes>
         </main>
         <div className="controls">
-          <button onClick={handleColorInversion}>
+          <Button onClick={handleColorInversion}>
             {colorInverted ? "Restore Colors" : "Invert Colors"}
-          </button>
-          <button onClick={() => handleFontChange("increase")}>
+          </Button>
+          <Button onClick={() => handleFontChange("increase")}>
             Increase Font
-          </button>
-          <button onClick={() => handleFontChange("reset")}>Reset Font</button>
-          <button onClick={() => handleFontChange("decrease")}>
+          </Button>
+          <Button onClick={() => handleFontChange("reset")}>Reset Font</Button>
+          <Button onClick={() => handleFontChange("decrease")}>
             Decrease Font
-          </button>
-          <button onClick={handleToggleGrayscale}>
+          </Button>
+          <Button onClick={handleToggleGrayscale}>
             {grayscale ? "Restore Color" : "Grayscale"}
-          </button>
+          </Button>
+          <Button onClick={handleCursorSize}>Toggle cursor size</Button>
         </div>
         <Footer />
       </BrowserRouter>

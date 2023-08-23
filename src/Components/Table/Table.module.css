@@ -145,7 +145,7 @@
 .backButton:disabled,
 .downloadButton:disabled {
   background-color: var(--first-button-color-disabled);
-  cursor: default;
+  cursor: var(--cursor-default);
 }
 
 .tableRow:hover {

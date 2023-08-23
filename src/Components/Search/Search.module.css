@@ -33,7 +33,7 @@
   border-radius: 0.5rem;
   width: 5rem;
   height: 2rem;
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
   margin: 0 0 1rem 0;
 }
 
@@ -79,6 +79,10 @@
   background-color: var(--first-button-color);
   box-shadow: 0 10px 10px -10px var(--shadow-color);
   font-size: var(--font-size);
+}
+
+.code:hover {
+  background-color: var(--second-button-color-hover);
 }
 
 .button:hover {

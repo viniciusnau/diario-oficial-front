@@ -58,15 +58,15 @@ const Home = () => {
       />
       <div className={styles.table}>
         <Table
-          title={isSearched ? "Edições encontradas" : "Últimas edições"}
+          title={current ? "Edições encontradas" : "Últimas edições"}
           data={extracted}
           columns={columns}
           setPage={setPage}
           page={page}
           backup={backup}
-          total={isSearched ? response.data.count : allPostsResponse.data.count}
+          total={current ? response.data.count : allPostsResponse.data.count}
           isEmpty={
-            (isSearched && response?.data?.results?.length === 0) ||
+            (current && response?.data?.results?.length === 0) ||
             (isDispatched && allPostsResponse?.data?.results?.length === 0)
           }
         />
