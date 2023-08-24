@@ -68,33 +68,6 @@ const A11y: React.FC<iA11y> = ({
   };
 
   useEffect(() => {
-    const cursor = cursorRef.current;
-
-    const onMouseMove = (event: MouseEvent) => {
-      if (cursorRef.current) {
-        cursorRef.current.style.display = "block";
-        cursorRef.current.style.top = mousePosition.y + "rem";
-        cursorRef.current.style.left = mousePosition.x + "rem";
-        cursorRef.current.style.transformOrigin = "center center";
-      }
-    };
-
-    const onMouseOut = () => {
-      if (cursor) {
-        cursor.style.display = "none";
-      }
-    };
-
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mouseout", onMouseOut);
-
-    return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseout", onMouseOut);
-    };
-  }, [mousePosition]);
-
-  useEffect(() => {
     const handleOutsideClick = (event: any) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
         setIsOpenModal(false);
