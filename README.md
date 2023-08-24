@@ -54,6 +54,7 @@ A página de redefinição de senha permite que administradores recuperem suas s
 Legenda da imagem: Página inicial exibindo as últimas notícias.
 
 A página inicial é renderizada com componentes React e exibe os diários mais recentes. Os diários são obtidos por meio de requisições GET ao servidor e são exibidas na tabela com o arquivo a ser baixado para acessar as informações.
+Todos os campos existentes para fazer a requisição GET são opcionais.
 
 ### Página de Status (Lista de Diários Agendados)
 
@@ -61,3 +62,4 @@ A página inicial é renderizada com componentes React e exibe os diários mais 
 Legenda da imagem: Página de status exibindo a área de agendamento de diários e os diários agendados para publicação.
 
 A página de status possui campos a serem preenchidos para efetuar o agendamento de um novo diário e também, exibe diários agendados para publicação futura. Semelhante à página inicial, utiliza componentes React para mostrar os diários agendados em cartões com detalhes, incluindo estado e data de agendamento.
+Todos os campos existentes para fazer a requisição POSt são obrigatórios, com exceção do campo "Horário", no qual será definido como 00:00 o horário da postagem, no backend.

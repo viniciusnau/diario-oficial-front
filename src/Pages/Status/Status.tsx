@@ -199,6 +199,7 @@ const Status = () => {
             value={day}
             onChange={setDay}
             shouldHighlightWeekends
+            inputPlaceholder="Data*"
             colorPrimary="#9fc54d"
             colorPrimaryLight="#d7ecbd"
             locale={ptLocale}
@@ -207,7 +208,7 @@ const Status = () => {
         </div>
         <div className={styles.type}>
           <SelectedList
-            placeholder="Tipo"
+            placeholder="Tipo*"
             field="type"
             list={selectedRange}
             setList={setSelectedRange}
@@ -217,23 +218,20 @@ const Status = () => {
           />
         </div>
         <div className={styles.lastColumn}>
-          <div>
-            <Input
-              className={styles.time}
-              name="time"
-              value={selectedRange.time}
-              onChange={handleTime}
-              placeholder="Horário"
-            />
-          </div>
-
           <Input
             className={`${styles.input} ${styles.code}`}
-            placeholder="Número"
+            placeholder="Número*"
             value={selectedRange.code}
             onChange={handleChange}
             name="code"
             max={5}
+          />
+          <Input
+            className={styles.time}
+            name="time"
+            value={selectedRange.time}
+            onChange={handleTime}
+            placeholder="Horário"
           />
         </div>
         <Button
