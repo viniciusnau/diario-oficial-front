@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./SelectedList.module.css";
 import Input from "../Forms/Input";
 import { v4 as uuidv4 } from "uuid";
@@ -39,6 +39,7 @@ const SelectedList: React.FC<iSelectedList> = ({
 }) => {
   const [showOptions, setShowOptions] = useState<boolean>(false);
   const inputValue = value !== undefined ? value : "";
+  const optionsListRef = useRef<HTMLDivElement | null>(null);
 
   const handleAddItem = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const inputValue = e.currentTarget.value.trim();
@@ -80,10 +81,12 @@ const SelectedList: React.FC<iSelectedList> = ({
     setShowOptions(false);
   };
 
-  const handleBlur = () => {
-    setTimeout(() => {
-      setShowOptions(false);
-    }, 100);
+  const handleBlur = (e: React.FocusEvent) => {
+    if (!optionsListRef.current?.contains(e.relatedTarget)) {
+      setTimeout(() => {
+        setShowOptions(false);
+      }, 100);
+    }
   };
 
   useEffect(() => {
@@ -114,7 +117,7 @@ const SelectedList: React.FC<iSelectedList> = ({
       />
 
       {showOptions && (
-        <div className={styles.list}>
+        <div className={styles.list} ref={optionsListRef}>
           {options?.map((option: any) => (
             <button
               className={`${styles.option} ${

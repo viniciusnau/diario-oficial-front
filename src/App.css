@@ -24,9 +24,11 @@ body {
 
 .cursor {
   background-image: url(./Assets/pointer.png);
+  display: flex;
+  position: absolute;
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  position: absolute;
+  margin: 0.2rem;
   width: 2.5rem;
   height: 2.5rem;
   z-index: 10000;

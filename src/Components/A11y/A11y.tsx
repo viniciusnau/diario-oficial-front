@@ -73,8 +73,8 @@ const A11y: React.FC<iA11y> = ({
     const onMouseMove = (event: MouseEvent) => {
       if (cursorRef.current) {
         cursorRef.current.style.display = "block";
-        cursorRef.current.style.top = mousePosition.y + "px";
-        cursorRef.current.style.left = mousePosition.x + "px";
+        cursorRef.current.style.top = mousePosition.y + "rem";
+        cursorRef.current.style.left = mousePosition.x + "rem";
         cursorRef.current.style.transformOrigin = "center center";
       }
     };
