@@ -15,7 +15,6 @@ interface TableProps {
   page: any;
   downloadButton?: boolean;
   total?: number;
-  backup?: any;
   isEmpty?: boolean;
   isStatus?: boolean;
 }

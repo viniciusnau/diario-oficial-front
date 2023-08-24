@@ -7,8 +7,8 @@ import Login from "./Pages/Login/Login";
 import Status from "./Pages/Status/Status";
 import ProtectedRoute from "./Auth/protectedRoute";
 import ResetPassword from "./Pages/ResetPassword/ResetPassword";
-import { useEffect, useRef, useState } from "react";
-import Button from "./Components/Forms/Button";
+import { useRef, useState } from "react";
+import A11y from "./Components/A11y/A11y";
 
 function App() {
   const cursorRef = useRef<HTMLDivElement | null>(null);
@@ -16,69 +16,17 @@ function App() {
   const [fontSize, setFontSize] = useState(1);
   const [grayscale, setGrayscale] = useState(false);
   const [customCursor, setCustomCursor] = useState(false);
-  // const [isClicked, setClicked] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isOpenModal, setIsOpenModal] = useState<Boolean>(true);
 
   const handleMouseMove = (event: any) => {
     const { clientX, clientY } = event;
     setMousePosition({ x: clientX, y: clientY });
   };
 
-  const handleColorInversion = () => {
-    setColorInverted((prevState) => !prevState);
+  const handleOutsideClick = () => {
+    setIsOpenModal(true);
   };
-
-  const handleFontChange = (action: string) => {
-    switch (action) {
-      case "increase":
-        setFontSize((prevSize) => Math.min(prevSize + 0.25, 2));
-        break;
-      case "decrease":
-        setFontSize((prevSize) => Math.max(prevSize - 0.25, 0.75));
-        break;
-      case "reset":
-        setFontSize(1);
-        break;
-    }
-  };
-
-  const handleToggleGrayscale = () => {
-    setGrayscale((prevState) => !prevState);
-  };
-
-  const handleCursorSize = () => {
-    setCustomCursor((prevSize) => !prevSize);
-    if (cursorRef.current) {
-      cursorRef.current.classList.toggle("large-cursor");
-    }
-  };
-
-  useEffect(() => {
-    const cursor = cursorRef.current;
-
-    const onMouseMove = (event: MouseEvent) => {
-      if (cursorRef.current) {
-        cursorRef.current.style.display = "block";
-        cursorRef.current.style.top = mousePosition.y + "px";
-        cursorRef.current.style.left = mousePosition.x + "px";
-        cursorRef.current.style.transformOrigin = "center center";
-      }
-    };
-
-    const onMouseOut = () => {
-      if (cursor) {
-        cursor.style.display = "none";
-      }
-    };
-
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mouseout", onMouseOut);
-
-    return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseout", onMouseOut);
-    };
-  }, [mousePosition]);
 
   return (
     <div
@@ -96,6 +44,7 @@ function App() {
         } as any
       }
       onMouseMove={handleMouseMove}
+      onClick={handleOutsideClick}
     >
       <div
         ref={cursorRef}
@@ -118,22 +67,17 @@ function App() {
             />
           </Routes>
         </main>
-        <div className="controls">
-          <Button onClick={handleColorInversion}>
-            {colorInverted ? "Restore Colors" : "Invert Colors"}
-          </Button>
-          <Button onClick={() => handleFontChange("increase")}>
-            Increase Font
-          </Button>
-          <Button onClick={() => handleFontChange("reset")}>Reset Font</Button>
-          <Button onClick={() => handleFontChange("decrease")}>
-            Decrease Font
-          </Button>
-          <Button onClick={handleToggleGrayscale}>
-            {grayscale ? "Restore Color" : "Grayscale"}
-          </Button>
-          <Button onClick={handleCursorSize}>Toggle cursor size</Button>
-        </div>
+        <A11y
+          setColorInverted={setColorInverted}
+          colorInverted={colorInverted}
+          setFontSize={setFontSize}
+          setGrayscale={setGrayscale}
+          grayscale={grayscale}
+          setCustomCursor={setCustomCursor}
+          mousePosition={mousePosition}
+          isOpenModal={isOpenModal}
+          setIsOpenModal={setIsOpenModal}
+        />
         <Footer />
       </BrowserRouter>
     </div>

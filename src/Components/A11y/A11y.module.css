@@ -1,0 +1,31 @@
+.a11y {
+  display: flex;
+  position: fixed;
+  top: 50%;
+  right: 1rem;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: fixed;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  z-index: 1000;
+  gap: 1rem;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  background-color: var(--first-button-color);
+  color: var(--first-text-color);
+  border: none;
+  border-radius: 4px;
+  cursor: var(--cursor-pointer);
+}
+
+.button:hover {
+  background-color: var(--first-button-color-hover);
+}

@@ -14,9 +14,17 @@ interface iSearch {
   setBackup?: any;
   setSearch?: any;
   search?: any;
+  setPage?: any;
+  page?: number;
 }
 
-const Search: React.FC<iSearch> = ({ setBackup, setSearch, search }) => {
+const Search: React.FC<iSearch> = ({
+  setBackup,
+  setSearch,
+  search,
+  setPage,
+  page,
+}) => {
   const [selectedRange, setSelectedRange] = useState({
     start_date: "",
     end_date: "",
@@ -95,6 +103,7 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch, search }) => {
         words: lowercaseWords,
       };
       dispatch<any>(fetchPublic(updatedRange, "1"));
+      setPage(1);
       setBackup(updatedRange);
       setSearch(true);
     } else if (dayRange.from && !dayRange.to) {
@@ -106,6 +115,7 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch, search }) => {
         words: lowercaseWords,
       };
       dispatch<any>(fetchPublic(updatedRange, "1"));
+      setPage(1);
       setBackup(updatedRange);
       setSearch(true);
     } else {
@@ -114,6 +124,7 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch, search }) => {
         words: lowercaseWords,
       };
       dispatch<any>(fetchPublic(updatedRange, "1"));
+      setPage(1);
       setBackup(updatedRange);
       setSearch(true);
     }
@@ -129,7 +140,6 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch, search }) => {
     setExactWordsChecked(false);
     setDayRange({ from: null, to: null });
   };
-
   return (
     <div
       className={styles.container}
