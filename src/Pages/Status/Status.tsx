@@ -6,30 +6,34 @@ import SelectedList from "../../Components/SelectedList/SelectedList";
 import Table from "../../Components/Table/Table";
 import Loading from "../../Components/Loading/Loading";
 import { MdUpload } from "react-icons/md";
-import { optionsType } from "../../Components/Helper";
+import { formatDateFromObject, optionsType } from "../../Components/Helper";
 import { fetchPost } from "../../Services/Slices/postSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGetFiles } from "../../Services/Slices/getFilesSlice";
 import Snackbar from "../../Components/Snackbar/Snackbar";
-import { DayValue } from "@taak/react-modern-calendar-datepicker";
 import { ptLocale } from "../../Components/Consts";
 import DatePicker from "@taak/react-modern-calendar-datepicker";
 
 const Status = () => {
   const dispatch = useDispatch();
-  const [page, setPage] = useState<number>(1);
-  const [selectedRange, setSelectedRange] = useState<any>({
-    file: File,
-    type: [],
-    time: "",
-    code: "",
-  });
-  const [isDispatched, setIsDispatched] = useState<boolean>(false);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const post = useSelector((state: any) => state.postSlice);
   const getFiles = useSelector((state: any) => state.getFilesSlice);
   const deleteFile = useSelector((state: any) => state.deleteFileSlice);
-  const [day, setDay] = React.useState<DayValue>(null);
+  const [page, setPage] = useState<number>(1);
+  const [isDispatched, setIsDispatched] = useState<boolean>(false);
+  const [snackbarType, setSnackbarType] = useState<string | null>(null);
+  const [selectedRange, setSelectedRange] = useState<any>({
+    file: File,
+    date: {
+      year: new Date().getFullYear(),
+      month: new Date().getMonth(),
+      day: 0,
+    },
+    type: [],
+    code: "",
+    time: "",
+  });
+
   const columns = [
     { title: "Nome", property: "name" },
     { title: "Data", property: "date" },
@@ -64,11 +68,10 @@ const Status = () => {
     const { value } = event.target;
     const numericValue = value.replace(/\D/g, "").toString();
 
-    if (numericValue.length > 0 && parseInt(numericValue[0], 10) > 2) {
-      return;
-    }
-
-    if (numericValue.length > 0 && parseInt(numericValue[2], 10) > 5) {
+    if (
+      numericValue.length > 0 &&
+      (parseInt(numericValue[0], 10) > 2 || parseInt(numericValue[0], 10) > 2)
+    ) {
       return;
     }
 
@@ -77,7 +80,6 @@ const Status = () => {
         ...prev,
         time: "",
       }));
-      return;
     }
 
     let formattedValue = numericValue;
@@ -97,39 +99,52 @@ const Status = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
-    setSelectedFile(file);
-  };
-
-  const formatDate = (date: any) => {
-    const day = date.day < 10 ? `0${date.day}` : date.day;
-    const month = date.month < 10 ? `0${date.month}` : date.month;
-    return `${day}-${month}-${date.year}`;
+    const fileExtension = file?.name.split(".").pop();
+    if (fileExtension === "docx") {
+      setSelectedRange((prev: any) => ({
+        ...prev,
+        file: file,
+      }));
+    } else if (fileExtension !== "docx") {
+      setSelectedRange((prev: any) => ({
+        ...prev,
+        file: File,
+      }));
+      setSnackbarType("fileInvalid");
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!selectedFile) {
+    if (
+      !selectedRange.file.size ||
+      selectedRange.date.day === 0 ||
+      selectedRange.type.length === 0 ||
+      !selectedRange.code
+    ) {
+      setSnackbarType("postInvalid");
       return;
     }
 
     const formData = new FormData();
-    formData.append("file", selectedFile);
-
-    const postType = selectedRange.type.join(",");
-    formData.append("post_type", postType);
-    formData.append("date", formatDate(day));
+    formData.append("file", selectedRange.file);
+    formData.append("post_type", selectedRange.type.join(","));
+    formData.append("date", formatDateFromObject(selectedRange.date));
     formData.append("hour", selectedRange.time);
     formData.append("number", selectedRange.code);
     dispatch<any>(fetchPost(formData));
     setSelectedRange({
       file: File,
+      date: {
+        year: new Date().getFullYear(),
+        month: new Date().getMonth(),
+        day: 0,
+      },
       type: [],
-      time: "",
       code: "",
+      time: "",
     });
-    setSelectedFile(null);
-    setDay(null);
   };
 
   const transformedData = getFiles?.data?.results?.map((item: any) => {
@@ -159,51 +174,54 @@ const Status = () => {
 
   if (post.loading || getFiles.loading)
     return (
-      <div
-        style={{
-          display: "flex",
-          height: "50vw",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <div className={styles.loading}>
         <Loading size="5rem" type="spin" />
       </div>
     );
 
   return (
     <div className={styles.container}>
-      {post.error && <Snackbar type="postError" />}
+      {post.error && (
+        <Snackbar type="postError" setSnackbarType={setSnackbarType} />
+      )}
+      {snackbarType === "fileInvalid" && (
+        <Snackbar type="fileInvalid" setSnackbarType={setSnackbarType} />
+      )}
+      {snackbarType === "postInvalid" && (
+        <Snackbar type="postInvalid" setSnackbarType={setSnackbarType} />
+      )}
       <div className={styles.postContainer}>
-        <div className={`${selectedFile ? styles.fileContainer : ""}`}>
-          <label
-            style={{ cursor: "pointer" }}
-            className={styles.fakeInput}
-            htmlFor="file"
-          >
+        <div className={`${selectedRange.file ? styles.fileContainer : ""}`}>
+          <label className={styles.fakeInput} htmlFor="file">
             <MdUpload size={24} />
           </label>
           <Input
             className={styles.file}
+            name="file"
             type="file"
             id="file"
-            name="file"
             onChange={handleFileChange}
           />
-          {selectedFile && (
-            <div className={styles.fileText}>Arquivo: {selectedFile.name}</div>
+          {selectedRange.file.size && (
+            <div className={styles.fileText}>
+              Arquivo: {selectedRange.file.name}
+            </div>
           )}
         </div>
         <div className={styles.calendarContainer}>
           <DatePicker
-            value={day}
-            onChange={setDay}
+            value={selectedRange.date}
+            onChange={(newDay) =>
+              setSelectedRange((prev: any) => ({
+                ...prev,
+                date: newDay,
+              }))
+            }
             shouldHighlightWeekends
             inputPlaceholder="Data*"
             colorPrimary="#9fc54d"
             colorPrimaryLight="#d7ecbd"
             locale={ptLocale}
-            calendarClassName={styles.calendar}
           />
         </div>
         <div className={styles.type}>
@@ -219,19 +237,19 @@ const Status = () => {
         </div>
         <div className={styles.lastColumn}>
           <Input
-            className={`${styles.input} ${styles.code}`}
+            className={styles.input}
             placeholder="Número*"
+            name="code"
             value={selectedRange.code}
             onChange={handleChange}
-            name="code"
             max={5}
           />
           <Input
             className={styles.time}
+            placeholder="Horário"
             name="time"
             value={selectedRange.time}
             onChange={handleTime}
-            placeholder="Horário"
           />
         </div>
         <Button

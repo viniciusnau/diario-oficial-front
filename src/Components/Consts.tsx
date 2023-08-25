@@ -30,6 +30,19 @@ export const handleTypeService = {
     description: "Tente novamente mais tarde.",
     color: "#ff6464",
   },
+
+  fileInvalid: {
+    title: "Erro ao carregar arquivo!",
+    description: "O formato do arquivo deve ser em .docx.",
+    color: "#ff6464",
+  },
+
+  postInvalid: {
+    title: "Erro ao enviar agendamento!",
+    description:
+      "Todos os campos com * devem ser preenchidos, juntamente com o arquivo em formato .docx.",
+    color: "#ff6464",
+  },
 };
 
 export const ptLocale = {

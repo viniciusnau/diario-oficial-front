@@ -1,3 +1,10 @@
+.loading {
+  display: flex;
+  height: 60vh;
+  align-items: center;
+  justify-content: center;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -14,6 +21,38 @@
   margin: 1.5rem 0 0 0;
 }
 
+.fileContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.fakeInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  min-width: 3rem;
+  border: none;
+  border-radius: 5rem;
+  margin: 0 0.5rem;
+  background-color: var(--first-button-color);
+  box-shadow: 0 10px 10px -10px var(--shadow-color);
+  font-size: var(--font-size);
+  cursor: var(--cursor-pointer);
+}
+
+.file {
+  display: none;
+}
+
+.fileText {
+  margin-right: 15px;
+  margin-top: 15px;
+  text-align: center;
+}
+
 .calendarContainer {
   display: flex;
   align-items: center;
@@ -21,35 +60,13 @@
   height: 3rem;
 }
 
-.calendar {
-}
-
 .type {
   display: flex;
 }
 
-.tableContainer {
-  width: 100%;
-}
-
-.tableHeader {
-  font-weight: bold;
-}
-
-.tableCell {
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #ccc;
-}
-
-.link {
-  text-decoration: none;
-  max-height: 100%;
-  color: #007bff;
-}
-
-.link:hover {
-  text-decoration: underline;
+.lastColumn {
+  display: flex;
+  align-items: center;
 }
 
 .input,
@@ -66,63 +83,11 @@
   font-size: var(--font-size);
 }
 
-.date {
-  width: 7rem;
-  padding: 0 1rem;
-}
-
-.fileContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.file {
-  display: none;
-}
-
-.fileText {
-  margin-right: 15px;
-  margin-top: 15px;
-  text-align: center;
-}
-
-.option {
-  width: 10rem;
-}
-
-.input:hover,
-.date:hover,
-.time:hover {
-  background-color: var(--second-button-color-hover);
-}
-
-.input:disabled,
-.date:disabled,
-.time:disabled {
-  background-color: var(--second-button-color-disabled);
-}
-
 .button {
   height: 3rem;
   width: 7.5rem;
   border: none;
   border-radius: 0.5rem;
-  margin: 0 0.5rem;
-  background-color: var(--first-button-color);
-  box-shadow: 0 10px 10px -10px var(--shadow-color);
-  font-size: var(--font-size);
-}
-
-.fakeInput {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 3rem;
-  min-width: 3rem;
-  border: none;
-  border-radius: 5rem;
   margin: 0 0.5rem;
   background-color: var(--first-button-color);
   box-shadow: 0 10px 10px -10px var(--shadow-color);
@@ -139,6 +104,10 @@
   background-color: var(--first-button-color-disabled);
 }
 
+.schedule {
+  padding: 0 0.75rem;
+}
+
 .table {
   display: flex;
   justify-content: center;
@@ -146,18 +115,18 @@
   margin: 5rem 0 3rem 0;
 }
 
-.lastColumn {
-  display: flex;
-  align-items: center;
+.input:hover,
+.time:hover {
+  background-color: var(--second-button-color-hover);
 }
 
-.schedule {
-  padding: 0 0.75rem;
+.input:disabled,
+.time:disabled {
+  background-color: var(--second-button-color-disabled);
 }
 
 @media screen and (max-width: 1175px) {
   .input,
-  .date,
   .time,
   .fakeInput {
     margin: 0.75rem;
@@ -172,7 +141,6 @@
     flex-direction: column;
   }
   .input,
-  .date,
   .time,
   .button,
   .fakeInput {

@@ -40,6 +40,12 @@ export function dateFormat(dateString: string) {
   return formattedDate;
 }
 
+export function formatDateFromObject(date: any) {
+  const day = date.day < 10 ? `0${date.day}` : date.day;
+  const month = date.month < 10 ? `0${date.month}` : date.month;
+  return `${day}-${month}-${date.year}`;
+}
+
 export function exhibitionDateFormat(dateString: string) {
   const date = new Date(dateString);
 

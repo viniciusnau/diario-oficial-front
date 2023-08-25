@@ -57,7 +57,9 @@ const Table: React.FC<TableProps> = ({
     if (type === "page") {
       return (
         current === currentPage && (
-          <span className={styles.currentPage}>{page}</span>
+          <span className={styles.currentPage}>
+            {data.length > 0 ? page : "0"}
+          </span>
         )
       );
     }

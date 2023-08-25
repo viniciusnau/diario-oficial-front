@@ -18,10 +18,25 @@ function App() {
   const [customCursor, setCustomCursor] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isOpenModal, setIsOpenModal] = useState<Boolean>(true);
+  const [isMouseOnScreen, setIsMouseOnScreen] = useState(true);
 
   const handleMouseMove = (event: any) => {
     const { clientX, clientY } = event;
     setMousePosition({ x: clientX, y: clientY });
+  };
+
+  const handleMouseEnter = () => {
+    setIsMouseOnScreen(true);
+    if (cursorRef.current) {
+      cursorRef.current.style.display = "block"; // Show the custom cursor
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsMouseOnScreen(false);
+    if (cursorRef.current) {
+      cursorRef.current.style.display = "none"; // Hide the custom cursor
+    }
   };
 
   const handleOutsideClick = () => {
@@ -43,6 +58,8 @@ function App() {
           "--cursor-default": `${customCursor ? "none" : "default"}`,
         } as any
       }
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
       onClick={handleOutsideClick}
     >

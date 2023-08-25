@@ -5,22 +5,24 @@ import { handleTypeService } from "../Consts";
 
 interface iSnackbar {
   type: keyof typeof handleTypeService;
+  setSnackbarType?: any;
 }
 
-const Snackbar: React.FC<iSnackbar> = ({ type }) => {
+const Snackbar: React.FC<iSnackbar> = ({ type, setSnackbarType }) => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     if (isVisible) {
       const timeoutId = setTimeout(() => {
         setIsVisible(false);
+        if (setSnackbarType) setSnackbarType(null);
       }, 3000);
 
       return () => {
         clearTimeout(timeoutId);
       };
     }
-  }, [isVisible]);
+  }, [isVisible, setSnackbarType]);
 
   return (
     <div className={styles.snackbarContainer}>
