@@ -40,6 +40,7 @@ const SelectedList: React.FC<iSelectedList> = ({
   const [showOptions, setShowOptions] = useState<boolean>(false);
   const inputValue = value !== undefined ? value : "";
   const optionsListRef = useRef<HTMLDivElement | null>(null);
+  const valueRef = useRef(inputValue);
 
   const handleAddItem = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const inputValue = e.currentTarget.value.trim();
@@ -91,10 +92,10 @@ const SelectedList: React.FC<iSelectedList> = ({
 
   useEffect(() => {
     if (clearField === true) {
-      value = "";
+      valueRef.current = "";
       setClearField(false);
     }
-  }, []);
+  }, [clearField, setClearField]);
 
   return (
     <div className={styles.listContainer}>

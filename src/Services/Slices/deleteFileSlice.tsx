@@ -53,7 +53,7 @@ export const fetchDeleteFile =
   ) => {
     dispatch(deleteFile());
     try {
-      const response = await services.deleteFile(file);
+      await services.deleteFile(file);
       dispatch(deleteFileSuccess({ response: "Arquivo deletado com sucesso" }));
     } catch (err) {
       console.log("err: ", err);

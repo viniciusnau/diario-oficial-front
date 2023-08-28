@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import styles from "./A11y.module.css";
 import Button from "../Forms/Button";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { BsUniversalAccessCircle } from "react-icons/bs";
 import { PiCursor } from "react-icons/pi";
 import { SiExoscale } from "react-icons/si";
@@ -25,15 +25,12 @@ const A11y: React.FC<iA11y> = ({
   setFontSize,
   setGrayscale,
   setCustomCursor,
-  mousePosition,
   isOpenModal,
   setIsOpenModal,
 }) => {
   const location = useLocation();
   const isPublicPage = location.pathname === "/";
-  const cursorRef = useRef<HTMLDivElement | null>(null);
   const modalRef = useRef<HTMLDivElement | null>(null);
-  const [isMouseOnScreen, setIsMouseOnScreen] = useState(true);
 
   const handleModalClick = (event: any) => {
     event.stopPropagation();
@@ -63,9 +60,6 @@ const A11y: React.FC<iA11y> = ({
 
   const handleCursorSize = () => {
     setCustomCursor((prev: any) => !prev);
-    if (cursorRef.current) {
-      cursorRef.current.classList.toggle("large-cursor");
-    }
   };
 
   useEffect(() => {
@@ -81,13 +75,6 @@ const A11y: React.FC<iA11y> = ({
       document.removeEventListener("click", handleOutsideClick);
     };
   }, [setIsOpenModal]);
-
-  useEffect(() => {
-    if (cursorRef.current) {
-      cursorRef.current.style.display = isMouseOnScreen ? "block" : "none";
-    }
-    console.log("isMouseOnScreen: ", isMouseOnScreen);
-  }, [isMouseOnScreen]);
 
   if (!isPublicPage) {
     return null;

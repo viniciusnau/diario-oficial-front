@@ -25,13 +25,14 @@ body {
 .cursor {
   background-image: url(./Assets/pointer.png);
   display: flex;
-  position: absolute;
+  position: fixed;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   margin: 0.2rem;
   width: 2.5rem;
   height: 2.5rem;
   z-index: 10000;
+  pointer-events: none;
 }
 
 .invert-colors {
