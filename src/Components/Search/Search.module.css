@@ -34,7 +34,6 @@
   width: 5rem;
   height: 2rem;
   cursor: var(--cursor-pointer);
-  margin: 0 0 1rem 0;
 }
 
 .input,
@@ -81,7 +80,8 @@
   font-size: var(--font-size);
 }
 
-.code:hover {
+.code:hover,
+.clearButton:hover {
   background-color: var(--second-button-color-hover);
 }
 

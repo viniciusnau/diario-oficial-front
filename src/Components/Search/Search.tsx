@@ -165,6 +165,7 @@ const Search: React.FC<iSearch> = ({
                     setDayRange({ from: null, to: null });
                   }}
                   className={styles.clearButton}
+                  style={{ marginBottom: "1rem" }}
                 >
                   Limpar
                 </button>

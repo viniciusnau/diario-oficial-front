@@ -28,7 +28,12 @@ function App() {
   const handleMouseEnter = () => {
     setIsMouseOnScreen(true);
     if (cursorRef.current) {
-      cursorRef.current.style.display = "block";
+      const cursorStyle = cursorRef.current.style;
+      cursorStyle.top = mousePosition.y + "px";
+      cursorStyle.left = mousePosition.x + "px";
+      setTimeout(() => {
+        cursorStyle.display = "block";
+      }, 1);
     }
   };
 
@@ -44,7 +49,7 @@ function App() {
   };
 
   useEffect(() => {
-    if (cursorRef.current && isMouseOnScreen) {
+    if (cursorRef.current) {
       cursorRef.current.style.top = mousePosition.y + "px";
       cursorRef.current.style.left = mousePosition.x + "px";
     }
