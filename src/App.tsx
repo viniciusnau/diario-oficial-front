@@ -1,3 +1,4 @@
+import { useRef, useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home/Home";
@@ -7,7 +8,6 @@ import Login from "./Pages/Login/Login";
 import Status from "./Pages/Status/Status";
 import ProtectedRoute from "./Auth/protectedRoute";
 import ResetPassword from "./Pages/ResetPassword/ResetPassword";
-import { useRef, useState, useEffect } from "react";
 import A11y from "./Components/A11y/A11y";
 
 function App() {
@@ -49,9 +49,19 @@ function App() {
   };
 
   useEffect(() => {
-    if (cursorRef.current) {
-      cursorRef.current.style.top = mousePosition.y + "px";
-      cursorRef.current.style.left = mousePosition.x + "px";
+    if (isMouseOnScreen) {
+      if (cursorRef.current) {
+        const cursorStyle = cursorRef.current.style;
+        cursorStyle.top = mousePosition.y + "px";
+        cursorStyle.left = mousePosition.x + "px";
+        setTimeout(() => {
+          cursorStyle.display = "block";
+        }, 1);
+      }
+    } else {
+      if (cursorRef.current) {
+        cursorRef.current.style.display = "none";
+      }
     }
   }, [isMouseOnScreen, mousePosition]);
 

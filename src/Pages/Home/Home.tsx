@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./Home.module.css";
 import Search from "../../Components/Search/Search";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,40 +12,57 @@ import { fetchAllPosts } from "../../Services/Slices/allPostsSlice";
 import Snackbar from "../../Components/Snackbar/Snackbar";
 import { fetchPublic } from "../../Services/Slices/publicSlice";
 
-const Home = () => {
+const Home = React.memo(() => {
   const dispatch = useDispatch();
   const response = useSelector((state: any) => state.publicSlice);
   const allPostsResponse = useSelector((state: any) => state.allPostsSlice);
   const [extracted, setExtracted] = useState<any>([]);
   const [backup, setBackup] = useState<any>({});
   const [page, setPage] = useState<number>(1);
-  const [isSearched, setIsSearched] = useState<any>(false);
-  // let { current } = useRef(isSearched);
+  const [isSearched, setIsSearched] = useState<boolean>();
+  const [tempPage, setTempPage] = useState<number | null>(null);
+  let { current } = useRef(isSearched);
+
   const columns = [
     { title: "Edição", property: "edition" },
     { title: "Publicado", property: "date" },
     { title: "Arquivo", property: "presigned_url" },
   ];
+
   useEffect(() => {
-    if (!isSearched && !response.data.length) {
-      dispatch<any>(fetchAllPosts(page.toString(), false));
-    }
-  }, [dispatch, page, isSearched, response.data.length, backup]);
+    setIsSearched(false);
+    console.log("rerender");
+  }, []);
 
   useEffect(() => {
     if (isSearched) {
-      dispatch<any>(fetchPublic(backup, page.toString()));
+      current = true;
     }
-  }, [dispatch, isSearched, backup, page]);
+    console.log("current:", current);
+  }, [isSearched]);
+
+  useEffect(() => {
+    if (!current && !response.data.length && page !== tempPage) {
+      dispatch<any>(fetchAllPosts(page.toString(), false));
+      setTempPage(page);
+    }
+  }, [dispatch, page, isSearched, response.data.length]);
+
+  useEffect(() => {
+    if (current && page !== tempPage) {
+      dispatch<any>(fetchPublic(backup, page.toString()));
+      setTempPage(page);
+    }
+  }, [dispatch, current, backup, page, tempPage]);
 
   useEffect(() => {
     setExtracted([]);
-    if (!response.data.results) {
+    if (!current && !response.data.length) {
       handleExtract(allPostsResponse.data.results, setExtracted);
     } else {
       handleExtractUrl(response.data.results, setExtracted);
     }
-  }, [dispatch, response.data, allPostsResponse.data]);
+  }, [dispatch, isSearched, response.data, allPostsResponse.data]);
 
   return (
     <div className={styles.container}>
@@ -62,20 +79,20 @@ const Home = () => {
       />
       <div className={styles.table}>
         <Table
-          title={isSearched ? "Edições encontradas" : "Últimas edições"}
+          title={current ? "Edições encontradas" : "Últimas edições"}
           data={extracted}
           columns={columns}
           setPage={setPage}
           page={page}
-          total={isSearched ? response.data.count : allPostsResponse.data.count}
+          total={current ? response.data.count : allPostsResponse.data.count}
           isEmpty={
-            (isSearched && response?.data?.results?.length === 0) ||
-            (!isSearched && allPostsResponse?.data?.results?.length === 0)
+            (current && response?.data?.results?.length === 0) ||
+            (!current && allPostsResponse?.data?.results?.length === 0)
           }
         />
       </div>
     </div>
   );
-};
+});
 
 export default Home;
