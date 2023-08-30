@@ -48,22 +48,22 @@ function App() {
     setIsOpenModal(true);
   };
 
-  useEffect(() => {
-    if (isMouseOnScreen) {
-      if (cursorRef.current) {
-        const cursorStyle = cursorRef.current.style;
-        cursorStyle.top = mousePosition.y + "px";
-        cursorStyle.left = mousePosition.x + "px";
-        setTimeout(() => {
-          cursorStyle.display = "block";
-        }, 1);
-      }
-    } else {
-      if (cursorRef.current) {
-        cursorRef.current.style.display = "none";
-      }
-    }
-  }, [isMouseOnScreen, mousePosition]);
+  // useEffect(() => {
+  //   if (isMouseOnScreen) {
+  //     if (cursorRef.current) {
+  //       const cursorStyle = cursorRef.current.style;
+  //       cursorStyle.top = mousePosition.y + "px";
+  //       cursorStyle.left = mousePosition.x + "px";
+  //       setTimeout(() => {
+  //         cursorStyle.display = "block";
+  //       }, 1);
+  //     }
+  //   } else {
+  //     if (cursorRef.current) {
+  //       cursorRef.current.style.display = "none";
+  //     }
+  //   }
+  // }, [isMouseOnScreen, mousePosition]);
 
   return (
     <div
@@ -80,10 +80,10 @@ function App() {
           "--cursor-default": `${customCursor ? "none" : "default"}`,
         } as any
       }
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onMouseMove={handleMouseMove}
-      onClick={handleOutsideClick}
+      // onMouseEnter={handleMouseEnter}
+      // onMouseLeave={handleMouseLeave}
+      // onMouseMove={handleMouseMove}
+      // onClick={handleOutsideClick}
     >
       <div
         ref={cursorRef}

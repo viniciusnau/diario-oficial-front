@@ -19,9 +19,9 @@ const Home = React.memo(() => {
   const [extracted, setExtracted] = useState<any>([]);
   const [backup, setBackup] = useState<any>({});
   const [page, setPage] = useState<number>(1);
-  const [isSearched, setIsSearched] = useState<boolean>();
+  const [isSearched, setIsSearched] = useState<boolean>(false);
   const [tempPage, setTempPage] = useState<number | null>(null);
-  let { current } = useRef(isSearched);
+  let ref = useRef<boolean>();
 
   const columns = [
     { title: "Edição", property: "edition" },
@@ -30,37 +30,34 @@ const Home = React.memo(() => {
   ];
 
   useEffect(() => {
-    setIsSearched(false);
-    console.log("rerender");
-  }, []);
-
-  useEffect(() => {
     if (isSearched) {
-      current = true;
+      ref.current = true;
     }
-    console.log("current:", current);
   }, [isSearched]);
+  console.log("ref.current", ref.current);
 
   useEffect(() => {
-    if (!current && !response.data.length && page !== tempPage) {
+    if (!ref.current && !response.data.length && page !== tempPage) {
       dispatch<any>(fetchAllPosts(page.toString(), false));
       setTempPage(page);
     }
   }, [dispatch, page, isSearched, response.data.length]);
 
   useEffect(() => {
-    if (current && page !== tempPage) {
+    if (ref.current && page !== tempPage) {
       dispatch<any>(fetchPublic(backup, page.toString()));
       setTempPage(page);
     }
-  }, [dispatch, current, backup, page, tempPage]);
+  }, [dispatch, ref.current, backup, page, tempPage]);
 
   useEffect(() => {
     setExtracted([]);
-    if (!current && !response.data.length) {
+    if (!ref.current && !response.data.length) {
       handleExtract(allPostsResponse.data.results, setExtracted);
+      console.log("allPosts");
     } else {
       handleExtractUrl(response.data.results, setExtracted);
+      console.log("response");
     }
   }, [dispatch, isSearched, response.data, allPostsResponse.data]);
 
@@ -79,15 +76,17 @@ const Home = React.memo(() => {
       />
       <div className={styles.table}>
         <Table
-          title={current ? "Edições encontradas" : "Últimas edições"}
+          title={ref.current ? "Edições encontradas" : "Últimas edições"}
           data={extracted}
           columns={columns}
           setPage={setPage}
           page={page}
-          total={current ? response.data.count : allPostsResponse.data.count}
+          total={
+            ref.current ? response.data.count : allPostsResponse.data.count
+          }
           isEmpty={
-            (current && response?.data?.results?.length === 0) ||
-            (!current && allPostsResponse?.data?.results?.length === 0)
+            (ref.current && response?.data?.results?.length === 0) ||
+            (!ref.current && allPostsResponse?.data?.results?.length === 0)
           }
         />
       </div>

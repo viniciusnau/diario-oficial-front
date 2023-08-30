@@ -186,8 +186,6 @@ const Search: React.FC<iSearch> = React.memo(
                     e.currentTarget.value = "";
                   }
                 }}
-                setClearField={setSearch}
-                clearField={search}
               />
             </div>
             <div className={styles.type}>
