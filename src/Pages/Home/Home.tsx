@@ -34,30 +34,27 @@ const Home = React.memo(() => {
       ref.current = true;
     }
   }, [isSearched]);
-  console.log("ref.current", ref.current);
 
   useEffect(() => {
     if (!ref.current && !response.data.length && page !== tempPage) {
       dispatch<any>(fetchAllPosts(page.toString(), false));
       setTempPage(page);
     }
-  }, [dispatch, page, isSearched, response.data.length]);
+  }, [dispatch, ref, page, tempPage, response.data.length]);
 
   useEffect(() => {
     if (ref.current && page !== tempPage) {
       dispatch<any>(fetchPublic(backup, page.toString()));
       setTempPage(page);
     }
-  }, [dispatch, ref.current, backup, page, tempPage]);
+  }, [dispatch, ref, backup, page, tempPage]);
 
   useEffect(() => {
     setExtracted([]);
     if (!ref.current && !response.data.length) {
       handleExtract(allPostsResponse.data.results, setExtracted);
-      console.log("allPosts");
     } else {
       handleExtractUrl(response.data.results, setExtracted);
-      console.log("response");
     }
   }, [dispatch, isSearched, response.data, allPostsResponse.data]);
 

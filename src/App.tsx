@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home/Home";
@@ -18,7 +18,6 @@ function App() {
   const [customCursor, setCustomCursor] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isOpenModal, setIsOpenModal] = useState<Boolean>(true);
-  const [isMouseOnScreen, setIsMouseOnScreen] = useState(true);
 
   const handleMouseMove = (event: any) => {
     const { clientX, clientY } = event;
@@ -26,7 +25,6 @@ function App() {
   };
 
   const handleMouseEnter = () => {
-    setIsMouseOnScreen(true);
     if (cursorRef.current) {
       const cursorStyle = cursorRef.current.style;
       cursorStyle.top = mousePosition.y + "px";
@@ -38,7 +36,6 @@ function App() {
   };
 
   const handleMouseLeave = () => {
-    setIsMouseOnScreen(false);
     if (cursorRef.current) {
       cursorRef.current.style.display = "none";
     }
@@ -47,23 +44,6 @@ function App() {
   const handleOutsideClick = () => {
     setIsOpenModal(true);
   };
-
-  // useEffect(() => {
-  //   if (isMouseOnScreen) {
-  //     if (cursorRef.current) {
-  //       const cursorStyle = cursorRef.current.style;
-  //       cursorStyle.top = mousePosition.y + "px";
-  //       cursorStyle.left = mousePosition.x + "px";
-  //       setTimeout(() => {
-  //         cursorStyle.display = "block";
-  //       }, 1);
-  //     }
-  //   } else {
-  //     if (cursorRef.current) {
-  //       cursorRef.current.style.display = "none";
-  //     }
-  //   }
-  // }, [isMouseOnScreen, mousePosition]);
 
   return (
     <div
@@ -80,10 +60,10 @@ function App() {
           "--cursor-default": `${customCursor ? "none" : "default"}`,
         } as any
       }
-      // onMouseEnter={handleMouseEnter}
-      // onMouseLeave={handleMouseLeave}
-      // onMouseMove={handleMouseMove}
-      // onClick={handleOutsideClick}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onMouseMove={handleMouseMove}
+      onClick={handleOutsideClick}
     >
       <div
         ref={cursorRef}
