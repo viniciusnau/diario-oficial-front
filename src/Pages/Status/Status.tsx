@@ -259,21 +259,19 @@ const Status = () => {
           Agendar
         </Button>
       </div>
-      {transformedData && (
-        <div className={styles.table}>
-          <Table
-            title="Edições Agendadas"
-            columns={columns}
-            data={transformedData}
-            setPage={setPage}
-            page={page}
-            total={getFiles.data.count}
-            downloadButton
-            isEmpty={isDispatched && getFiles.data.results.length === 0}
-            isStatus
-          />
-        </div>
-      )}
+      <div className={styles.table}>
+        <Table
+          title="Edições Agendadas"
+          columns={columns}
+          data={transformedData}
+          setPage={setPage}
+          page={page}
+          total={getFiles.data.count}
+          downloadButton
+          isEmpty={isDispatched && getFiles?.data?.results?.length === 0}
+          isStatus
+        />
+      </div>
     </div>
   );
 };

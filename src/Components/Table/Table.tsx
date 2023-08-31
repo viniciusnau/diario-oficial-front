@@ -58,7 +58,7 @@ const Table: React.FC<TableProps> = ({
       return (
         current === currentPage && (
           <span className={styles.currentPage}>
-            {data.length > 0 ? page : "0"}
+            {data?.length > 0 ? page : "0"}
           </span>
         )
       );
@@ -122,7 +122,7 @@ const Table: React.FC<TableProps> = ({
             </div>
           ) : (
             <>
-              {data.map((row: any, rowIndex: any) => (
+              {data?.map((row: any, rowIndex: any) => (
                 <div key={rowIndex} className={styles.tableRow}>
                   {columns.map((column: any, columnIndex: any) => (
                     <div key={columnIndex} className={styles.row}>

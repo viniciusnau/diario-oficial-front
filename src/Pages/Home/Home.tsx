@@ -12,7 +12,7 @@ import { fetchAllPosts } from "../../Services/Slices/allPostsSlice";
 import Snackbar from "../../Components/Snackbar/Snackbar";
 import { fetchPublic } from "../../Services/Slices/publicSlice";
 
-const Home = React.memo(() => {
+const Home = () => {
   const dispatch = useDispatch();
   const response = useSelector((state: any) => state.publicSlice);
   const allPostsResponse = useSelector((state: any) => state.allPostsSlice);
@@ -89,6 +89,6 @@ const Home = React.memo(() => {
       </div>
     </div>
   );
-});
+};
 
 export default Home;

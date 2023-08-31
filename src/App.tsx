@@ -18,9 +18,8 @@ function App() {
   const [customCursor, setCustomCursor] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isOpenModal, setIsOpenModal] = useState<Boolean>(true);
-
-  const handleMouseMove = (event: any) => {
-    const { clientX, clientY } = event;
+  const handleMouseMove = (e: any) => {
+    const { clientX, clientY } = e;
     setMousePosition({ x: clientX, y: clientY });
   };
 
@@ -60,9 +59,9 @@ function App() {
           "--cursor-default": `${customCursor ? "none" : "default"}`,
         } as any
       }
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onMouseMove={handleMouseMove}
+      onMouseEnter={customCursor ? handleMouseEnter : undefined}
+      onMouseLeave={customCursor ? handleMouseLeave : undefined}
+      onMouseMove={customCursor ? handleMouseMove : undefined}
       onClick={handleOutsideClick}
     >
       <div
