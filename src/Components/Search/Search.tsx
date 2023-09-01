@@ -6,7 +6,7 @@ import SelectedList from "../SelectedList/SelectedList";
 import { formatDate, handleKeyPress, optionsType } from "../Helper";
 import { useDispatch } from "react-redux";
 import { fetchPublic } from "../../Services/Slices/publicSlice";
-import { Calendar, DayRange } from "@taak/react-modern-calendar-datepicker";
+import { Calendar } from "@taak/react-modern-calendar-datepicker";
 import "@taak/react-modern-calendar-datepicker/lib/DatePicker.css";
 import { ptLocale } from "../Consts";
 
@@ -18,30 +18,13 @@ interface iSearch {
   page?: number;
 }
 
-const Search: React.FC<iSearch> = ({
-  setBackup,
-  setSearch,
-  search,
-  setPage,
-  page,
-}) => {
-  const [selectedRange, setSelectedRange] = useState({
-    start_date: "",
-    end_date: "",
+const Search: React.FC<iSearch> = ({ setBackup, setSearch, setPage }) => {
+  const [form, setForm] = useState({
+    date: { from: null, to: null },
     post_type: [] as string[],
     post_code: "",
     words: [] as string[],
     exact_words: false,
-  });
-
-  const [postCode, setPostCode] = useState<string | undefined>(
-    selectedRange.post_code
-  );
-  const [exactWordsChecked, setExactWordsChecked] = useState<boolean>(false);
-
-  const [dayRange, setDayRange] = useState<DayRange>({
-    from: null,
-    to: null,
   });
 
   const dispatch = useDispatch();
@@ -49,38 +32,34 @@ const Search: React.FC<iSearch> = ({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | any) => {
     const { name, value, type, checked } = e.target;
 
-    if (type === "checkbox") {
-      setSelectedRange((prev) => ({
-        ...prev,
-        [name]: checked,
-      }));
-      if (name === "exact_words") {
-        setExactWordsChecked(checked);
-      }
-    } else {
-      setSelectedRange((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
+    setForm((prev: any) => ({
+      ...prev,
+      [name]:
+        type === "checkbox"
+          ? checked
+          : name === "post_code"
+          ? value
+          : [...prev[name], value],
+      ...(name === "words" &&
+        value.trim() !== "" && { words: [...prev.words, value.trim()] }),
+    }));
+  };
 
-      if (name === "post_code") {
-        setPostCode(value);
-      }
-
-      if (name === "words" && value.trim() !== "") {
-        setSelectedRange((prev) => ({
-          ...prev,
-          words: [...prev.words, value.trim()],
-        }));
-      }
-    }
+  const handleDisable = () => {
+    return (
+      !form.date.from &&
+      !form.date.to &&
+      form.post_type.length === 0 &&
+      !form.post_code.trim() &&
+      form.words.length === 0
+    );
   };
 
   const handleKeyUp = (e: React.FocusEvent<HTMLInputElement> | any) => {
     const value = e.target.value.trim();
     const key = e.key;
     if (value !== "" && key === " ") {
-      setSelectedRange((prev) => ({
+      setForm((prev) => ({
         ...prev,
         words: [...prev.words, value],
       }));
@@ -89,57 +68,34 @@ const Search: React.FC<iSearch> = ({
   };
 
   const handleSubmit = () => {
-    const lowercaseWords = selectedRange.words.map((word: string) =>
-      word.toLowerCase()
-    );
-
-    if (dayRange.from && dayRange.to) {
-      const formattedStartDate = formatDate(dayRange.from);
-      const formattedEndDate = formatDate(dayRange.to);
-      const updatedRange = {
-        ...selectedRange,
-        start_date: formattedStartDate,
-        end_date: formattedEndDate,
-        words: lowercaseWords,
-      };
-      dispatch<any>(fetchPublic(updatedRange, "1"));
-      setPage(1);
-      setBackup(updatedRange);
-      setSearch(true);
-    } else if (dayRange.from && !dayRange.to) {
-      const formattedStartDate = formatDate(dayRange.from);
-      const updatedRange = {
-        ...selectedRange,
-        start_date: formattedStartDate,
-        end_date: formattedStartDate,
-        words: lowercaseWords,
-      };
-      dispatch<any>(fetchPublic(updatedRange, "1"));
-      setPage(1);
-      setBackup(updatedRange);
-      setSearch(true);
-    } else {
-      const updatedRange = {
-        ...selectedRange,
-        words: lowercaseWords,
-      };
-      dispatch<any>(fetchPublic(updatedRange, "1"));
-      setPage(1);
-      setBackup(updatedRange);
-      setSearch(true);
-    }
-    setSelectedRange({
-      start_date: "",
-      end_date: "",
+    const lowercaseWords = form.words.map((word: string) => word.toLowerCase());
+    const updatedRange = {
+      ...form,
+      ...(form.date.from
+        ? {
+            date: {
+              from: formatDate(form.date.from),
+              to: form.date.to
+                ? formatDate(form.date.to)
+                : formatDate(form.date.from),
+            },
+          }
+        : {}),
+      words: lowercaseWords,
+    };
+    dispatch<any>(fetchPublic(updatedRange, "1"));
+    setPage(1);
+    setBackup(updatedRange);
+    setSearch(true);
+    setForm({
+      date: { from: null, to: null },
       post_type: [] as string[],
       post_code: "",
       words: [] as string[],
       exact_words: false,
     });
-    setPostCode("");
-    setExactWordsChecked(false);
-    setDayRange({ from: null, to: null });
   };
+
   return (
     <div
       className={styles.container}
@@ -150,8 +106,13 @@ const Search: React.FC<iSearch> = ({
       <div className={styles.align}>
         <div className={styles.calendarContainer}>
           <Calendar
-            value={dayRange}
-            onChange={setDayRange}
+            value={form.date}
+            onChange={(newDateRange) =>
+              setForm((prev) => ({
+                ...prev,
+                date: newDateRange as any,
+              }))
+            }
             shouldHighlightWeekends
             colorPrimary="#9fc54d"
             colorPrimaryLight="#d7ecbd"
@@ -162,7 +123,10 @@ const Search: React.FC<iSearch> = ({
                 <button
                   type="button"
                   onClick={() => {
-                    setDayRange({ from: null, to: null });
+                    setForm((prev) => ({
+                      ...prev,
+                      date: { from: null, to: null },
+                    }));
                   }}
                   className={styles.clearButton}
                   style={{ marginBottom: "1rem" }}
@@ -178,13 +142,13 @@ const Search: React.FC<iSearch> = ({
             <SelectedList
               placeholder="Palavra-chave"
               field="words"
-              list={selectedRange}
-              setList={setSelectedRange}
+              list={form}
+              setList={setForm}
               onKeyUp={handleKeyUp}
               onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
                 const value = e.target.value.trim();
                 if (value !== "") {
-                  setSelectedRange((prev) => ({
+                  setForm((prev) => ({
                     ...prev,
                     words: [...prev.words, value],
                   }));
@@ -197,8 +161,8 @@ const Search: React.FC<iSearch> = ({
             <SelectedList
               placeholder="Tipo"
               field="post_type"
-              list={selectedRange}
-              setList={setSelectedRange}
+              list={form}
+              setList={setForm}
               options={optionsType}
               isType
               readOnly
@@ -209,7 +173,7 @@ const Search: React.FC<iSearch> = ({
           <Input
             className={styles.code}
             name="post_code"
-            value={postCode}
+            value={form.post_code}
             onChange={handleChange}
             placeholder="Código da edição"
             max={12}
@@ -225,13 +189,17 @@ const Search: React.FC<iSearch> = ({
             >
               <Input
                 name="exact_words"
-                checked={exactWordsChecked}
+                checked={form.exact_words}
                 onChange={handleChange}
                 type="checkbox"
               />
               <label className={styles.yes}>Sim</label>
             </div>
-            <Button className={styles.button} onClick={handleSubmit}>
+            <Button
+              className={styles.button}
+              onClick={handleSubmit}
+              disabled={handleDisable()}
+            >
               Pesquisar
             </Button>
           </div>

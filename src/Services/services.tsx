@@ -100,8 +100,8 @@ const services = {
   },
   getPublic: async (body: any, page?: string) => {
     const queryString = [
-      body.start_date && `start_date=${body.start_date}`,
-      body.end_date && `end_date=${body.end_date}`,
+      body.date.from && `start_date=${body.date.from}`,
+      body.date.to && `end_date=${body.date.to}`,
       body.post_type &&
         Array.isArray(body.post_type) &&
         body.post_type.length > 0 &&

@@ -22,7 +22,7 @@ const Status = () => {
   const [page, setPage] = useState<number>(1);
   const [isDispatched, setIsDispatched] = useState<boolean>(false);
   const [snackbarType, setSnackbarType] = useState<string | null>(null);
-  const [selectedRange, setSelectedRange] = useState<any>({
+  const [form, setForm] = useState<any>({
     file: File,
     date: {
       year: new Date().getFullYear(),
@@ -44,12 +44,12 @@ const Status = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | any) => {
     const { name, value } = e.target;
     if (name === "date") {
-      setSelectedRange((prev: any) => ({
+      setForm((prev: any) => ({
         ...prev,
         [name]: value,
       }));
     } else {
-      setSelectedRange((prev: any) => {
+      setForm((prev: any) => {
         if (Array.isArray(prev[name])) {
           return {
             ...prev,
@@ -76,7 +76,7 @@ const Status = () => {
     }
 
     if (numericValue === "") {
-      setSelectedRange((prev: any) => ({
+      setForm((prev: any) => ({
         ...prev,
         time: "",
       }));
@@ -91,7 +91,7 @@ const Status = () => {
       formattedValue = formattedValue.substring(0, 5);
     }
 
-    setSelectedRange((prev: any) => ({
+    setForm((prev: any) => ({
       ...prev,
       time: formattedValue,
     }));
@@ -101,12 +101,12 @@ const Status = () => {
     const file = e.target.files && e.target.files[0];
     const fileExtension = file?.name.split(".").pop();
     if (fileExtension === "docx") {
-      setSelectedRange((prev: any) => ({
+      setForm((prev: any) => ({
         ...prev,
         file: file,
       }));
     } else if (fileExtension !== "docx") {
-      setSelectedRange((prev: any) => ({
+      setForm((prev: any) => ({
         ...prev,
         file: File,
       }));
@@ -118,23 +118,23 @@ const Status = () => {
     e.preventDefault();
 
     if (
-      !selectedRange.file.size ||
-      selectedRange.date.day === 0 ||
-      selectedRange.type.length === 0 ||
-      !selectedRange.code
+      !form.file.size ||
+      form.date.day === 0 ||
+      form.type.length === 0 ||
+      !form.code
     ) {
       setSnackbarType("postInvalid");
       return;
     }
 
     const formData = new FormData();
-    formData.append("file", selectedRange.file);
-    formData.append("post_type", selectedRange.type.join(","));
-    formData.append("date", formatDateFromObject(selectedRange.date));
-    formData.append("hour", selectedRange.time);
-    formData.append("number", selectedRange.code);
+    formData.append("file", form.file);
+    formData.append("post_type", form.type.join(","));
+    formData.append("date", formatDateFromObject(form.date));
+    formData.append("hour", form.time);
+    formData.append("number", form.code);
     dispatch<any>(fetchPost(formData));
-    setSelectedRange({
+    setForm({
       file: File,
       date: {
         year: new Date().getFullYear(),
@@ -191,7 +191,7 @@ const Status = () => {
         <Snackbar type="postInvalid" setSnackbarType={setSnackbarType} />
       )}
       <div className={styles.postContainer}>
-        <div className={`${selectedRange.file ? styles.fileContainer : ""}`}>
+        <div className={`${form.file ? styles.fileContainer : ""}`}>
           <label className={styles.fakeInput} htmlFor="file">
             <MdUpload size={24} />
           </label>
@@ -202,17 +202,15 @@ const Status = () => {
             id="file"
             onChange={handleFileChange}
           />
-          {selectedRange.file.size && (
-            <div className={styles.fileText}>
-              Arquivo: {selectedRange.file.name}
-            </div>
+          {form.file.size && (
+            <div className={styles.fileText}>Arquivo: {form.file.name}</div>
           )}
         </div>
         <div className={styles.calendarContainer}>
           <DatePicker
-            value={selectedRange.date}
+            value={form.date}
             onChange={(newDay) =>
-              setSelectedRange((prev: any) => ({
+              setForm((prev: any) => ({
                 ...prev,
                 date: newDay,
               }))
@@ -228,8 +226,8 @@ const Status = () => {
           <SelectedList
             placeholder="Tipo*"
             field="type"
-            list={selectedRange}
-            setList={setSelectedRange}
+            list={form}
+            setList={setForm}
             options={optionsType}
             isType
             readOnly
@@ -240,7 +238,7 @@ const Status = () => {
             className={styles.input}
             placeholder="Número*"
             name="code"
-            value={selectedRange.code}
+            value={form.code}
             onChange={handleChange}
             max={5}
           />
@@ -248,7 +246,7 @@ const Status = () => {
             className={styles.time}
             placeholder="Horário"
             name="time"
-            value={selectedRange.time}
+            value={form.time}
             onChange={handleTime}
           />
         </div>

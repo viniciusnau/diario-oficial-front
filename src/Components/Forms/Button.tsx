@@ -17,12 +17,14 @@ const Button: React.FC<iButton> = ({
   className,
   onClick,
   children,
+  disabled,
   ...props
 }) => {
   return (
     <button
       className={`${styles.container} ${className}`}
       onClick={onClick}
+      disabled={disabled}
       {...props}
     >
       {children}
