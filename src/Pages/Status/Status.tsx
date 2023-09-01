@@ -4,7 +4,6 @@ import Input from "../../Components/Forms/Input";
 import Button from "../../Components/Forms/Button";
 import SelectedList from "../../Components/SelectedList/SelectedList";
 import Table from "../../Components/Table/Table";
-import Loading from "../../Components/Loading/Loading";
 import { MdUpload } from "react-icons/md";
 import { formatDateFromObject, optionsType } from "../../Components/Helper";
 import { fetchPost } from "../../Services/Slices/postSlice";
@@ -172,13 +171,6 @@ const Status = () => {
     setIsDispatched(true);
   }, [dispatch, page, deleteFile?.data?.response]);
 
-  if (post.loading || getFiles.loading)
-    return (
-      <div className={styles.loading}>
-        <Loading size="5rem" type="spin" />
-      </div>
-    );
-
   return (
     <div className={styles.container}>
       {post.error && (
@@ -268,6 +260,7 @@ const Status = () => {
           downloadButton
           isEmpty={isDispatched && getFiles?.data?.results?.length === 0}
           isStatus
+          loading={post.loading || getFiles.loading}
         />
       </div>
     </div>

@@ -85,6 +85,7 @@ const Home = () => {
             (ref.current && response?.data?.results?.length === 0) ||
             (!ref.current && allPostsResponse?.data?.results?.length === 0)
           }
+          loading={ref.current ? response.loading : allPostsResponse.loading}
         />
       </div>
     </div>

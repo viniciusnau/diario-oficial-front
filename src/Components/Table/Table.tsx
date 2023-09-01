@@ -6,6 +6,7 @@ import { MdDelete, MdDownload } from "react-icons/md";
 import services from "../../Services/services";
 import { fetchDeleteFile } from "../../Services/Slices/deleteFileSlice";
 import { useDispatch } from "react-redux";
+import Loading from "../Loading/Loading";
 
 interface TableProps {
   title?: string;
@@ -17,6 +18,7 @@ interface TableProps {
   total?: number;
   isEmpty?: boolean;
   isStatus?: boolean;
+  loading?: boolean;
 }
 
 const Table: React.FC<TableProps> = ({
@@ -28,6 +30,7 @@ const Table: React.FC<TableProps> = ({
   downloadButton,
   total,
   isEmpty,
+  loading,
 }) => {
   const [currentPage] = useState<number>(1);
   const [isResponsive, setIsResponsive] = useState(false);
@@ -116,43 +119,51 @@ const Table: React.FC<TableProps> = ({
           ))}
         </div>
         <div className={styles.tableBody}>
-          {isEmpty ? (
-            <div className={styles.empty}>
-              Não foi encontrado nenhum conteúdo
+          {loading ? (
+            <div style={{ marginBottom: "3rem" }}>
+              <Loading size="5rem" type="spin" />
             </div>
           ) : (
             <>
-              {data?.map((row: any, rowIndex: any) => (
-                <div key={rowIndex} className={styles.tableRow}>
-                  {columns.map((column: any, columnIndex: any) => (
-                    <div key={columnIndex} className={styles.row}>
-                      {column.property === "presigned_url" ? (
-                        <Button
-                          onClick={() =>
-                            handleDownloadFile(row[column.property])
-                          }
-                          className={styles.button}
-                        >
-                          <MdDownload size={isResponsive ? 18 : 24} />
-                        </Button>
-                      ) : column.property === "delete" ? (
-                        <Button
-                          onClick={() =>
-                            dispatch<any>(fetchDeleteFile(row.delete))
-                          }
-                          className={styles.button}
-                        >
-                          <MdDelete size={isResponsive ? 18 : 24} />
-                        </Button>
-                      ) : (
-                        <div className={styles.tableCell}>
-                          {row[column.property]}
+              {isEmpty ? (
+                <div className={styles.empty}>
+                  Não foi encontrado nenhum conteúdo
+                </div>
+              ) : (
+                <>
+                  {data?.map((row: any, rowIndex: any) => (
+                    <div key={rowIndex} className={styles.tableRow}>
+                      {columns.map((column: any, columnIndex: any) => (
+                        <div key={columnIndex} className={styles.row}>
+                          {column.property === "presigned_url" ? (
+                            <Button
+                              onClick={() =>
+                                handleDownloadFile(row[column.property])
+                              }
+                              className={styles.button}
+                            >
+                              <MdDownload size={isResponsive ? 18 : 24} />
+                            </Button>
+                          ) : column.property === "delete" ? (
+                            <Button
+                              onClick={() =>
+                                dispatch<any>(fetchDeleteFile(row.delete))
+                              }
+                              className={styles.button}
+                            >
+                              <MdDelete size={isResponsive ? 18 : 24} />
+                            </Button>
+                          ) : (
+                            <div className={styles.tableCell}>
+                              {row[column.property]}
+                            </div>
+                          )}
                         </div>
-                      )}
+                      ))}
                     </div>
                   ))}
-                </div>
-              ))}
+                </>
+              )}
             </>
           )}
         </div>
