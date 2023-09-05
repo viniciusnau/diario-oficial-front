@@ -232,7 +232,7 @@ const Status = () => {
             name="code"
             value={form.code}
             onChange={handleChange}
-            max={5}
+            max={10}
           />
           <Input
             className={styles.time}
