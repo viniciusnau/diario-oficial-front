@@ -76,10 +76,6 @@ const A11y: React.FC<iA11y> = ({
     };
   }, [setIsOpenModal]);
 
-  if (!isPublicPage) {
-    return null;
-  }
-
   return (
     <>
       {isOpenModal && (

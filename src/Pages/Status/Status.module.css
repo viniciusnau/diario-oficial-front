@@ -1,3 +1,5 @@
+@import "../../colors.css";
+
 .loading {
   display: flex;
   height: 60vh;
@@ -58,6 +60,16 @@
   align-items: center;
   margin: 0 1rem;
   height: 3rem;
+}
+
+input {
+  cursor: var(--cursor-text);
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  background-color: var(--second-button-color) !important;
+  border: none !important;
+  font-size: var(--font-size)-5rem !important;
+  box-shadow: 0 10px 10px -10px var(--shadow-color);
 }
 
 .type {

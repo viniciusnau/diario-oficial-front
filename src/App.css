@@ -3,10 +3,20 @@
   --cursor-pointer: pointer;
   --cursor-not-allowed: not-allowed;
   --cursor-default: default;
+  --cursor-text: text;
 }
 
 body {
   margin: 0;
+}
+
+div[class*="Calendar__day"],
+button[class*="Calendar__yearText"],
+button[class*="Calendar__monthText"],
+button[class*="Calendar__yearSelectorText"],
+button[class*="Calendar__monthSelectorItemText"],
+button[class*="Calendar__monthArrowWrapper"] {
+  cursor: var(--cursor-pointer) !important;
 }
 
 .App {

@@ -57,6 +57,7 @@ function App() {
           "--cursor-pointer": `${customCursor ? "none" : "pointer"}`,
           "--cursor-not-allowed": `${customCursor ? "none" : "not-allowed"}`,
           "--cursor-default": `${customCursor ? "none" : "default"}`,
+          "--cursor-text": `${customCursor ? "none" : "text"}`,
         } as any
       }
       onMouseEnter={customCursor ? handleMouseEnter : undefined}
