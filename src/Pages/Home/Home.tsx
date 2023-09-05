@@ -86,6 +86,7 @@ const Home = () => {
             (!ref.current && allPostsResponse?.data?.results?.length === 0)
           }
           loading={ref.current ? response.loading : allPostsResponse.loading}
+          error={ref.current ? response.error : allPostsResponse.error}
         />
       </div>
     </div>

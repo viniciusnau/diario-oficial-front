@@ -19,6 +19,7 @@ interface TableProps {
   isEmpty?: boolean;
   isStatus?: boolean;
   loading?: boolean;
+  error?: boolean;
 }
 
 const Table: React.FC<TableProps> = ({
@@ -31,6 +32,7 @@ const Table: React.FC<TableProps> = ({
   total,
   isEmpty,
   loading,
+  error,
 }) => {
   const [currentPage] = useState<number>(1);
   const [isResponsive, setIsResponsive] = useState(false);
@@ -125,9 +127,11 @@ const Table: React.FC<TableProps> = ({
             </div>
           ) : (
             <>
-              {isEmpty ? (
+              {isEmpty || error ? (
                 <div className={styles.empty}>
-                  Não foi encontrado nenhum conteúdo
+                  {isEmpty
+                    ? "Não foi encontrado nenhum conteúdo"
+                    : "Não foi possível carregar as informações!"}
                 </div>
               ) : (
                 <>

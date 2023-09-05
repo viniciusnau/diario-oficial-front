@@ -170,9 +170,12 @@ const Status = () => {
     dispatch<any>(fetchGetFiles(page.toString()));
     setIsDispatched(true);
   }, [dispatch, page, deleteFile?.data?.response]);
-
+  console.log("getFiles.error:", getFiles.error);
   return (
     <div className={styles.container}>
+      {getFiles.error && (
+        <Snackbar type="scheduleError" setSnackbarType={setSnackbarType} />
+      )}
       {post.error && (
         <Snackbar type="postError" setSnackbarType={setSnackbarType} />
       )}
@@ -261,6 +264,7 @@ const Status = () => {
           isEmpty={isDispatched && getFiles?.data?.results?.length === 0}
           isStatus
           loading={post.loading || getFiles.loading}
+          error={post.error || getFiles.error}
         />
       </div>
     </div>
