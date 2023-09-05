@@ -15,10 +15,15 @@ interface iSearch {
   setSearch?: any;
   search?: any;
   setPage?: any;
-  page?: number;
+  setTempPage?: any;
 }
 
-const Search: React.FC<iSearch> = ({ setBackup, setSearch, setPage }) => {
+const Search: React.FC<iSearch> = ({
+  setBackup,
+  setSearch,
+  setPage,
+  setTempPage,
+}) => {
   const [form, setForm] = useState({
     date: { from: null, to: null },
     post_type: [] as string[],
@@ -87,6 +92,7 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch, setPage }) => {
     };
     dispatch<any>(fetchPublic(updatedRange, "1"));
     setPage(1);
+    setTempPage(1);
     setBackup(updatedRange);
     setSearch(true);
     setForm({

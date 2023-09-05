@@ -69,7 +69,7 @@ const Home = () => {
         setSearch={setIsSearched}
         search={isSearched}
         setPage={setPage}
-        page={page}
+        setTempPage={setTempPage}
       />
       <div className={styles.table}>
         <Table
