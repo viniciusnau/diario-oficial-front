@@ -1,4 +1,3 @@
-import { useLocation } from "react-router-dom";
 import styles from "./A11y.module.css";
 import Button from "../Forms/Button";
 import { useEffect, useRef } from "react";
@@ -28,8 +27,6 @@ const A11y: React.FC<iA11y> = ({
   isOpenModal,
   setIsOpenModal,
 }) => {
-  const location = useLocation();
-  const isPublicPage = location.pathname === "/";
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   const handleModalClick = (event: any) => {

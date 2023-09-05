@@ -26,6 +26,7 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch, setPage }) => {
     words: [] as string[],
     exact_words: false,
   });
+  const [hasValue, setHasValue] = useState<boolean>(false);
 
   const dispatch = useDispatch();
 
@@ -51,7 +52,8 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch, setPage }) => {
       !form.date.to &&
       form.post_type.length === 0 &&
       !form.post_code.trim() &&
-      form.words.length === 0
+      form.words.length === 0 &&
+      !hasValue
     );
   };
 
@@ -155,6 +157,7 @@ const Search: React.FC<iSearch> = ({ setBackup, setSearch, setPage }) => {
                   e.currentTarget.value = "";
                 }
               }}
+              hasValue={setHasValue}
             />
           </div>
           <div className={styles.type}>

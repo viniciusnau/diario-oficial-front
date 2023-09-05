@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./SelectedList.module.css";
 import Input from "../Forms/Input";
 import { v4 as uuidv4 } from "uuid";
@@ -17,6 +17,7 @@ interface iSelectedList {
   options?: string[];
   onBlur?: any;
   onKeyUp?: any;
+  hasValue?: any;
 }
 
 const SelectedList: React.FC<iSelectedList> = ({
@@ -31,12 +32,12 @@ const SelectedList: React.FC<iSelectedList> = ({
   classNameDiv,
   options,
   onKeyUp,
+  hasValue,
   ...props
 }) => {
   const [showOptions, setShowOptions] = useState<boolean>(false);
   const inputValue = value !== undefined ? value : "";
   const optionsListRef = useRef<HTMLDivElement | null>(null);
-  const valueRef = useRef(inputValue);
 
   const handleAddItem = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const inputValue = e.currentTarget.value.trim();
@@ -103,6 +104,9 @@ const SelectedList: React.FC<iSelectedList> = ({
         defaultValue={inputValue}
         readOnly={readOnly}
         onKeyUp={onKeyUp}
+        onChange={(e: any) => {
+          e.currentTarget.value !== "" ? hasValue(true) : hasValue(false);
+        }}
         {...props}
       />
 
