@@ -20,6 +20,7 @@ const Status = () => {
   const deleteFile = useSelector((state: any) => state.deleteFileSlice);
   const [page, setPage] = useState<number>(1);
   const [isDispatched, setIsDispatched] = useState<boolean>(false);
+  const [isResponsive, setIsResponsive] = useState<boolean>(false);
   const [snackbarType, setSnackbarType] = useState<string | null>(null);
   const [form, setForm] = useState<any>({
     file: File,
@@ -170,7 +171,20 @@ const Status = () => {
     dispatch<any>(fetchGetFiles(page.toString()));
     setIsDispatched(true);
   }, [dispatch, page, deleteFile?.data?.response]);
-  console.log("getFiles.error:", getFiles.error);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsResponsive(window.innerWidth <= 750);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className={styles.container}>
       {getFiles.error && (
@@ -188,7 +202,7 @@ const Status = () => {
       <div className={styles.postContainer}>
         <div className={`${form.file ? styles.fileContainer : ""}`}>
           <label className={styles.fakeInput} htmlFor="file">
-            <MdUpload size={24} />
+            <MdUpload size={isResponsive ? 18 : 24} />
           </label>
           <Input
             className={styles.file}

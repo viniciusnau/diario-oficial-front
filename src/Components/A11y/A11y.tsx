@@ -1,6 +1,6 @@
 import styles from "./A11y.module.css";
 import Button from "../Forms/Button";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BsUniversalAccessCircle } from "react-icons/bs";
 import { PiCursor } from "react-icons/pi";
 import { SiExoscale } from "react-icons/si";
@@ -28,6 +28,7 @@ const A11y: React.FC<iA11y> = ({
   setIsOpenModal,
 }) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
+  const [isResponsive, setIsResponsive] = useState(false);
 
   const handleModalClick = (event: any) => {
     event.stopPropagation();
@@ -73,6 +74,19 @@ const A11y: React.FC<iA11y> = ({
     };
   }, [setIsOpenModal]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsResponsive(window.innerWidth >= 769);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
       {isOpenModal && (
@@ -83,38 +97,49 @@ const A11y: React.FC<iA11y> = ({
           }}
           className={`${styles.a11y} ${styles.button}`}
         >
-          <BsUniversalAccessCircle size={24} />
+          <BsUniversalAccessCircle size={!isResponsive ? 18 : 24} />
         </Button>
       )}
       {!isOpenModal && (
         <div className={styles.controls}>
-          <Button className={styles.button} onClick={handleColorInversion}>
-            <MdInvertColors size={18} />
+          <Button
+            className={`${styles.button} ${styles.option}`}
+            onClick={handleColorInversion}
+          >
+            <MdInvertColors size={!isResponsive ? 18 : 24} />
           </Button>
           <Button
-            className={styles.button}
+            className={`${styles.button} ${styles.option}`}
             onClick={() => handleFontChange("increase")}
           >
-            <MdTextIncrease size={18} />
+            <MdTextIncrease size={!isResponsive ? 18 : 24} />
           </Button>
           <Button
-            className={styles.button}
+            className={`${styles.button} ${styles.option}`}
             onClick={() => handleFontChange("reset")}
           >
-            <BiFontSize size={18} />
+            <BiFontSize size={!isResponsive ? 18 : 24} />
           </Button>
           <Button
-            className={styles.button}
+            className={`${styles.button} ${styles.option}`}
             onClick={() => handleFontChange("decrease")}
           >
-            <MdTextDecrease size={18} />
+            <MdTextDecrease size={!isResponsive ? 18 : 24} />
           </Button>
-          <Button className={styles.button} onClick={handleToggleGrayscale}>
-            <SiExoscale size={18} />
+          <Button
+            className={`${styles.button} ${styles.option}`}
+            onClick={handleToggleGrayscale}
+          >
+            <SiExoscale size={!isResponsive ? 18 : 24} />
           </Button>
-          <Button className={styles.button} onClick={handleCursorSize}>
-            <PiCursor size={18} />
-          </Button>
+          {isResponsive && (
+            <Button
+              className={`${styles.button} ${styles.option}`}
+              onClick={handleCursorSize}
+            >
+              <PiCursor size={!isResponsive ? 18 : 24} />
+            </Button>
+          )}
         </div>
       )}
     </>

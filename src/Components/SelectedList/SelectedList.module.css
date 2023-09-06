@@ -95,13 +95,13 @@
     font-size: var(--font-size)-0.3rem;
   }
   .selected {
-    width: 7rem;
+    width: 9rem;
   }
   .input {
-    width: 8rem;
+    width: 10rem;
   }
   .list {
-    width: 9rem;
+    width: 11rem;
   }
 }
 

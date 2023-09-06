@@ -19,8 +19,8 @@
   justify-content: center;
   align-items: flex-start;
   width: 100%;
-  height: 10rem;
-  margin: 1.5rem 0 0 0;
+  max-height: 18rem;
+  margin: 3rem 0 0 0;
 }
 
 .fileContainer {
@@ -34,8 +34,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 3rem;
-  min-width: 3rem;
+  /* height: 3rem;
+  min-width: 3rem; */
   border: none;
   border-radius: 5rem;
   margin: 0 0.5rem;
@@ -95,8 +95,14 @@ input {
   font-size: var(--font-size);
 }
 
+input[class*="DatePicker__input"] {
+  font-size: var(--font-size);
+  font-weight: 400;
+  color: var(--first-text-color);
+}
+
 .button {
-  height: 3rem;
+  min-height: 2.5rem;
   width: 7.5rem;
   border: none;
   border-radius: 0.5rem;
@@ -137,28 +143,45 @@ input {
   background-color: var(--second-button-color-disabled);
 }
 
-@media screen and (max-width: 1175px) {
-  .input,
-  .time,
-  .fakeInput {
-    margin: 0.75rem;
-  }
+@media (min-width: 70px) {
+  .postContainer,
   .lastColumn {
     flex-direction: column;
+    align-items: center;
+  }
+  .input,
+  .time,
+  .fakeInput,
+  .type {
+    margin: 1rem 0;
+  }
+
+  input[type="text"],
+  .input,
+  input[class*="DatePicker__input"],
+  .time {
+    width: 10rem;
+  }
+
+  .fakeInput {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+@media (min-width: 751px) {
+  .fakeInput {
+    width: 3rem;
+    height: 3rem;
   }
 }
 
-@media screen and (max-width: 600px) {
-  .postContainer {
-    flex-direction: column;
-  }
-  .input,
-  .time,
-  .button,
-  .fakeInput {
-    margin: 0.5rem 0;
-  }
+@media (min-width: 1024px) {
+  .postContainer,
   .lastColumn {
-    flex-direction: column;
+    flex-direction: row;
+  }
+  .fakeInput {
+    width: 3rem;
+    height: 3rem;
   }
 }

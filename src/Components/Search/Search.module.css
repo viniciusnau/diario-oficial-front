@@ -66,7 +66,6 @@
 .info {
   display: flex;
   align-items: center;
-  height: 2.5rem;
 }
 
 .button {
@@ -74,7 +73,6 @@
   width: 90%;
   border: none;
   border-radius: 0.5rem;
-  margin: 0.5rem 0;
   background-color: var(--first-button-color);
   box-shadow: 0 10px 10px -10px var(--shadow-color);
   font-size: var(--font-size);
@@ -139,7 +137,7 @@
     padding: 0;
   }
   .info {
-    flex-direction: row;
+    flex-direction: column;
   }
   .code {
     width: 8rem;
@@ -200,9 +198,9 @@
   .code {
     margin: 0.5rem 0;
   }
+
   .info {
     flex-direction: column;
-    margin: 0.5rem 0;
   }
   .button {
     padding: 0.5rem 0;
@@ -256,6 +254,15 @@
     flex-direction: row;
     justify-content: space-between;
   }
+
+  .lastColumn {
+    max-width: 15rem;
+  }
+  .button {
+    padding: 0 1rem;
+    margin: 0 0 0 0.5rem;
+  }
+
   .type {
     margin-top: 0.5rem;
     margin: 0.5rem 0 0 3rem;

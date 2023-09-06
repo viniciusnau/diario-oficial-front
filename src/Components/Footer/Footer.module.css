@@ -73,6 +73,7 @@
 @media (max-width: 750px) {
   .footer {
     overflow-y: scroll;
+    z-index: 10;
   }
   .description,
   .copyright {
@@ -91,9 +92,6 @@
   .copyright {
     padding: 0 0 0 0;
     align-items: flex-start;
-  }
-  .footer {
-    z-index: 10;
   }
 }
 
