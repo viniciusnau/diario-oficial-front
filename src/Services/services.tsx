@@ -90,7 +90,6 @@ const services = {
       .catch((err: any) => console.log(err));
   },
   getAllPosts: async (page: string, auth: boolean) => {
-    console.log("all posts defaultHeaders: ", defaultHeaders);
     return axios
       .get(
         `${PATH.base}/all-posts/${page ? `?page=${page}` : ""}`,
