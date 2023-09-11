@@ -31,6 +31,7 @@ const Table: React.FC<TableProps> = ({
   downloadButton,
   total,
   isEmpty,
+  isStatus,
   loading,
   error,
 }) => {
@@ -53,6 +54,38 @@ const Table: React.FC<TableProps> = ({
     a.download = "template.pdf";
     a.click();
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsResponsive(window.innerWidth <= 750);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    const liElements = document.querySelectorAll(
+      "li[class*='rc-pagination-item']"
+    );
+
+    liElements.forEach((li) => {
+      li.setAttribute("title", "");
+    });
+
+    const prevElement = document.querySelector("li.rc-pagination-prev");
+    const nextElement = document.querySelector("li.rc-pagination-next");
+
+    if (prevElement) {
+      prevElement.setAttribute("title", "");
+    }
+
+    if (nextElement) {
+      nextElement.setAttribute("title", "");
+    }
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const handlePageChange = (page: number) => {
     setPage(page);
@@ -84,19 +117,6 @@ const Table: React.FC<TableProps> = ({
     }
     return null;
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsResponsive(window.innerWidth <= 750);
-    };
-
-    window.addEventListener("resize", handleResize);
-    handleResize();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   return (
     <div className={styles.content}>
