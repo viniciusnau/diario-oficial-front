@@ -12,12 +12,14 @@ export const defaultHeaders = {
 };
 
 const services = {
-  getFiles: async (page: string) => {
+  getFiles: async (page: string, headers: any) => {
+    const tempHeader = {
+      headers: {
+        Authorization: "Basic " + headers,
+      },
+    };
     return axios
-      .get(
-        `${PATH.base}/all-files/${page ? `?page=${page}` : ""}`,
-        defaultHeaders
-      )
+      .get(`${PATH.base}/all-files/${page ? `?page=${page}` : ""}`, tempHeader)
       .then((data: any) => {
         return data;
       })
@@ -88,6 +90,7 @@ const services = {
       .catch((err: any) => console.log(err));
   },
   getAllPosts: async (page: string, auth: boolean) => {
+    console.log("all posts defaultHeaders: ", defaultHeaders);
     return axios
       .get(
         `${PATH.base}/all-posts/${page ? `?page=${page}` : ""}`,

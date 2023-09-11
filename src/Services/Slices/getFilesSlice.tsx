@@ -41,7 +41,7 @@ export const { getFiles, getFilesSuccess, getFilesFailure } =
 export default getFilesSlice.reducer;
 
 export const fetchGetFiles =
-  (page: string) =>
+  (page: string, headers: any) =>
   async (
     dispatch: (arg0: {
       payload: any;
@@ -53,7 +53,7 @@ export const fetchGetFiles =
   ) => {
     dispatch(getFiles());
     try {
-      const response = await services.getFiles(page);
+      const response = await services.getFiles(page, headers);
       dispatch(getFilesSuccess(response.data));
     } catch (err) {
       console.log("err: ", err);

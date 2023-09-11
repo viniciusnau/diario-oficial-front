@@ -168,7 +168,9 @@ const Status = () => {
   });
 
   useEffect(() => {
-    dispatch<any>(fetchGetFiles(page.toString()));
+    dispatch<any>(
+      fetchGetFiles(page.toString(), sessionStorage.getItem("credentials"))
+    );
     setIsDispatched(true);
   }, [dispatch, page, deleteFile?.data?.response]);
 
