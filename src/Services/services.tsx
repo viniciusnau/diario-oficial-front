@@ -34,10 +34,15 @@ const services = {
       .catch((err: any) => console.log(err));
   },
   downloadFiles: async (file: string) => {
+    const header = {
+      headers: {
+        Authorization: "Basic " + sessionStorage.getItem("credentials"),
+      },
+    };
     return axios
       .get(
         `${PATH.base}/download-files/?directory=templates&file=${file}`,
-        defaultHeaders
+        header
       )
       .then((data: any) => {
         return data;
