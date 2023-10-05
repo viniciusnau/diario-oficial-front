@@ -121,6 +121,7 @@ const services = {
         body.words.length > 0 &&
         body.words.map((word: string) => `words=${word}`),
       body.exact_words === true && `exact_words=${body.exact_words}`,
+      body.words_contain === true && `words_contain=${body.words_contain}`,
       page && `page=${page}`,
     ]
       .filter(Boolean)

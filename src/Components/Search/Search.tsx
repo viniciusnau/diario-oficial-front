@@ -30,6 +30,7 @@ const Search: React.FC<iSearch> = ({
     post_code: "",
     words: [] as string[],
     exact_words: false,
+    words_contain: false,
   });
   const [hasValue, setHasValue] = useState<boolean>(false);
 
@@ -101,6 +102,7 @@ const Search: React.FC<iSearch> = ({
       post_code: "",
       words: [] as string[],
       exact_words: false,
+      words_contain: false,
     });
   };
 
@@ -201,6 +203,22 @@ const Search: React.FC<iSearch> = ({
                 checked={form.exact_words}
                 onChange={handleChange}
                 type="checkbox"
+              />
+              <label className={styles.yes}>Sim</label>
+            </div>
+            <label className={styles.question}>Contém palavras?</label>
+            <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  margin: "0 0 0 .5rem",
+                }}
+            >
+              <Input
+                  name="words_contain"
+                  checked={form.words_contain}
+                  onChange={handleChange}
+                  type="checkbox"
               />
               <label className={styles.yes}>Sim</label>
             </div>
