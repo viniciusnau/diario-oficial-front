@@ -202,13 +202,13 @@ const Search: React.FC<iSearch> = ({
             max={12}
           />
           <div className={styles.info}>
-            <label
-              className={styles.question}
-              onMouseEnter={handleAllWordsTooltipToggle}
-              onMouseLeave={handleAllWordsTooltipToggle}
-            >
+            <label className={styles.question}>
               {isAllWordsToolTipVisible && (
-                <p className={styles.tooltip}>
+                <p
+                  className={`${styles.tooltip} ${
+                    isAllWordsToolTipVisible ? styles.fadeIn : styles.fadeOut
+                  }`}
+                >
                   Busca por arquivos que contém TODAS as palavras indicadas.
                   Exemplo: "Diário" e "Oficial" e "Eletrônico".
                 </p>
@@ -218,6 +218,8 @@ const Search: React.FC<iSearch> = ({
                 size={18}
                 color="#ff6464"
                 style={{ margin: "0 0 0 .25rem" }}
+                onMouseEnter={handleAllWordsTooltipToggle}
+                onMouseLeave={handleAllWordsTooltipToggle}
               />
             </label>
             <div
@@ -235,25 +237,26 @@ const Search: React.FC<iSearch> = ({
               />
               <label className={styles.yes}>Sim</label>
             </div>
-            <label
-              className={styles.question}
-              onMouseEnter={handleContainWordsTooltipToggle}
-              onMouseLeave={handleContainWordsTooltipToggle}
-            >
-              {isContainWordsTooltipVisible && (
-                <p className={styles.tooltip}>
-                  Busca por arquivos que contém as palavras indicadas mesmo que
-                  não exatas. Exemplo: buscar por "Palavra" também trará
-                  resultados como: "Palavra-Composta".
-                </p>
-              )}
+            <label className={styles.question}>
+              <p
+                className={`${styles.tooltip} ${
+                  isContainWordsTooltipVisible ? styles.fadeIn : styles.fadeOut
+                }`}
+              >
+                Busca por arquivos que contém as palavras indicadas mesmo que
+                não exatas. Exemplo: buscar por "Palavra" também trará
+                resultados como: "Palavra-Composta".
+              </p>
               Contém palavras?
               <BsQuestionSquare
                 size={18}
                 color="#ff6464"
                 style={{ margin: "0 0 0 .25rem" }}
+                onMouseEnter={handleContainWordsTooltipToggle}
+                onMouseLeave={handleContainWordsTooltipToggle}
               />
             </label>
+
             <div
               style={{
                 display: "flex",
