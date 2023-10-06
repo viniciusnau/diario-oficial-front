@@ -49,7 +49,6 @@ const Search: React.FC<iSearch> = ({
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | any) => {
     const { name, value, type, checked } = e.target;
-    console.log("name: ", name);
 
     setForm((prev: any) => ({
       ...prev,
@@ -116,6 +115,16 @@ const Search: React.FC<iSearch> = ({
       exact_words: false,
       words_contain: false,
     });
+  };
+
+  const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement> | any) => {
+    const { name } = e.target;
+    console.log("name:? ", name);
+    setForm((prev) => ({
+      ...prev,
+      [name === "words_contain" ? "exact_words" : "words_contain"]: false,
+    }));
+    handleChange(e);
   };
 
   return (
@@ -232,7 +241,7 @@ const Search: React.FC<iSearch> = ({
               <Input
                 name="exact_words"
                 checked={form.exact_words}
-                onChange={handleChange}
+                onChange={handleCheckbox}
                 type="checkbox"
               />
               <label className={styles.yes}>Sim</label>
@@ -271,7 +280,7 @@ const Search: React.FC<iSearch> = ({
               <Input
                 name="words_contain"
                 checked={form.words_contain}
-                onChange={handleChange}
+                onChange={handleCheckbox}
                 type="checkbox"
               />
               <label className={styles.yes}>Sim</label>
