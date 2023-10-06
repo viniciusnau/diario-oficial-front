@@ -47,9 +47,9 @@ const Search: React.FC<iSearch> = ({
   const handleContainWordsTooltipToggle = () => {
     setIsContainWordsTooltipVisible(!isContainWordsTooltipVisible);
   };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | any) => {
     const { name, value, type, checked } = e.target;
+    console.log("name: ", name);
 
     setForm((prev: any) => ({
       ...prev,
@@ -238,15 +238,19 @@ const Search: React.FC<iSearch> = ({
               <label className={styles.yes}>Sim</label>
             </div>
             <label className={styles.question}>
-              <p
-                className={`${styles.tooltip} ${
-                  isContainWordsTooltipVisible ? styles.fadeIn : styles.fadeOut
-                }`}
-              >
-                Busca por arquivos que contém as palavras indicadas mesmo que
-                não exatas. Exemplo: buscar por "Palavra" também trará
-                resultados como: "Palavra-Composta".
-              </p>
+              {isContainWordsTooltipVisible && (
+                <p
+                  className={`${styles.tooltip} ${
+                    isContainWordsTooltipVisible
+                      ? styles.fadeIn
+                      : styles.fadeOut
+                  }`}
+                >
+                  Busca por arquivos que contém as palavras indicadas mesmo que
+                  não exatas. Exemplo: buscar por "Palavra" também trará
+                  resultados como: "Palavra-Composta".
+                </p>
+              )}
               Contém palavras?
               <BsQuestionSquare
                 size={18}
