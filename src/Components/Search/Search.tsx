@@ -9,6 +9,7 @@ import { fetchPublic } from "../../Services/Slices/publicSlice";
 import { Calendar } from "@taak/react-modern-calendar-datepicker";
 import "@taak/react-modern-calendar-datepicker/lib/DatePicker.css";
 import { ptLocale } from "../Consts";
+import { BsQuestionSquare } from "react-icons/bs";
 
 interface iSearch {
   setBackup?: any;
@@ -24,6 +25,7 @@ const Search: React.FC<iSearch> = ({
   setPage,
   setTempPage,
 }) => {
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
     date: { from: null, to: null },
     post_type: [] as string[],
@@ -33,8 +35,18 @@ const Search: React.FC<iSearch> = ({
     words_contain: false,
   });
   const [hasValue, setHasValue] = useState<boolean>(false);
+  const [isAllWordsToolTipVisible, setIsAllWordsTooltipVisible] =
+    useState(false);
+  const [isContainWordsTooltipVisible, setIsContainWordsTooltipVisible] =
+    useState(false);
 
-  const dispatch = useDispatch();
+  const handleAllWordsTooltipToggle = () => {
+    setIsAllWordsTooltipVisible(!isAllWordsToolTipVisible);
+  };
+
+  const handleContainWordsTooltipToggle = () => {
+    setIsContainWordsTooltipVisible(!isContainWordsTooltipVisible);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | any) => {
     const { name, value, type, checked } = e.target;
@@ -190,7 +202,24 @@ const Search: React.FC<iSearch> = ({
             max={12}
           />
           <div className={styles.info}>
-            <label className={styles.question}>Palavras exatas?</label>
+            <label
+              className={styles.question}
+              onMouseEnter={handleAllWordsTooltipToggle}
+              onMouseLeave={handleAllWordsTooltipToggle}
+            >
+              {isAllWordsToolTipVisible && (
+                <p className={styles.tooltip}>
+                  Busca por arquivos que contém TODAS as palavras indicadas.
+                  Exemplo: "Diário" e "Oficial" e "Eletrônico".
+                </p>
+              )}
+              Todas as palavras?
+              <BsQuestionSquare
+                size={18}
+                color="#ff6464"
+                style={{ margin: "0 0 0 .25rem" }}
+              />
+            </label>
             <div
               style={{
                 display: "flex",
@@ -206,19 +235,37 @@ const Search: React.FC<iSearch> = ({
               />
               <label className={styles.yes}>Sim</label>
             </div>
-            <label className={styles.question}>Contém palavras?</label>
+            <label
+              className={styles.question}
+              onMouseEnter={handleContainWordsTooltipToggle}
+              onMouseLeave={handleContainWordsTooltipToggle}
+            >
+              {isContainWordsTooltipVisible && (
+                <p className={styles.tooltip}>
+                  Busca por arquivos que contém as palavras indicadas mesmo que
+                  não exatas. Exemplo: buscar por "Palavra" também trará
+                  resultados como: "Palavra-Composta".
+                </p>
+              )}
+              Contém palavras?
+              <BsQuestionSquare
+                size={18}
+                color="#ff6464"
+                style={{ margin: "0 0 0 .25rem" }}
+              />
+            </label>
             <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  margin: "0 0 0 .5rem",
-                }}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                margin: "0 0 0 .5rem",
+              }}
             >
               <Input
-                  name="words_contain"
-                  checked={form.words_contain}
-                  onChange={handleChange}
-                  type="checkbox"
+                name="words_contain"
+                checked={form.words_contain}
+                onChange={handleChange}
+                type="checkbox"
               />
               <label className={styles.yes}>Sim</label>
             </div>

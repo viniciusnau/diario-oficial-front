@@ -91,6 +91,32 @@
   background-color: var(--first-button-color-disabled);
 }
 
+.tooltip {
+  position: absolute;
+  background-color: var(--second-button-color);
+  padding: 0.5rem 1rem;
+  border-radius: 0.35rem;
+  z-index: 1000;
+  height: auto;
+  opacity: 0;
+}
+
+.tooltip {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.tooltip {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.tooltip {
+  text-align: center;
+}
+
+.question {
+  width: 10rem;
+}
+
 @media (max-width: 750px) {
   .align {
     display: flex;

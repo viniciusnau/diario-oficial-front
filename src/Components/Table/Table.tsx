@@ -3,7 +3,7 @@ import styles from "./Table.module.css";
 import Pagination from "rc-pagination";
 import Button from "../Forms/Button";
 import { MdDelete, MdDownload } from "react-icons/md";
-import services, { defaultHeaders } from "../../Services/services";
+import services from "../../Services/services";
 import { fetchDeleteFile } from "../../Services/Slices/deleteFileSlice";
 import { useDispatch } from "react-redux";
 import Loading from "../Loading/Loading";
