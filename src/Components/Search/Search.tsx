@@ -119,7 +119,6 @@ const Search: React.FC<iSearch> = ({
 
   const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement> | any) => {
     const { name } = e.target;
-    console.log("name:? ", name);
     setForm((prev) => ({
       ...prev,
       [name === "words_contain" ? "exact_words" : "words_contain"]: false,
