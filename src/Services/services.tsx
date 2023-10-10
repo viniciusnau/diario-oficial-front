@@ -1,15 +1,5 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 import { PATH } from "../PATH";
-
-const username = sessionStorage.getItem("username");
-const password = sessionStorage.getItem("password");
-const encodedCredentials = btoa(`${username}:${password}`);
-
-export const defaultHeaders = {
-  headers: {
-    Authorization: "Basic " + encodedCredentials,
-  },
-};
 
 const services = {
   getFiles: async (page: string, headers: any) => {
@@ -26,8 +16,13 @@ const services = {
       .catch((err: any) => console.log(err));
   },
   deleteFile: async (file: string) => {
+    const header = {
+      headers: {
+        Authorization: "Basic " + sessionStorage.getItem("credentials"),
+      },
+    };
     return axios
-      .get(`${PATH.base}/delete-files/?file=${file}`, defaultHeaders)
+      .get(`${PATH.base}/delete-files/?file=${file}`, header)
       .then((data: any) => {
         return data;
       })
@@ -49,36 +44,25 @@ const services = {
       })
       .catch((err: any) => console.log(err));
   },
-  doPost: async (body: FormData, username?: string, password?: string) => {
-    const encodedCredentials = btoa(`${username}:${password}`);
-    const headers: AxiosRequestConfig["headers"] = {};
-
-    if (username && password) {
-      headers.Authorization = "Basic " + encodedCredentials;
-    } else {
-      headers.Authorization = defaultHeaders.headers.Authorization;
-    }
-
-    try {
-      const response = await axios.post(PATH.base + "/do-post/", body, {
-        headers,
-      });
-      return response.data;
-    } catch (err) {
-      console.log(err);
-      throw err;
-    }
+  doPost: async (body: FormData) => {
+    const header = {
+      headers: {
+        Authorization: "Basic " + sessionStorage.getItem("credentials"),
+      },
+    };
+    return axios
+      .post(PATH.base + "/do-post/", body, header)
+      .then((response: any) => {
+        return response;
+      })
+      .catch((err: any) => console.log(err));
   },
   getMe: async (body: { username: string; password: string }) => {
-    const headers =
-      body.username && body.password
-        ? {
-            headers: {
-              Authorization:
-                "Basic " + btoa(`${body.username}:${body.password}`),
-            },
-          }
-        : defaultHeaders;
+    const headers = {
+      headers: {
+        Authorization: "Basic " + btoa(`${body.username}:${body.password}`),
+      },
+    };
     return axios
       .get(PATH.base + "/all-files/", headers)
       .then((data: any) => {
@@ -95,10 +79,15 @@ const services = {
       .catch((err: any) => console.log(err));
   },
   getAllPosts: async (page: string, auth: boolean) => {
+    const header = {
+      headers: {
+        Authorization: "Basic " + sessionStorage.getItem("credentials"),
+      },
+    };
     return axios
       .get(
         `${PATH.base}/all-posts/${page ? `?page=${page}` : ""}`,
-        auth ? defaultHeaders : undefined
+        auth ? header : undefined
       )
       .then((data: any) => {
         return data;

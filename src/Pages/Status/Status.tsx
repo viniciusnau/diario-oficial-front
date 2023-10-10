@@ -26,14 +26,13 @@ const Status = () => {
     file: File,
     date: {
       year: new Date().getFullYear(),
-      month: new Date().getMonth(),
-      day: 0,
+      month: new Date().getMonth() + 1,
+      day: new Date().getUTCDate(),
     },
     type: [],
     code: "",
     time: "",
   });
-
   const columns = [
     { title: "Nome", property: "name" },
     { title: "Data", property: "date" },
@@ -139,7 +138,7 @@ const Status = () => {
       date: {
         year: new Date().getFullYear(),
         month: new Date().getMonth(),
-        day: 0,
+        day: 1,
       },
       type: [],
       code: "",
