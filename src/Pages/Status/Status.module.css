@@ -193,4 +193,11 @@ input[class*="DatePicker__input"] {
     width: 3rem;
     height: 3rem;
   }
+  .fakeInput,
+  .calendarContainer,
+  .type,
+  .input,
+  .time {
+    margin-right: 1rem;
+  }
 }
