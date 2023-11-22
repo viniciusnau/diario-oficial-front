@@ -107,14 +107,15 @@ const Search: React.FC<iSearch> = ({
     setTempPage(1);
     setBackup(updatedRange);
     setSearch(true);
-    setForm({
-      date: { from: null, to: null },
-      post_type: [] as string[],
-      post_code: "",
-      words: [] as string[],
-      exact_words: false,
-      words_contain: false,
-    });
+    // here 
+    // setForm({
+    //   date: { from: null, to: null },
+    //   post_type: [] as string[],
+    //   post_code: "",
+    //   words: [] as string[],
+    //   exact_words: false,
+    //   words_contain: false,
+    // });
   };
 
   const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement> | any) => {
