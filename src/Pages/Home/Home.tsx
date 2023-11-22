@@ -73,7 +73,7 @@ const Home = () => {
       />
       <div className={styles.table}>
         <Table
-          title={ref.current ? `Edições encontradas: ${response.data.count !== undefined ? response.data.count : ''}` : "Últimas edições"}
+          title={ref.current ? `Edições encontradas: ${response.data.count ? response.data.count : ''}` : "Últimas edições"}
           data={extracted}
           columns={columns}
           setPage={setPage}
