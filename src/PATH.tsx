@@ -1,5 +1,5 @@
 const baseurl = {
-  apiUrl: "https://api.diariooficial.defensoria.sc.def.br",
+  apiUrl: "http://0.0.0.0:8000",
 };
 export const PATH = {
   base: baseurl.apiUrl,

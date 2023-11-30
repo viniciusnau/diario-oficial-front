@@ -5,6 +5,12 @@ export const handleTypeService = {
     color: "#9fc54d",
   },
 
+  searchError: {
+    title: "Erro ao efetuar a requisição!",
+    description: "O número de registros retornados pela consulta excede o limite. Por favor, repita a consulta usando mais filtros.",
+    color: "#ff6464",
+  },
+
   error: {
     title: "Erro ao efetuar a requisição!",
     description: "Tente novamente mais tarde.",
