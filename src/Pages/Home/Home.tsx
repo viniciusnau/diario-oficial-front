@@ -27,6 +27,7 @@ const Home = () => {
         { title: 'Edição', property: 'edition' },
         { title: 'Publicado', property: 'date' },
         { title: 'Arquivo', property: 'presigned_url' },
+        { title: 'Copiar', property: 'url' },
     ];
 
     useEffect(() => {

@@ -29,6 +29,18 @@ export const handleTypeService = {
     color: "#ff6464",
   },
 
+  copyError: {
+    title: "Erro ao copiar URL!",
+    description: "Tente novamente mais tarde.",
+    color: "#ff6464",
+  },
+
+  copySuccess: {
+    title: "URL copiada!",
+    description: "",
+    color: "#9fc54d",
+  },
+
   resetSuccess: {
     title: "Requisição feita com sucesso!",
     description: "Acesse o email para finalizar a troca de senha.",
