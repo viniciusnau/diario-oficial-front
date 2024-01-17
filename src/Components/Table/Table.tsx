@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import styles from "./Table.module.css";
 import Pagination from "rc-pagination";
 import Button from "../Forms/Button";
-import {MdContentCopy, MdDelete, MdDownload} from "react-icons/md";
+import {MdContentCopy, MdDelete, MdDownload, MdPictureAsPdf} from "react-icons/md";
 import services from "../../Services/services";
 import { fetchDeleteFile } from "../../Services/Slices/deleteFileSlice";
 import { useDispatch } from "react-redux";
 import Loading from "../Loading/Loading";
 import Snackbar from "../../Components/Snackbar/Snackbar";
+import { Link } from 'react-router-dom';
 
 interface TableProps {
   title?: string;
@@ -204,6 +205,12 @@ const Table: React.FC<TableProps> = ({
                             >
                               <MdDelete size={isResponsive ? 18 : 24} />
                             </Button>
+                          ) : column.property === 'view' ? (
+                            <div className={styles.tableCell}>
+                                <Link to={`/pdf-viewer/${row['url']}`}>
+                                    <MdPictureAsPdf size={isResponsive ? 18 : 24} />
+                                </Link>
+                            </div>
                           ) : (
                             <div className={styles.tableCell}>
                               {row[column.property]}

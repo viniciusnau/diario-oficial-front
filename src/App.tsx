@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home/Home";
+import PDFViewer from "./Pages/PDFViewer/PDFViewer"
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import Login from "./Pages/Login/Login";
@@ -78,6 +79,7 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/pdf-viewer/:pdfId" element={<PDFViewer />} />
             <Route path="/login" element={<Login />} />
             <Route path="/resetar-senha" element={<ResetPassword />} />
             <Route
