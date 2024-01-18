@@ -72,6 +72,11 @@ const Table: React.FC<TableProps> = ({
     }, 4000);
   };
 
+  const handleExtractId = (url: string): string | null => {
+    const match = url.match(/\/posts\/([^?]+)\?AWSAccessKeyId/);
+    return match ? match[1] : null;
+  };
+
   useEffect(() => {
     const handleResize = () => {
       setIsResponsive(window.innerWidth <= 750);
@@ -207,9 +212,17 @@ const Table: React.FC<TableProps> = ({
                             </Button>
                           ) : column.property === 'view' ? (
                             <div className={styles.tableCell}>
-                                <Link to={`/pdf-viewer/${row['url']}`}>
-                                    <MdPictureAsPdf size={isResponsive ? 18 : 24} />
-                                </Link>
+                              <Button
+                                onClick={() => {
+                                  const id = handleExtractId(row['url']);
+                                  if (id) {
+                                    window.location.href = `/pdf-viewer/${encodeURIComponent(id)}`;
+                                  }
+                                }}
+                                className={styles.button}
+                              >
+                                <MdPictureAsPdf size={isResponsive ? 18 : 24} />
+                              </Button>
                             </div>
                           ) : (
                             <div className={styles.tableCell}>
