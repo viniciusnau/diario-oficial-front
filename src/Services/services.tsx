@@ -136,6 +136,14 @@ const services = {
       })
       .catch((err: any) => console.log(err));
   },
+  getFileContentBase64: async (file_name: string) => {
+    return axios
+      .get(`${PATH.base}/get-file-content-base64/${file_name}`)
+      .then((data: any) => {
+        return data;
+      })
+      .catch((err: any) => console.log(err));
+  },
 };
 
 export default services;

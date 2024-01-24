@@ -12,12 +12,21 @@ import { fetchGetFiles } from "../../Services/Slices/getFilesSlice";
 import Snackbar from "../../Components/Snackbar/Snackbar";
 import { ptLocale } from "../../Components/Consts";
 import DatePicker from "@taak/react-modern-calendar-datepicker";
+import { getFileContentBase64, getFileContentBase64Success, getFileContentBase64Failure, } from "../../Services/Slices/fileContentBase64Slice";
 
 const Status = () => {
   const dispatch = useDispatch();
   const post = useSelector((state: any) => state.postSlice);
   const getFiles = useSelector((state: any) => state.getFilesSlice);
   const deleteFile = useSelector((state: any) => state.deleteFileSlice);
+  const fetchFileContentBase64 = async (file_name: string) => {
+    dispatch(getFileContentBase64());
+    try {
+      dispatch(getFileContentBase64Success({ content: 'file content' }));
+    } catch (error) {
+      dispatch(getFileContentBase64Failure());
+    }
+  };
   const [page, setPage] = useState<number>(1);
   const [isDispatched, setIsDispatched] = useState<boolean>(false);
   const [isResponsive, setIsResponsive] = useState<boolean>(false);
