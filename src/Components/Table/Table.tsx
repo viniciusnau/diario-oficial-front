@@ -40,7 +40,6 @@ const Table: React.FC<TableProps> = ({
   const [currentPage] = useState<number>(1);
   const [isResponsive, setIsResponsive] = useState(false);
   const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
-  const [base64Data, setBase64Data] = useState<string[]>([]);
   const dispatch = useDispatch();
 
   const handleDownloadFile = (file: string) => {
@@ -73,6 +72,11 @@ const Table: React.FC<TableProps> = ({
     }, 4000);
   };
 
+  function redirectToPdfViewer(fileKey: string) {
+    const cleanFileKey = fileKey.replace("posts/", "");
+    window.location.href = `/pdf-viewer/${cleanFileKey}`;
+  }
+
   useEffect(() => {
     const handleResize = () => {
       setIsResponsive(window.innerWidth <= 750);
@@ -104,26 +108,6 @@ const Table: React.FC<TableProps> = ({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  useEffect(() => {
-    const fetchBase64Data = async () => {
-      const base64Array = await Promise.all(
-        data.map(async (row: any) => {
-          try {
-            const response = await services.getFileContentBase64(row.file_name);
-            return response.data.base64;
-          } catch (error) {
-            console.error(`Error fetching Base64 for ${row.file_name}:`, error);
-            return '';
-          }
-        })
-      );
-      setBase64Data(base64Array);
-    };
-  
-    fetchBase64Data();
-  }, [data]);
-
 
   const handlePageChange = (page: number) => {
     setPage(page);
@@ -228,9 +212,12 @@ const Table: React.FC<TableProps> = ({
                             </Button>
                           ) : column.property === 'view' ? (
                             <div className={styles.tableCell}>
-                              <Link to={`/pdf-viewer/${encodeURIComponent(base64Data[rowIndex])}`}>
+                              <button 
+                                className={styles.button} 
+                                onClick={() => redirectToPdfViewer(row["fileKey"])}
+                              >
                                 <MdPictureAsPdf size={isResponsive ? 18 : 24} />
-                              </Link>
+                              </button>
                             </div>
                           ) : (
                             <div className={styles.tableCell}>

@@ -79,7 +79,7 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/pdf-viewer/:base64" element={<PDFViewer />} />
+            <Route path="/pdf-viewer/:fileKey" element={<PDFViewer />} />
             <Route path="/login" element={<Login />} />
             <Route path="/resetar-senha" element={<ResetPassword />} />
             <Route

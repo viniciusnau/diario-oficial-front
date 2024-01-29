@@ -83,7 +83,7 @@ export function handleKeyPress(
 export function handleExtract(data: iContent[], setContent: any) {
   data?.forEach((content: iContent) => {
     const split = content?.file_name?.split("---");
-    let date, edition, hour;
+    let date, edition, hour, fileKey;
     if (split.length === 3) {
       date = split[1].split("=")[1].replace(/-/g, "/");
       edition = split[2].split("=")[1].replace(".pdf", "").replace("_", " ");
@@ -101,12 +101,15 @@ export function handleExtract(data: iContent[], setContent: any) {
         } ${hour}`
       );
       if (extractedHour < new Date()) {
+        fileKey = content.file_name; 
+        
         const extractedInfo = {
           date,
           edition,
           hour,
           presigned_url: content.presigned_url,
           url: content.presigned_url,
+          fileKey: content.file_name,
         };
 
         setContent((prev: any) => [...prev, extractedInfo]);

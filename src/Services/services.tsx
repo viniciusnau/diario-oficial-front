@@ -136,14 +136,22 @@ const services = {
       })
       .catch((err: any) => console.log(err));
   },
-  getFileContentBase64: async (file_name: string) => {
-    return axios
-      .get(`${PATH.base}/get-file-content-base64/${file_name}`)
-      .then((data: any) => {
-        return data;
+  getFileContentBase64: (fileKey: string) => {
+    return axios.get(`${PATH.base}/get-file-content-base64/?file_key=${fileKey}`)
+      .then((response) => {
+        if (response.data && response.data.file_content_base64) {
+          return response.data.file_content_base64; 
+        } else {
+          throw new Error("A resposta da API não contém o conteúdo do arquivo em base64.");
+        }
       })
-      .catch((err: any) => console.log(err));
+      .catch((error) => {
+        console.error("Error fetching file content:", error);
+        throw error; 
+      });
   },
+  
+  
 };
 
 export default services;
