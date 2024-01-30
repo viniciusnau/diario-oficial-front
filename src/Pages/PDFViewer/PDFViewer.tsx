@@ -5,33 +5,34 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFileContent } from '../../Services/Slices/fileContentSlice';
 import Snackbar from '../../Components/Snackbar/Snackbar';
+import Loading from '../../Components/Loading/Loading'; 
 import styles from './PDFViewer.module.css';
 
 const PDFViewer = () => {
     const { fileKey } = useParams<{ fileKey: string }>();
     const dispatch = useDispatch();
-    const {data, loading, error} = useSelector((state: any) => state.fileContentSlice);
-    const [pdfContent, setPdfContent] = useState<string | null>(null);
+    const { data, loading, error } = useSelector((state: any) => state.fileContentSlice);
 
     useEffect(() => {
-      if (fileKey) {
-        dispatch<any>(fetchFileContent(fileKey));
-      }
+        dispatch<any>(fetchFileContent(fileKey))
     }, [dispatch, fileKey]);
 
     return (
         <div className={styles.pdfContainer}>
             {error && (
-                <Snackbar type="error" setSnackbarType={setPdfContent} />
+                <Snackbar type="error" />
             )}
-            {data ? (
+
+            {loading && (
+                <Loading size="5rem" type="spin" label="Carregando PDF..." />
+            )}
+
+            {data && (
                 <div className={styles.pdfWrapper}>
                     <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
                         <Viewer fileUrl={`data:application/pdf;base64,${data}`} />
                     </Worker>
                 </div>
-            ) : (
-                <div>Loading PDF...</div>
             )}
         </div>
     );

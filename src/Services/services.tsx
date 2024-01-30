@@ -136,7 +136,7 @@ const services = {
       })
       .catch((err: any) => console.log(err));
   },
-  getFileContentBase64: (fileKey: string) => {
+  getFileContentBase64: (fileKey: string|undefined) => {
     return axios.get(`${PATH.base}/get-file-content-base64/?file_key=${fileKey}`)
       .then((response) => {
         if (response.data && response.data.file_content_base64) {

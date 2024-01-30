@@ -44,7 +44,7 @@ export const {
 export default fileContentSlice.reducer;
 
 export const fetchFileContent =
-  (fileKey: string) =>
+  (fileKey: string|undefined) =>
   async (
     dispatch: (arg0: {
       payload: any;   
