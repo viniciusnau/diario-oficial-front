@@ -15,7 +15,7 @@
     width: 100%;
     max-width: 100%;
     height: calc(100% - 3em); 
-    border: 0.4em solid #325340;
+    border: 0.4em solid #d3d6cc3b;
     margin: 1em;
     overflow: auto;
 }
