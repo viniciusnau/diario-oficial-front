@@ -1,14 +1,72 @@
-/* .pdfContainer {
-    width: 100%;
-    height: 100%;
+.pdfContainer {
+    position: fixed;
+    top: 4.5em; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
+
 .pdfWrapper {
-    border: 9px;
-    margin-top: 1px;
-    margin-bottom: -8px;
-    margin-left: min(11px);
-    margin-bottom: min(11px);
-    padding: 0;
-}   */
+    width: 100%;
+    max-width: 100%;
+    height: calc(100% - 3em); 
+    border: 0.4em solid #325340;
+    margin: 1em;
+    overflow: auto;
+}
+
+.button {
+    background-color: var(--first-button-color);
+    color: var(--first-text-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+    width: 3.5rem;
+    height: 3.5rem;
+    box-shadow: 0 8px 6px rgba(0, 0, 0, 0.1), 0 3px 8px rgba(0, 0, 0, 0.08); 
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background-color: var(--first-button-color-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.12), 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+@media screen and (max-width: 500px) {
+    .button {
+        display: block;
+        position: absolute;
+        top: 3rem;
+        right: 0.5rem;
+        width: 2rem;
+        height: 2rem;
+    }
+}
+
+@media (min-width: 501px) {
+    .button {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .button {
+        width: 3rem;
+        height: 3rem;
+    }
+}
