@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import styles from "./Table.module.css";
 import Pagination from "rc-pagination";
 import Button from "../Forms/Button";
-import {MdContentCopy, MdDelete, MdDownload} from "react-icons/md";
+import { MdDelete, MdDownload, MdPictureAsPdf } from "react-icons/md";
 import services from "../../Services/services";
 import { fetchDeleteFile } from "../../Services/Slices/deleteFileSlice";
 import { useDispatch } from "react-redux";
 import Loading from "../Loading/Loading";
-import Snackbar from "../../Components/Snackbar/Snackbar";
 
 interface TableProps {
   title?: string;
@@ -38,7 +37,6 @@ const Table: React.FC<TableProps> = ({
 }) => {
   const [currentPage] = useState<number>(1);
   const [isResponsive, setIsResponsive] = useState(false);
-  const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
   const dispatch = useDispatch();
 
   const handleDownloadFile = (file: string) => {
@@ -57,19 +55,10 @@ const Table: React.FC<TableProps> = ({
     a.click();
   };
 
-  const handleCopyText = (value: any) => {
-    const textArea = document.createElement("textarea");
-    textArea.value = value;
-    document.body.appendChild(textArea);
-    textArea.select();
-
-    document.execCommand("copy");
-    document.body.removeChild(textArea);
-    setShowSnackbar(true);
-    setTimeout(() => {
-      setShowSnackbar(false);
-    }, 4000);
-  };
+  function redirectToPdfViewer(fileKey: string) {
+    const cleanFileKey = fileKey.replace("posts/", "");
+    window.location.href = `/pdf-viewer/${cleanFileKey}`;
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -184,17 +173,6 @@ const Table: React.FC<TableProps> = ({
                             >
                               <MdDownload size={isResponsive ? 18 : 24} />
                             </Button>
-                          ) : column.property === "url" ? (
-                              <div className={styles.tableCell}>
-                                <Button
-                                    onClick={() => {
-                                      handleCopyText(row[column.property])
-                                    }}
-                                    className={styles.button}
-                                >
-                                  <MdContentCopy size={isResponsive ? 18 : 24} />
-                                </Button>
-                              </div>
                           ) : column.property === "delete" ? (
                             <Button
                               onClick={() =>
@@ -204,6 +182,17 @@ const Table: React.FC<TableProps> = ({
                             >
                               <MdDelete size={isResponsive ? 18 : 24} />
                             </Button>
+                          ) : column.property === "view" ? (
+                            <div className={styles.tableCell}>
+                              <button
+                                className={styles.button}
+                                onClick={() =>
+                                  redirectToPdfViewer(row["fileKey"])
+                                }
+                              >
+                                <MdPictureAsPdf size={isResponsive ? 18 : 24} />
+                              </button>
+                            </div>
                           ) : (
                             <div className={styles.tableCell}>
                               {row[column.property]}
@@ -229,9 +218,6 @@ const Table: React.FC<TableProps> = ({
           itemRender={customItemRender}
         />
       </div>
-      {showSnackbar && (
-          <Snackbar type="copySuccess" />
-      )}
     </div>
   );
 };
