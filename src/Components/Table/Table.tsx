@@ -7,6 +7,7 @@ import services from "../../Services/services";
 import { fetchDeleteFile } from "../../Services/Slices/deleteFileSlice";
 import { useDispatch } from "react-redux";
 import Loading from "../Loading/Loading";
+import { fetchDeletePublishedFile } from "../../Services/Slices/deletePublishedFileSlice";
 
 interface TableProps {
   title?: string;
@@ -168,10 +169,15 @@ const Table: React.FC<TableProps> = ({
                             >
                               <MdDownload size={isResponsive ? 18 : 24} />
                             </Button>
-                          ) : column.property === "delete" ? (
+                          ) : column.property === "delete" ||
+                            column.property === "deletePublished" ? (
                             <Button
                               onClick={() =>
-                                dispatch<any>(fetchDeleteFile(row.delete))
+                                dispatch<any>(
+                                  column.property === "delete"
+                                    ? fetchDeleteFile(row.delete)
+                                    : fetchDeletePublishedFile(row.delete)
+                                )
                               }
                               className={styles.button}
                             >

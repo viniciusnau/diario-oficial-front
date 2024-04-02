@@ -11,6 +11,7 @@ import {
 import { fetchAllPosts } from "../../Services/Slices/allPostsSlice";
 import Snackbar from "../../Components/Snackbar/Snackbar";
 import { fetchPublic } from "../../Services/Slices/publicSlice";
+import { isLoggedIn } from "../../Auth/auth";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,9 @@ const Home = () => {
     { title: "Edição", property: "edition" },
     { title: "Publicado", property: "date" },
     { title: "Arquivo", property: "presigned_url" },
+    ...(isLoggedIn()
+      ? [{ title: "Excluir", property: "deletePublished" }]
+      : []),
   ];
 
   useEffect(() => {

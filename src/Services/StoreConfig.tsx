@@ -5,6 +5,7 @@ import publicSlice from "./Slices/publicSlice";
 import postSlice from "./Slices/postSlice";
 import getFilesSlice from "./Slices/getFilesSlice";
 import deleteFileSlice from "./Slices/deleteFileSlice";
+import deletePublishedFileSlice from "./Slices/deletePublishedFileSlice";
 import resetPassword from "./Slices/resetPassword";
 
 const reducer = combineReducers({
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   postSlice,
   getFilesSlice,
   deleteFileSlice,
+  deletePublishedFileSlice,
   resetPassword,
 });
 
