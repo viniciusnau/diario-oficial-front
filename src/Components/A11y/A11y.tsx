@@ -6,6 +6,8 @@ import { PiCursor } from "react-icons/pi";
 import { SiExoscale } from "react-icons/si";
 import { BiFontSize } from "react-icons/bi";
 import { MdTextIncrease, MdTextDecrease, MdInvertColors } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleColorInversion } from "../../Services/Slices/a11ySlice";
 
 interface iA11y {
   setColorInverted: any;
@@ -27,15 +29,19 @@ const A11y: React.FC<iA11y> = ({
   isOpenModal,
   setIsOpenModal,
 }) => {
+  const dispatch = useDispatch();
   const modalRef = useRef<HTMLDivElement | null>(null);
   const [isResponsive, setIsResponsive] = useState(false);
+  const colorInvertedState = useSelector(
+    (state: any) => state.a11ySlice.colorInverted
+  );
 
   const handleModalClick = (event: any) => {
     event.stopPropagation();
   };
 
   const handleColorInversion = () => {
-    setColorInverted((prev: any) => !prev);
+    dispatch(toggleColorInversion());
   };
 
   const handleFontChange = (action: string) => {
@@ -86,6 +92,10 @@ const A11y: React.FC<iA11y> = ({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    setColorInverted(colorInvertedState);
+  }, [setColorInverted, colorInvertedState]);
 
   return (
     <>

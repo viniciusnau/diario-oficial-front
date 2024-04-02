@@ -17,7 +17,7 @@
 .postContainer {
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
   width: 100%;
   max-height: 18rem;
   margin: 3rem 0 0 0;
@@ -73,8 +73,8 @@ input {
 
 .type {
   display: flex;
-  justify-content: start;
-  align-items: start;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .lastColumn {
@@ -179,7 +179,7 @@ input[class*="DatePicker__input"] {
 @media (min-width: 1024px) {
   .postContainer {
     display: flex;
-    align-items: start;
+    align-items: flex-start;
   }
   .postContainer,
   .lastColumn {

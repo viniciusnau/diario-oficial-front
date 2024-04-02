@@ -137,7 +137,9 @@ const services = {
       .then((data: any) => {
         return data;
       })
-      .catch((err: any) => console.log(err));
+      .catch((err: any) => {
+          console.log(err);
+      });
   },
   resetPassword: async (body: any) => {
     return axios

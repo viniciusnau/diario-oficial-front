@@ -5,6 +5,12 @@ export const handleTypeService = {
     color: "#9fc54d",
   },
 
+  searchError: {
+    title: "Erro ao efetuar a requisição!",
+    description: "O número de registros retornados pela consulta excede o limite. Por favor, repita a consulta usando mais filtros.",
+    color: "#ff6464",
+  },
+
   error: {
     title: "Erro ao efetuar a requisição!",
     description: "Tente novamente mais tarde.",
@@ -21,6 +27,18 @@ export const handleTypeService = {
     title: "Erro ao redefinir senha!",
     description: "Confira se o email está correto e tente novamente.",
     color: "#ff6464",
+  },
+
+  copyError: {
+    title: "Erro ao copiar URL!",
+    description: "Tente novamente mais tarde.",
+    color: "#ff6464",
+  },
+
+  copySuccess: {
+    title: "URL copiada!",
+    description: "",
+    color: "#9fc54d",
   },
 
   resetSuccess: {

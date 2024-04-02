@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import styles from "./Table.module.css";
 import Pagination from "rc-pagination";
 import Button from "../Forms/Button";
-import { MdDelete, MdDownload } from "react-icons/md";
+import {MdContentCopy, MdDelete, MdDownload} from "react-icons/md";
 import services from "../../Services/services";
 import { fetchDeleteFile } from "../../Services/Slices/deleteFileSlice";
 import { useDispatch } from "react-redux";
 import Loading from "../Loading/Loading";
+<<<<<<< HEAD
 import { fetchDeletePublishedFile } from "../../Services/Slices/deletePublishedFileSlice";
+=======
+import Snackbar from "../../Components/Snackbar/Snackbar";
+>>>>>>> f147beecbedf4fb1abc674fe8abb4f33401b9e74
 
 interface TableProps {
   title?: string;
@@ -38,6 +42,7 @@ const Table: React.FC<TableProps> = ({
 }) => {
   const [currentPage] = useState<number>(1);
   const [isResponsive, setIsResponsive] = useState(false);
+  const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
   const dispatch = useDispatch();
 
   const handleDownloadFile = (file: string) => {
@@ -54,6 +59,20 @@ const Table: React.FC<TableProps> = ({
     a.href = file?.data?.url;
     a.download = "template.pdf";
     a.click();
+  };
+
+  const handleCopyText = (value: any) => {
+    const textArea = document.createElement("textarea");
+    textArea.value = value;
+    document.body.appendChild(textArea);
+    textArea.select();
+
+    document.execCommand("copy");
+    document.body.removeChild(textArea);
+    setShowSnackbar(true);
+    setTimeout(() => {
+      setShowSnackbar(false);
+    }, 4000);
   };
 
   useEffect(() => {
@@ -169,8 +188,23 @@ const Table: React.FC<TableProps> = ({
                             >
                               <MdDownload size={isResponsive ? 18 : 24} />
                             </Button>
+<<<<<<< HEAD
                           ) : column.property === "delete" ||
                             column.property === "deletePublished" ? (
+=======
+                          ) : column.property === "url" ? (
+                              <div className={styles.tableCell}>
+                                <Button
+                                    onClick={() => {
+                                      handleCopyText(row[column.property])
+                                    }}
+                                    className={styles.button}
+                                >
+                                  <MdContentCopy size={isResponsive ? 18 : 24} />
+                                </Button>
+                              </div>
+                          ) : column.property === "delete" ? (
+>>>>>>> f147beecbedf4fb1abc674fe8abb4f33401b9e74
                             <Button
                               onClick={() =>
                                 dispatch<any>(
@@ -208,6 +242,9 @@ const Table: React.FC<TableProps> = ({
           itemRender={customItemRender}
         />
       </div>
+      {showSnackbar && (
+          <Snackbar type="copySuccess" />
+      )}
     </div>
   );
 };

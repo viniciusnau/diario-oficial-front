@@ -106,6 +106,7 @@ export function handleExtract(data: iContent[], setContent: any) {
           edition,
           hour,
           presigned_url: content.presigned_url,
+          url: content.presigned_url,
         };
 
         setContent((prev: any) => [...prev, extractedInfo]);
@@ -151,6 +152,7 @@ export function handleExtractUrl(urls: string[], setContent: any) {
         hour: hour ? hour : "00:00",
         edition,
         presigned_url,
+        url: presigned_url
       };
       const extractedHour = new Date(
         `${date.split("/")[1]}/${date.split("/")[0]}/${

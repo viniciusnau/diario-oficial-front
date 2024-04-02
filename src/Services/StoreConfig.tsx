@@ -7,8 +7,10 @@ import getFilesSlice from "./Slices/getFilesSlice";
 import deleteFileSlice from "./Slices/deleteFileSlice";
 import deletePublishedFileSlice from "./Slices/deletePublishedFileSlice";
 import resetPassword from "./Slices/resetPassword";
+import a11ySlice from "./Slices/a11ySlice";
 
 const reducer = combineReducers({
+  a11ySlice,
   meSlice,
   allPostsSlice,
   publicSlice,
