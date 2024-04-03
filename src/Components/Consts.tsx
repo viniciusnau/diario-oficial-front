@@ -7,7 +7,8 @@ export const handleTypeService = {
 
   searchError: {
     title: "Erro ao efetuar a requisição!",
-    description: "O número de registros retornados pela consulta excede o limite. Por favor, repita a consulta usando mais filtros.",
+    description:
+      "O número de registros retornados pela consulta excede o limite. Por favor, repita a consulta usando mais filtros.",
     color: "#ff6464",
   },
 
@@ -69,6 +70,11 @@ export const handleTypeService = {
     title: "Erro ao enviar agendamento!",
     description:
       "Todos os campos com * devem ser preenchidos, juntamente com o arquivo em formato .docx.",
+    color: "#ff6464",
+  },
+  deletePublishedError: {
+    title: "Erro ao excluir publicação!",
+    description: "Tente novamente mais tarde.",
     color: "#ff6464",
   },
 };
