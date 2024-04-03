@@ -152,7 +152,7 @@ export function handleExtractUrl(urls: string[], setContent: any) {
         hour: hour ? hour : "00:00",
         edition,
         presigned_url,
-        url: presigned_url
+        url: presigned_url,
       };
       const extractedHour = new Date(
         `${date.split("/")[1]}/${date.split("/")[0]}/${
@@ -164,6 +164,22 @@ export function handleExtractUrl(urls: string[], setContent: any) {
       }
     }
   });
+}
+
+export function returnHandleExtractUrl(url: any) {
+  const dateRegex = /date%3D([^&]+)/;
+
+  const dateMatch = url.match(dateRegex);
+
+  if (dateMatch) {
+    let date = decodeURIComponent(dateMatch[1]).replace(/-/g, "/");
+
+    const questionMarkIndex = dateMatch[0].indexOf(".pdf");
+    if (questionMarkIndex !== -1) {
+      date = dateMatch[0].substring(0, questionMarkIndex + 4).replace("_", " ");
+    }
+    return date || "";
+  }
 }
 
 export function handleResetResponse() {

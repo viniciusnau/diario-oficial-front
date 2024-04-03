@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import Loading from "../Loading/Loading";
 import { fetchDeletePublishedFile } from "../../Services/Slices/deletePublishedFileSlice";
 import Snackbar from "../Snackbar/Snackbar";
+import { handleExtractUrl, returnHandleExtractUrl } from "../Helper";
 
 interface TableProps {
   title?: string;
@@ -40,7 +41,12 @@ const Table: React.FC<TableProps> = ({
   const [currentPage] = useState<number>(1);
   const [isResponsive, setIsResponsive] = useState(false);
   const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
+
+  const handleDeletePublishedFile = (row: any) => {
+    const extractedUrl = returnHandleExtractUrl(row.presigned_url);
+    dispatch(fetchDeletePublishedFile(extractedUrl ? extractedUrl : ""));
+  };
 
   const handleDownloadFile = (file: string) => {
     const a = document.createElement("a");
@@ -200,11 +206,9 @@ const Table: React.FC<TableProps> = ({
                             column.property === "deletePublished" ? (
                             <Button
                               onClick={() =>
-                                dispatch<any>(
-                                  column.property === "delete"
-                                    ? fetchDeleteFile(row.delete)
-                                    : fetchDeletePublishedFile(row.delete)
-                                )
+                                column.property === "delete"
+                                  ? dispatch(fetchDeleteFile(row.delete))
+                                  : handleDeletePublishedFile(row)
                               }
                               className={styles.button}
                             >

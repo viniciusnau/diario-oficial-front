@@ -44,7 +44,7 @@ export const {
 export default deletePublishedFileSlice.reducer;
 
 export const fetchDeletePublishedFile =
-  (file: any) =>
+  (file: string) =>
   async (
     dispatch: (arg0: {
       payload: any;
