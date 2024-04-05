@@ -176,7 +176,7 @@ export function returnHandleExtractUrl(url: any) {
 
     const questionMarkIndex = dateMatch[0].indexOf(".pdf");
     if (questionMarkIndex !== -1) {
-      date = dateMatch[0].substring(0, questionMarkIndex + 4).replace("_", " ");
+      date = dateMatch[0].substring(0, questionMarkIndex + 4);
     }
     return date || "";
   }

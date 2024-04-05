@@ -24,6 +24,7 @@ const Home = () => {
   const [backup, setBackup] = useState<any>({});
   const [page, setPage] = useState<number>(1);
   const [isSearched, setIsSearched] = useState<boolean>(false);
+  const [publishedError, setPublishedError] = useState<boolean>(false);
   const [tempPage, setTempPage] = useState<number | null>(null);
   let ref = useRef<boolean>();
 
@@ -51,6 +52,10 @@ const Home = () => {
   }, [dispatch, ref, page, tempPage, response.data.length]);
 
   useEffect(() => {
+    dispatch<any>(fetchAllPosts(page.toString(), false));
+  }, [deletePublishedResponse.data?.response]);
+
+  useEffect(() => {
     if (ref.current && page !== tempPage) {
       dispatch<any>(fetchPublic(backup, page.toString()));
       setTempPage(page);
@@ -65,11 +70,20 @@ const Home = () => {
       handleExtractUrl(response.data.results, setExtracted);
     }
   }, [dispatch, isSearched, response.data, allPostsResponse.data]);
+  console.log("deletePublishedResponse: ", deletePublishedResponse);
+  useEffect(() => {
+    deletePublishedResponse.error
+      ? setPublishedError(true)
+      : setPublishedError(false);
+  }, [deletePublishedResponse.error]);
 
   return (
     <div className={styles.container}>
-      {deletePublishedResponse && (
-        <Snackbar type="deletePublishedError" setSnackbarType={setIsSearched} />
+      {deletePublishedResponse.error && (
+        <Snackbar
+          type="deletePublishedError"
+          setSnackbarType={setPublishedError}
+        />
       )}
       {isSearched && response.error && response.error.status === 503 && (
         <Snackbar type="searchError" setSnackbarType={setIsSearched} />
